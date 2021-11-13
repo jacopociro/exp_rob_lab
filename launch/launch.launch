@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+    <launch>
+
+        <node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
+
+        <node pkg="exp_pro_lab" type="armor_client.py" name="armor_client" />
+        <node pkg="exp_pro_lab" type="state_machine.py" name="state_machine" />
+
+    </launch>
