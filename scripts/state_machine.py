@@ -16,7 +16,7 @@ def room():
 
 def callback(msg):
     global var
-    rospy.loginfo(msg)
+    #rospy.loginfo(msg)
     var = msg
     return var
 
@@ -55,7 +55,7 @@ class Clues(smach.State):
             request = HypothesisRequest(id, name, class_id)
             resp_hyp = hyp(id, name, class_id)
             print (resp_hyp)
-            if resp_hyp == 1:
+            if resp_hyp.consistent == False:
                 return 'move'
             else:
                 return 'hypothesis'
@@ -68,7 +68,7 @@ class Clues(smach.State):
 
         
 
-class Hypothesis(smach.State):
+class Hyp(smach.State):
     def __init__(self):
         smach.State.__init__(self, outcomes=['move', 'stop'])
 
@@ -96,8 +96,8 @@ def main():
 
     with sm:
         smach.StateMachine.add('Move', Move(), transitions={'clues':'Clues'})
-        smach.StateMachine.add('Clues', Clues(), transitions={'move':'Move', 'hypothesis':'Hypothesis'})
-        smach.StateMachine.add('Hypothesis', Hypothesis(), transitions={'move':'Move', 'stop':'stop'})
+        smach.StateMachine.add('Clues', Clues(), transitions={'move':'Move', 'hypothesis':'Hyp'})
+        smach.StateMachine.add('Hyp', Hyp(), transitions={'move':'Move', 'stop':'stop'})
 
     sis = smach_ros.IntrospectionServer('state_machine', sm, '/SM_ROOT')
     sis.start()

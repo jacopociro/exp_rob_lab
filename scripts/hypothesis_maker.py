@@ -38,11 +38,19 @@ def make_hypothesis(request):
                 res.what = t
                 t = hypo_find(request.id, 'where')
                 res.where = t
+                res.consistent = True
                 print (res)
                 return res
     else:
         print("not complete or not consistent")
-        return 1
+        ret = HypothesisResponse()
+        ret.id = request.id
+        ret.who = 'empty'
+        ret.what = 'empty'
+        ret.where = 'empty'
+        ret.consistent = False
+
+        return ret
 
 
 
