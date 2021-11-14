@@ -165,7 +165,7 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
-  scripts/hint_publisher.py scripts/hypothesis_maker.py scripts/oracle_service.py scripts/state_machine.py scripts/state_machine_try.py scripts/hyp_hint_try.py scripts/client.py scripts/server.py
+  scripts/hint_publisher.py scripts/hypothesis_maker.py scripts/oracle_service.py scripts/state_machine.py scripts/state_machine_try.py scripts/hyp_hint_try.py scripts/client.py scripts/server.py 
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

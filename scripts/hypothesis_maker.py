@@ -31,7 +31,8 @@ def make_hypothesis(request):
             if done == 0:
                 print('Hypothesis formulated')
                 res = HypothesisResponse(request)
-                hypothesis.append(request.id)
+                #hypothesis.append(request.id)
+                res.id = request.id 
                 t = hypo_find( request.id, 'who')
                 res.who = t
                 t = hypo_find(request.id, 'what')
@@ -59,11 +60,10 @@ def hypothesis_maker_server():
     rospy.init_node('hypothesis_maker_server')
     rospy.wait_for_service('armor_interface_srv')
     armor = rospy.ServiceProxy('armor_interface_srv', ArmorDirective)
-    load()
     
     rospy.Service('hypothesis_maker', Hypothesis, make_hypothesis)
     
-    #load()
+    load()
     print('ready to formulate hypothesis')
     rospy.spin()
 
@@ -84,11 +84,13 @@ def load():
         print(e)
 
 def check(data):
+    print('\nCHECK START\n')
     global char, weapon, place
     find = 0
     #a = 0
     #b = 0
     #c = 0
+    print('DATA\n')
     print(data)
     if data.class_id == 'who':
         for a in range(len(char)):
@@ -108,11 +110,13 @@ def check(data):
                 find = 1
             if find == 0:
                 place.append(data.name)
+    print('\nCHECK END\n')
     return find
 
 
 def add(name, class_id):
     try:
+        print('\nADD START\n')
         class_ont = ont_class(class_id)
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
@@ -122,25 +126,33 @@ def add(name, class_id):
         request.secondary_command_spec= 'CLASS'
         request.args= [name, class_ont]
         msg = armor(request)
+        print('request\n')
+        print(request)
         res=msg.armor_response
         reason()
         disjoint(class_ont)
         reason()
+        print('\nADD END\n')
     except rospy.ServiceException as e:
         print(e)
 
 
 
 def ont_class(class_id):
+    print('\n ONT CLASS START\n')
     if class_id == 'who':
+        print('\n ONT CLASS END\n')
         return 'PERSON'
     if class_id == 'what':
+        print('\n ONT CLASS END\n')
         return 'WEAPON'
     if class_id == 'where':
+        print('\n ONT CLASS END\n')
         return 'LOCATION'
 
 def reason():
     try:
+        print('\nREASON START\n')
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
         request.reference_name= 'cluedo_ont'
@@ -151,12 +163,14 @@ def reason():
         msg = armor(request)
         res=msg.armor_response
         #print(res)
+        print('\nREASON END\n')
     except rospy.ServiceException as e:
         print(e)	
 
 
 def disjoint(class_ont):
     try:
+        print('\nDISJOINT START\n')
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
         request.reference_name= 'cluedo_ont'
@@ -164,23 +178,27 @@ def disjoint(class_ont):
         request.primary_command_spec= 'IND'
         request.secondary_command_spec= 'CLASS'
         request.args= [class_ont]
-        msg = armor(request)		 
+        msg = armor(request)	
+        print('\n DISJOINT END\n')	 
     except rospy.ServiceException as e:
         print(e)  
 
 def ont_check(id, name, class_id):
     try:
+        print('\nONT_CHECK START\n')
         name_list = []
         res_final= hypo_find(id, class_id)
         name_list.append(name)
-
-        hypo_form(id, name, class_id)
-        reason()
+        if res_final != name_list:
+            hypo_form(id, name, class_id)
+            reason()
+        print('\nONT_CHECK END\n')
     except rospy.ServiceException as e:
         print(e)
 
 def hypo_form(id, name, class_id):
     try:
+        print('\nHYPO_FORM START\n')
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
         request.reference_name= 'cluedo_ont'
@@ -190,11 +208,14 @@ def hypo_form(id, name, class_id):
         request.args= [class_id,id,name]
         msg = armor(request)
         res=msg.armor_response
+        print('\nHYPO_FORM END\n')
+        
     except rospy.ServiceException as e:
         print(e)
 
 def hypo_find(id, class_id):
     try:
+        print('\nHYPO_FIND START\n')
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
         request.reference_name= 'cluedo_ont'
@@ -203,23 +224,32 @@ def hypo_find(id, class_id):
         request.secondary_command_spec= 'IND'
         request.args= [class_id, id]
         msg = armor(request)
-        res=msg.armor_response.queried_objects
-        res_final=query(res)
+        
+        res=msg #.armor_response.queried_objects
+        print('RES\n')
+        print (res)
+        res_final=query(res.armor_response.queried_objects)
+        print('RES_FINAL\n')
+        print (res_final)
+        print('\nHYPO_FIND START\n')
         return res_final
     except rospy.ServiceException as e:
         print(e)   
 
 def query(query):
+    print('\nQUERY START\n')
     for i in range(len(query)):
         t=query[i]
         t=t.split('#')
         index=len(t)
         t=t[index-1]
         query[i]=t[:-1]
+    print('\nQUERY END\n')
     return query
 
 def complete_consistent(id):
     try:
+        print('\COMPLETE_CONSISTENT START\n')
         complete = 0
         consistent = 0
         request=ArmorDirectiveReq()
@@ -246,6 +276,7 @@ def complete_consistent(id):
         msg = armor(request)
         res = msg.armor_response.queried_objects
         res_final = query(res)
+        print('\COMPLETE_CONSISTENT END\n')
         for i in range(len(res_final)):
             if res_final[i]==id:
                 consistent = 1    
