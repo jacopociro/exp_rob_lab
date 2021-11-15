@@ -26,7 +26,7 @@ def hypothesis_maker_server():
     comp_consist()
     hypo_detail()
     rospy.Service('hypothesis_maker', Hypothesis, make_hypothesis)
-    print('ready to formulate hypothesis')
+    print('Ready to formulate hypothesis')
     rospy.spin()
 
 def load():
@@ -39,21 +39,21 @@ def load():
         request.secondary_command_spec= ''
         request.args= ['/root/ros_ws/src/exp_rob_lab/cluedo_ontology.owl', 'http://www.emarolab.it/cluedo-ontology', 'true', 'PELLET', 'true']
         msg = armor(request)
-        print('load ok')
+        #print('load ok')
         res=msg.armor_response
-        #print(res)
+        
     except rospy.ServiceException as e:
         print(e)
 
 def make_hypothesis(request):
     global people, locations, weapons
-    print('make_hypothesis')
+    #print('make_hypothesis')
     
     id = request.id
     name = request.name
     class_id = request.class_id
 
-    #add_to_hypo(id,name,class_id)
+    
     add_to_ont(name, class_id)
     check(id,name,class_id)
     
@@ -76,21 +76,21 @@ def make_hypothesis(request):
     if control == True:
 
         pos_people = position_find(people, id)
-        print(pos_people)
+        #print(pos_people)
         pos_place = position_find(locations, id)
-        print(pos_place)
+        #print(pos_place)
         pos_weapon = position_find(weapons, id)
-        print(pos_weapon)
+        #print(pos_weapon)
 
         person = people[pos_people][0] 
-        print(person)
+        #print(person)
         who = add_to_hypo(id,person,'who')
         place = locations[pos_place][0]
-        print(place)
+        #print(place)
         where = add_to_hypo(id,place,'where')
         weapon = weapons[pos_weapon][0]
-        what = print(weapon)
-        add_to_hypo(id,weapon,'what')
+        #print(weapon)
+        what = add_to_hypo(id,weapon,'what')
         consistent = True
     else:
         consistent = False
@@ -100,27 +100,7 @@ def make_hypothesis(request):
     disjoint(class_id)
     apply()
     reason()
-    
-    '''
-    if class_id == 'who':
-        who = name
-    else:
-        who = ''
 
-    if class_id == 'what':
-        what = name
-    else:
-        what = ''
-    if class_id == 'where':
-        where = name
-    else:
-        where = ''
-    
-    if consistent == True:
-        is_consistent = True
-    else:
-        is_consistent = False
-    '''
     res = HypothesisResponse(id, who, what, where, consistent)
     print(res)
 
@@ -140,11 +120,8 @@ def comp_consist():
         msg = armor(request)
         msg = armor(request)
         res = msg.armor_response
-        print(' COMP_CONSISTENT_2 OK')
-        #if res.is_consistent == 'True':
-        #    print('OK')
-        #else:
-        #    exit('SGANZO PAZZO IN COMP_CONSIST')
+        #print(' COMP_CONSISTENT_2 OK')
+        
         request=ArmorDirectiveReq()
         request.client_name = 'hypothesis_maker'
         request.reference_name= 'cluedo_ont'
@@ -154,11 +131,8 @@ def comp_consist():
         request.args= ['INCONSISTENT']
         msg = armor(request)
         res = msg.armor_response
-        print(' COMP_CONSISTENT_2 OK')
-        #if res.is_consistent == 'True':
-        #    print('OK')
-        #else:
-        #    exit('SGANZO PAZZO IN COMP_CONSIST')
+        #print(' COMP_CONSISTENT_2 OK')
+        
 
     except rospy.ServiceException as e:
         print(e)
@@ -175,11 +149,8 @@ def hypo_detail():
         request.args= ['who', 'HP0']
         msg = armor(request)
         res = msg.armor_response
-        print(' HYPO_DETAIL_1 OK')
-        #if res.is_consistent == 'True':
-        #    print('OK')
-        #else:
-        #    exit('SGANZO PAZZO IN HYPO_DETAIL')
+        #print(' HYPO_DETAIL_1 OK')
+        
 
         request=ArmorDirectiveReq()
         request.client_name = 'hypothesis_maker'
@@ -190,11 +161,8 @@ def hypo_detail():
         request.args= ['where', 'HP0']
         msg = armor(request)
         res = msg.armor_response
-        print(' HYPO_DETAIL_2 OK')
-        #if res.is_consistent == True:
-        #    print('OK')
-        #else:
-        #    exit('SGANZO PAZZO IN HYPO_DETAIL')
+        #print(' HYPO_DETAIL_2 OK')
+        
 
         request=ArmorDirectiveReq()
         request.client_name = 'hypothesis_maker'
@@ -205,11 +173,8 @@ def hypo_detail():
         request.args= ['what', 'HP0']
         msg = armor(request)
         res = msg.armor_response
-        print(' HYPO_DETAIL_3 OK')
-        #if res.is_consistent == 'True':
-        #    print('OK')
-        #else:
-        #    exit('SGANZO PAZZO IN HYPO_DETAIL')
+        #print(' HYPO_DETAIL_3 OK')
+        
 
     except rospy.ServiceException as e:
         print(e)
@@ -226,11 +191,8 @@ def add_to_hypo(id,name,class_id):
         msg = armor(request)
         res = msg.armor_response
         return name
-        print(' ADD_TO_HYPO OK')
-        #if res.is_consistent == 'True':
-        #    print('OK')
-        #else:
-        #    exit('SGANZO PAZZO IN ADD_TO_HYPO')
+        #print(' ADD_TO_HYPO OK')
+        
 
     except rospy.ServiceException as e:
         print(e)
@@ -248,11 +210,8 @@ def add_to_ont(name,class_id):
         request.args= [name, identifier]
         msg = armor(request)
         res = msg.armor_response
-        print(' ADD_TO_ONT OK')
-        #if res.is_consistent == 'True':
-        #    print('OK')
-        #else:
-        #    exit('SGANZO PAZZO IN ADD_TO_ONT')
+        #print(' ADD_TO_ONT OK')
+        
 
     except rospy.ServiceException as e:
         print(e)
@@ -270,11 +229,8 @@ def disjoint(class_id):
         request.args= [identifier]
         msg = armor(request)   
         res = msg.armor_response
-        print(' DISJOINT OK')
-        #if res.is_consistent == 'True':
-        #    print('OK')
-        #else:
-        #    exit('SGANZO PAZZO IN ADD_TO_HYPO')
+        #print(' DISJOINT OK')
+        
 
     except rospy.ServiceException as e:
         print(e)
@@ -298,11 +254,8 @@ def reason():
         request.args= []
         msg = armor(request)
         res=msg.armor_response
-        print(' REASON OK')
-        #if res.is_consistent == 'True':
-        #    print('OK')
-        #else:
-        #    exit('SGANZO PAZZO IN ADD_TO_HYPO')
+        #print(' REASON OK')
+        
 
         return res.is_consistent
     except rospy.ServiceException as e:
@@ -319,11 +272,8 @@ def apply():
         request.args= []
         msg = armor(request)
         res=msg.armor_response
-        print(' APPLY OK')
-        #if res.is_consistent == 'True':
-        #    print('OK')
-        #else:
-        #    exit('SGANZO PAZZO IN ADD_TO_HYPO')
+        #print(' APPLY OK')
+        
 
         return res.is_consistent
     except rospy.ServiceException as e:
@@ -360,10 +310,10 @@ def check(id,name,class_id):
 def position_find(matrix, value):
     i = 0
     for row in matrix:
-        print(i)
+        
         for element in row:
             if element == value:
-                    print('row count is: %d' %i)
+                    #print('row count is: %d' %i)
                     return i
         i =+ 1
 

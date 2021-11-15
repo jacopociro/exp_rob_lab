@@ -16,7 +16,8 @@ def publisher():
     rospy.init_node('hint_publisher')
     r = rospy.Rate(1)
     while not rospy.is_shutdown():
-        num = random.randint(0,8)
+        #ricordati di cambiare il randint per includere tutti gli int
+        num = random.randint(0,17)
     
         msg = Hint()
         msg.id = hint[num][0]

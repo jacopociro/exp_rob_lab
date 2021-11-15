@@ -3,7 +3,10 @@
 
         <node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
 
-        <node pkg="exp_pro_lab" type="armor_client.py" name="armor_client" />
-        <node pkg="exp_pro_lab" type="state_machine.py" name="state_machine" />
+        <node name="hint" pkg="exp_pro_lab" type="hint_publisher.py"/>
+        <node name="oracle" pkg="exp_pro_lab" type="oracle_service.py"/>
+        <node name="hypothesis_maker" pkg="exp_pro_lab" type="hypothesis_maker_2.py"/>
+        <node name="state_machine" pkg="exp_pro_lab" type="state_machine.py" output="screen"/>
+
 
     </launch>

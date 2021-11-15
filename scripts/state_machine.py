@@ -54,6 +54,7 @@ class Clues(smach.State):
           
             request = HypothesisRequest(id, name, class_id)
             resp_hyp = hyp(id, name, class_id)
+            print('Hint collected:')
             print (resp_hyp)
             if resp_hyp.consistent == False:
                 return 'move'
@@ -74,16 +75,22 @@ class Hyp(smach.State):
 
     def execute(self, userdata):
         global resp_hyp
+        
         rospy.loginfo('Formulating an hypothesis')
+        rospy.loginfo('Moving to terminal')
+        time.sleep(2)
+
         #subscribes to hypothesis maker and sends to oracle to check
 
         rospy.wait_for_service('oracle')
         try: 
             Oracle = rospy.ServiceProxy('oracle', oracle)
             oracle_res = Oracle(resp_hyp.id)
-            if oracle_res == 0:
+            if oracle_res.right == 0:
+                print("Yay! I got the answer right!")
                 return 'stop'
             else: 
+                print("Mmh... I need more hints...")
                 return 'move'
         except rospy.ServiceException as e:
             print("Service call failed: %s"%e)

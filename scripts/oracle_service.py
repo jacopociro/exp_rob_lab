@@ -4,11 +4,14 @@ from exp_rob_lab.srv import oracle, oracleResponse
 import rospy
 
 def oracle_handle(req):
-    if req.id == 3:
-        print("Hypothesis is correct!")
-        return oracleResponse(0)
+    print('Hypothesis number %s is...'%req.id)
+    if req.id == 'HP3':
+        print("correct!")
+        right = 0
     else:
-        print("Try again!")
+        print("wrong! Try again!")
+        right = 1
+    return oracleResponse(right)
 
 def oracle_server():
     rospy.init_node('oracle')
