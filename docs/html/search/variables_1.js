@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['right_26',['right',['../oracle__service_8py.html#a2f54f8b71f0d765e2b7dbd9a8b9774ff',1,'oracle_service']]]
+  ['control_36',['control',['../hypothesis__maker_8py.html#ae1baa9f42256960b9f5b2161a808a3ac',1,'hypothesis_maker']]]
 ];

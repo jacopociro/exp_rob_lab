@@ -1,73 +1,65 @@
 #! /usr/bin/env python2
 
+## @package expr_rob_lab
+#
+#  \file hypothesis_maker.py
+#  \brief This script handles the hypothesis maker service and the onthology part.
+#
+#  \author Jacopo Ciro Soncini
+#  \version 1.0
+#  \date 15/11/2021
+#  \details
+#  
+#  Subscribes to: <BR>
+#       None
+#
+#  Publishes to: <BR>
+#	    hint
+#
+#  Services: <BR>
+#       hypothesis_maker
+#
+#  Client Services: <BR>
+#       armor_interface_srv
+#
+#  Action Services: <BR>
+#       None
+#
+#  Description: <BR>
+#       This node handles the hint publisher, by publishing random hints from a list.
+
 from os import name
 from exp_rob_lab.srv import *
-from genpy import message
 import rospy
 from armor_msgs.msg import *
 from armor_msgs.srv import *
 
-armor = None
-hypothesis = []
-char = []
-weapon = []
-place = []
 
-
-def make_hypothesis(request):
-    print ('make_hypothesis')
-    global hypothesis
-    done = 0
-    find = check(request)
-    if find == 0:
-        add(request.name, request.class_id)
-    ont_check(request.id, request.name, request.class_id)
-    send = complete_consistent(request.id)
-
-    if send == 1:
-        for i in range (len(hypothesis)):
-            if request.id == hypothesis[i]:
-                done = 1
-            if done == 0:
-                print('Hypothesis formulated')
-                res = HypothesisResponse(request)
-                #hypothesis.append(request.id)
-                res.id = request.id 
-                t = hypo_find( request.id, 'who')
-                res.who = t
-                t = hypo_find(request.id, 'what')
-                res.what = t
-                t = hypo_find(request.id, 'where')
-                res.where = t
-                res.consistent = True
-                print (res)
-                return res
-    else:
-        print("not complete or not consistent")
-        ret = HypothesisResponse()
-        ret.id = request.id
-        ret.who = 'empty'
-        ret.what = 'empty'
-        ret.where = 'empty'
-        ret.consistent = False
-
-        return ret
-
+locations = [[]]
+weapons = [[]]
+people = [[]]
 
 
 def hypothesis_maker_server():
+##
+# \brief this function initializes the node, the hypothesis_maker service and the proxy to the 
+# armor service
     global armor
-    rospy.init_node('hypothesis_maker_server')
+    rospy.init_node('hypothesis_maker2')
     rospy.wait_for_service('armor_interface_srv')
+
     armor = rospy.ServiceProxy('armor_interface_srv', ArmorDirective)
-    
-    rospy.Service('hypothesis_maker', Hypothesis, make_hypothesis)
-    
+
     load()
-    print('ready to formulate hypothesis')
+    comp_consist()
+    hypo_detail()
+    rospy.Service('hypothesis_maker', Hypothesis, make_hypothesis)
+    print('Ready to formulate hypothesis')
     rospy.spin()
 
 def load():
+##
+# \brief this function defines the load command for armor
     try:
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
@@ -79,80 +71,226 @@ def load():
         msg = armor(request)
         #print('load ok')
         res=msg.armor_response
-        #print(res)
+        
     except rospy.ServiceException as e:
         print(e)
 
-def check(data):
-    print('\nCHECK START\n')
-    global char, weapon, place
-    find = 0
-    #a = 0
-    #b = 0
-    #c = 0
-    print('DATA\n')
-    print(data)
-    if data.class_id == 'who':
-        for a in range(len(char)):
-            if char[a]==data.name:
-                find = 1
-        if find == 0:
-            char.append(data.name)
-    if data.class_id == 'what':
-        for b in range(len(weapon)):
-            if weapon[b]==data.name:
-                find = 1
-        if find == 0:
-            weapon.append(data.name)
-    if data.class_id == 'where':
-        for c in range(len(place)):
-            if weapon[c]==data.name:
-                find = 1
-            if find == 0:
-                place.append(data.name)
-    print('\nCHECK END\n')
-    return find
+def make_hypothesis(request):
+##
+# \brief this function is the handle of the hypothesis maker service. it returns the response to 
+# the state machine.
+    global people, locations, weapons
+    
+    id = request.id
+    name = request.name
+    class_id = request.class_id
+
+    
+    add_to_ont(name, class_id)
+    check(id,name,class_id)
+    
+    if class_id == 'who':
+        who = name
+    else:
+        who = ''
+
+    if class_id == 'what':
+        what = name
+    else:
+        what = ''
+
+    if class_id == 'where':
+        where = name
+    else:
+        where = ''
+
+    control = hypo_control(id)
+
+    if control == True:
+
+        pos_people = position_find(people, id)
+        #print(pos_people)
+        pos_place = position_find(locations, id)
+        #print(pos_place)
+        pos_weapon = position_find(weapons, id)
+        #print(pos_weapon)
+
+        person = people[pos_people][0] 
+        #print(person)
+        who = add_to_hypo(id,person,'who')
+        place = locations[pos_place][0]
+        #print(place)
+        where = add_to_hypo(id,place,'where')
+        weapon = weapons[pos_weapon][0]
+        #print(weapon)
+        what = add_to_hypo(id,weapon,'what')
+        consistent = True
+    else:
+        consistent = False
+        
+        
+
+    disjoint(class_id)
+    apply()
+    reason()
+
+    res = HypothesisResponse(id, who, what, where, consistent)
+    print(res)
+
+    return res
 
 
-def add(name, class_id):
+def comp_consist():
+##
+# \brief this function loads in the onthology the completed and incostistent for armor
     try:
-        print('\nADD START\n')
-        class_ont = ont_class(class_id)
+        
         request=ArmorDirectiveReq()
-        request.client_name= 'hypothesis_maker'
+        request.client_name = 'hypothesis_maker'
+        request.reference_name= 'cluedo_ont'
+        request.command= 'QUERY'
+        request.primary_command_spec= 'IND'
+        request.secondary_command_spec= 'CLASS'
+        request.args= ['COMPLETED']
+        msg = armor(request)
+        msg = armor(request)
+        res = msg.armor_response
+        #print(' COMP_CONSISTENT_2 OK')
+        
+        request=ArmorDirectiveReq()
+        request.client_name = 'hypothesis_maker'
+        request.reference_name= 'cluedo_ont'
+        request.command= 'QUERY'
+        request.primary_command_spec= 'IND'
+        request.secondary_command_spec= 'CLASS'
+        request.args= ['INCONSISTENT']
+        msg = armor(request)
+        res = msg.armor_response
+        #print(' COMP_CONSISTENT_2 OK')
+        
+
+    except rospy.ServiceException as e:
+        print(e)
+
+def hypo_detail():
+##
+# \brief this function defines the hypothesis' classes
+    try:
+        request=ArmorDirectiveReq()
+        request.client_name = 'hypothesis_maker'
+        request.reference_name= 'cluedo_ont'
+        request.command= 'QUERY'
+        request.primary_command_spec= 'OBJECTPROP'
+        request.secondary_command_spec= 'IND'
+        request.args= ['who', 'HP0']
+        msg = armor(request)
+        res = msg.armor_response
+        #print(' HYPO_DETAIL_1 OK')
+        
+
+        request=ArmorDirectiveReq()
+        request.client_name = 'hypothesis_maker'
+        request.reference_name= 'cluedo_ont'
+        request.command= 'QUERY'
+        request.primary_command_spec= 'OBJECTPROP'
+        request.secondary_command_spec= 'IND'
+        request.args= ['where', 'HP0']
+        msg = armor(request)
+        res = msg.armor_response
+        #print(' HYPO_DETAIL_2 OK')
+        
+
+        request=ArmorDirectiveReq()
+        request.client_name = 'hypothesis_maker'
+        request.reference_name= 'cluedo_ont'
+        request.command= 'QUERY'
+        request.primary_command_spec= 'OBJECTPROP'
+        request.secondary_command_spec= 'IND'
+        request.args= ['what', 'HP0']
+        msg = armor(request)
+        res = msg.armor_response
+        #print(' HYPO_DETAIL_3 OK')
+        
+
+    except rospy.ServiceException as e:
+        print(e)
+
+def add_to_hypo(id,name,class_id):
+##
+# \brief this function adds an hyopthesis to the reasoner
+    try:
+        request=ArmorDirectiveReq()
+        request.client_name = 'hypothesis_maker'
+        request.reference_name= 'cluedo_ont'
+        request.command= 'ADD'
+        request.primary_command_spec= 'OBJECTPROP'
+        request.secondary_command_spec= 'IND'
+        request.args= [class_id, id, name]
+        msg = armor(request)
+        res = msg.armor_response
+        return name
+        #print(' ADD_TO_HYPO OK')
+        
+
+    except rospy.ServiceException as e:
+        print(e)
+
+def add_to_ont(name,class_id):
+##
+# \brief this function adds an hypothesis to the onthology
+    try:
+        identifier = class_ont(class_id)
+
+        request=ArmorDirectiveReq()
+        request.client_name = 'hypothesis_maker'
         request.reference_name= 'cluedo_ont'
         request.command= 'ADD'
         request.primary_command_spec= 'IND'
         request.secondary_command_spec= 'CLASS'
-        request.args= [name, class_ont]
+        request.args= [name, identifier]
         msg = armor(request)
-        print('request\n')
-        print(request)
-        res=msg.armor_response
-        reason()
-        disjoint(class_ont)
-        reason()
-        print('\nADD END\n')
+        res = msg.armor_response
+        #print(' ADD_TO_ONT OK')
+        
+
     except rospy.ServiceException as e:
         print(e)
 
-
-
-def ont_class(class_id):
-    print('\n ONT CLASS START\n')
-    if class_id == 'who':
-        print('\n ONT CLASS END\n')
-        return 'PERSON'
-    if class_id == 'what':
-        print('\n ONT CLASS END\n')
-        return 'WEAPON'
-    if class_id == 'where':
-        print('\n ONT CLASS END\n')
-        return 'LOCATION'
-
-def reason():
+def disjoint(class_id):
+##
+# \brief this function calls the disjoint command
     try:
-        print('\nREASON START\n')
+        identifier = class_ont(class_id)
+
+        request=ArmorDirectiveReq()
+        request.client_name= 'hypothesis_maker'
+        request.reference_name= 'cluedo_ont'
+        request.command= 'DISJOINT'
+        request.primary_command_spec= 'IND'
+        request.secondary_command_spec= 'CLASS'
+        request.args= [identifier]
+        msg = armor(request)   
+        res = msg.armor_response
+        #print(' DISJOINT OK')
+        
+
+    except rospy.ServiceException as e:
+        print(e)
+     
+def class_ont(class_id):
+##
+# \brief this function gets the class_id and returns the class name for the onthology
+        if class_id == 'who':
+            return  'PERSON'
+        elif class_id == 'what':
+            return 'WEAPON'
+        elif class_id == 'where':
+            return  'PLACE'
+            
+def reason():
+##
+# \brief this function calls the reason command for armor
+    try:
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
         request.reference_name= 'cluedo_ont'
@@ -162,130 +300,96 @@ def reason():
         request.args= []
         msg = armor(request)
         res=msg.armor_response
-        #print(res)
-        print('\nREASON END\n')
-    except rospy.ServiceException as e:
-        print(e)	
+        #print(' REASON OK')
+        
 
-
-def disjoint(class_ont):
-    try:
-        print('\nDISJOINT START\n')
-        request=ArmorDirectiveReq()
-        request.client_name= 'hypothesis_maker'
-        request.reference_name= 'cluedo_ont'
-        request.command= 'DISJOINT'
-        request.primary_command_spec= 'IND'
-        request.secondary_command_spec= 'CLASS'
-        request.args= [class_ont]
-        msg = armor(request)	
-        print('\n DISJOINT END\n')	 
-    except rospy.ServiceException as e:
-        print(e)  
-
-def ont_check(id, name, class_id):
-    try:
-        print('\nONT_CHECK START\n')
-        name_list = []
-        res_final= hypo_find(id, class_id)
-        name_list.append(name)
-        if res_final != name_list:
-            hypo_form(id, name, class_id)
-            reason()
-        print('\nONT_CHECK END\n')
+        return res.is_consistent
     except rospy.ServiceException as e:
         print(e)
 
-def hypo_form(id, name, class_id):
+def apply():
+##
+# \brief this function calls the apply command for armor
     try:
-        print('\nHYPO_FORM START\n')
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
         request.reference_name= 'cluedo_ont'
-        request.command= 'ADD'
-        request.primary_command_spec= 'OBJECTPROP'
-        request.secondary_command_spec= 'IND'
-        request.args= [class_id,id,name]
+        request.command= 'APPLY'
+        request.primary_command_spec= ''
+        request.secondary_command_spec= ''
+        request.args= []
         msg = armor(request)
         res=msg.armor_response
-        print('\nHYPO_FORM END\n')
+        #print(' APPLY OK')
         
+
+        return res.is_consistent
     except rospy.ServiceException as e:
         print(e)
 
-def hypo_find(id, class_id):
-    try:
-        print('\nHYPO_FIND START\n')
-        request=ArmorDirectiveReq()
-        request.client_name= 'hypothesis_maker'
-        request.reference_name= 'cluedo_ont'
-        request.command= 'QUERY'
-        request.primary_command_spec= 'OBJECTPROP'
-        request.secondary_command_spec= 'IND'
-        request.args= [class_id, id]
-        msg = armor(request)
-        
-        res=msg #.armor_response.queried_objects
-        print('RES\n')
-        print (res)
-        res_final=query(res.armor_response.queried_objects)
-        print('RES_FINAL\n')
-        print (res_final)
-        print('\nHYPO_FIND START\n')
-        return res_final
-    except rospy.ServiceException as e:
-        print(e)   
+def check(id,name,class_id):
+##
+# \brief this function check if the hypothesis has already beeen added to the matrix where I 
+# store them, if not it add the hypothesis' name and id.
+    global locations, weapons, people
+    
+    if class_id == 'who':
+        control = matrix_find(people, name)
+        if control == False:
+            temp = [name, id]
+            people.append(temp)
+    elif class_id == 'what':
+        control = matrix_find(weapons, name)
+        if control == False:
+            temp = [name, id]
+            weapons.append(temp)
+    elif class_id == 'where':
+        control = matrix_find(locations, name)
+        if control == False:
+            temp = [name, id]
+            locations.append(temp)
 
-def query(query):
-    print('\nQUERY START\n')
-    for i in range(len(query)):
-        t=query[i]
-        t=t.split('#')
-        index=len(t)
-        t=t[index-1]
-        query[i]=t[:-1]
-    print('\nQUERY END\n')
-    return query
+    print('people:\n')
+    print(people)
 
-def complete_consistent(id):
-    try:
-        print('\COMPLETE_CONSISTENT START\n')
-        complete = 0
-        consistent = 0
-        request=ArmorDirectiveReq()
-        request.client_name = 'hypothesis_maker'
-        request.reference_name= 'cluedo_ont'
-        request.command= 'QUERY'
-        request.primary_command_spec= 'IND'
-        request.secondary_command_spec= 'CLASS'
-        request.args= ['COMPLETED']
-        msg = armor(request)
-        res = msg.armor_response.queried_objects
-        res_final = query(res)
-        for i in range(len(res_final)):
-            if res_final[i]==id:
-                complete = 1
+    print('weapons:\n')
+    print(weapons)
 
-        request=ArmorDirectiveReq()
-        request.client_name = 'hypothesis_maker'
-        request.reference_name= 'cluedo_ont'
-        request.command= 'QUERY'
-        request.primary_command_spec= 'IND'
-        request.secondary_command_spec= 'CLASS'
-        request.args= ['INCONSISTENT']
-        msg = armor(request)
-        res = msg.armor_response.queried_objects
-        res_final = query(res)
-        print('\COMPLETE_CONSISTENT END\n')
-        for i in range(len(res_final)):
-            if res_final[i]==id:
-                consistent = 1    
-        if complete == 1 and consistent == 0:
-            return 1
-        else : 
-            return 0
-    except rospy.ServiceException as e:
-        print(e)
+    print('locations:\n')
+    print(locations)
+
+def position_find(matrix, value):
+## 
+# \brief this function finds the idex of the row I'm looking for and return it
+    i = 0
+    for row in matrix:
+        for element in row:
+            if element == value:
+                    #print('row count is: %d' %i)
+                    return i
+        i =+ 1
+
+def matrix_find(matrix, value):
+##
+# \brief this function return if a value exists in a matrix
+    for row in matrix:
+        for element in row:
+            if element == value:
+                return True
+    return False
+    
+def hypo_control(id):
+##
+# \brief this function sees if in the matrix exists a complete hypothesis
+    global people, locations, weapons
+
+    a = matrix_find(people, id)
+    b = matrix_find(locations, id)
+    c = matrix_find(weapons, id)
+    if a == True and b == True and c == True:
+        return True
+    else: 
+        return False
 
 if __name__ == '__main__':
     try:
