@@ -1,5 +1,35 @@
 #! /usr/bin/env python2
 
+
+## @package expr_rob_lab
+#
+#  \file hint_publisher.py
+#  \brief script for the hint publisher.
+#
+#  \author Jacopo Ciro Soncini
+#  \version 1.0
+#  \date 15/11/2021
+#  \details
+#  
+#  Subscribes to: <BR>
+#       None
+#
+#  Publishes to: <BR>
+#	    hint
+#
+#  Services: <BR>
+#       None
+#
+#  Client Services: <BR>
+#       None
+#
+#  Action Services: <BR>
+#       None
+#
+#  Description: <BR>
+#       This node handles the hint publisher, by publishing random hints from a list.
+
+
 import rospy
 from exp_rob_lab.msg import Hint
 import random
@@ -12,11 +42,13 @@ hint = [['HP1','Miss_Scarlett', 'who'],['HP1','Candlestick', 'what'],['HP1','Kit
         ['HP6','Mrs_White', 'who'],['HP6','Wrench', 'what'],['HP6','Lounge', 'where']]
 
 def publisher():
+##
+# \brief this function initilizes the node and the publisher. it also defines the message we want to send.
     pub = rospy.Publisher('hint', Hint)
     rospy.init_node('hint_publisher')
     r = rospy.Rate(1)
     while not rospy.is_shutdown():
-        #ricordati di cambiare il randint per includere tutti gli int
+        
         num = random.randint(0,17)
     
         msg = Hint()
