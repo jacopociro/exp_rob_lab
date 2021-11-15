@@ -1,14 +1,39 @@
 #! /usr/bin/env python2
 
+## @package expr_rob_lab
+#
+#  \file hypothesis_maker.py
+#  \brief This script handles the hypothesis maker service and the onthology part.
+#
+#  \author Jacopo Ciro Soncini
+#  \version 1.0
+#  \date 15/11/2021
+#  \details
+#  
+#  Subscribes to: <BR>
+#       None
+#
+#  Publishes to: <BR>
+#	    hint
+#
+#  Services: <BR>
+#       hypothesis_maker
+#
+#  Client Services: <BR>
+#       armor_interface_srv
+#
+#  Action Services: <BR>
+#       None
+#
+#  Description: <BR>
+#       This node handles the hint publisher, by publishing random hints from a list.
+
 from os import name
-
-
 from exp_rob_lab.srv import *
 import rospy
 from armor_msgs.msg import *
 from armor_msgs.srv import *
-import numpy as np
-import re
+
 
 locations = [[]]
 weapons = [[]]
@@ -16,6 +41,9 @@ people = [[]]
 
 
 def hypothesis_maker_server():
+##
+# \brief this function initializes the node, the hypothesis_maker service and the proxy to the 
+# armor service
     global armor
     rospy.init_node('hypothesis_maker2')
     rospy.wait_for_service('armor_interface_srv')
@@ -30,6 +58,8 @@ def hypothesis_maker_server():
     rospy.spin()
 
 def load():
+##
+# \brief this function defines the load command for armor
     try:
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
@@ -46,8 +76,10 @@ def load():
         print(e)
 
 def make_hypothesis(request):
+##
+# \brief this function is the handle of the hypothesis maker service. it returns the response to 
+# the state machine.
     global people, locations, weapons
-    #print('make_hypothesis')
     
     id = request.id
     name = request.name
@@ -66,6 +98,7 @@ def make_hypothesis(request):
         what = name
     else:
         what = ''
+
     if class_id == 'where':
         where = name
     else:
@@ -108,6 +141,8 @@ def make_hypothesis(request):
 
 
 def comp_consist():
+##
+# \brief this function loads in the onthology the completed and incostistent for armor
     try:
         
         request=ArmorDirectiveReq()
@@ -138,7 +173,8 @@ def comp_consist():
         print(e)
 
 def hypo_detail():
-
+##
+# \brief this function defines the hypothesis' classes
     try:
         request=ArmorDirectiveReq()
         request.client_name = 'hypothesis_maker'
@@ -180,6 +216,8 @@ def hypo_detail():
         print(e)
 
 def add_to_hypo(id,name,class_id):
+##
+# \brief this function adds an hyopthesis to the reasoner
     try:
         request=ArmorDirectiveReq()
         request.client_name = 'hypothesis_maker'
@@ -198,6 +236,8 @@ def add_to_hypo(id,name,class_id):
         print(e)
 
 def add_to_ont(name,class_id):
+##
+# \brief this function adds an hypothesis to the onthology
     try:
         identifier = class_ont(class_id)
 
@@ -217,6 +257,8 @@ def add_to_ont(name,class_id):
         print(e)
 
 def disjoint(class_id):
+##
+# \brief this function calls the disjoint command
     try:
         identifier = class_ont(class_id)
 
@@ -236,6 +278,8 @@ def disjoint(class_id):
         print(e)
      
 def class_ont(class_id):
+##
+# \brief this function gets the class_id and returns the class name for the onthology
         if class_id == 'who':
             return  'PERSON'
         elif class_id == 'what':
@@ -244,6 +288,8 @@ def class_ont(class_id):
             return  'PLACE'
             
 def reason():
+##
+# \brief this function calls the reason command for armor
     try:
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
@@ -262,6 +308,8 @@ def reason():
         print(e)
 
 def apply():
+##
+# \brief this function calls the apply command for armor
     try:
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
@@ -280,6 +328,9 @@ def apply():
         print(e)
 
 def check(id,name,class_id):
+##
+# \brief this function check if the hypothesis has already beeen added to the matrix where I 
+# store them, if not it add the hypothesis' name and id.
     global locations, weapons, people
     
     if class_id == 'who':
@@ -308,9 +359,10 @@ def check(id,name,class_id):
     print(locations)
 
 def position_find(matrix, value):
+## 
+# \brief this function finds the idex of the row I'm looking for and return it
     i = 0
     for row in matrix:
-        
         for element in row:
             if element == value:
                     #print('row count is: %d' %i)
@@ -318,6 +370,8 @@ def position_find(matrix, value):
         i =+ 1
 
 def matrix_find(matrix, value):
+##
+# \brief this function return if a value exists in a matrix
     for row in matrix:
         for element in row:
             if element == value:
@@ -325,6 +379,8 @@ def matrix_find(matrix, value):
     return False
     
 def hypo_control(id):
+##
+# \brief this function sees if in the matrix exists a complete hypothesis
     global people, locations, weapons
 
     a = matrix_find(people, id)
