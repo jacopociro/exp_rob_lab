@@ -1,0 +1,76 @@
+\hypertarget{state__machine_8py}{}\doxysection{scripts/state\+\_\+machine.py File Reference}
+\label{state__machine_8py}\index{scripts/state\_machine.py@{scripts/state\_machine.py}}
+
+
+This script handles the state machine\textquotesingle{}s states calling services as he needs. This is the main program.  
+
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceexpr__rob__lab}{expr\+\_\+rob\+\_\+lab}}
+\begin{DoxyCompactList}\small\item\em ! /usr/bin/env python2 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{state__machine_8py_a3211dd50679a50adf96ec48989a5f67c}\label{state__machine_8py_a3211dd50679a50adf96ec48989a5f67c}} 
+def {\bfseries room} ()
+\item 
+\mbox{\Hypertarget{state__machine_8py_ad78a1b671190bff340ac59e15b975b2e}\label{state__machine_8py_ad78a1b671190bff340ac59e15b975b2e}} 
+def \mbox{\hyperlink{state__machine_8py_ad78a1b671190bff340ac59e15b975b2e}{callback}} (msg)
+\begin{DoxyCompactList}\small\item\em this function return a random room for the robot to move in \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{state__machine_8py_a5c680ce705e6052fa07c6cece21743d0}\label{state__machine_8py_a5c680ce705e6052fa07c6cece21743d0}} 
+def {\bfseries main} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{state__machine_8py_a9212c4d24fed276f77c74fd575310ff0}\label{state__machine_8py_a9212c4d24fed276f77c74fd575310ff0}} 
+{\bfseries resp\+\_\+hyp} = Hypothesis\+Response
+\item 
+\mbox{\Hypertarget{state__machine_8py_a335628f2e9085305224b4f9cc6e95ed5}\label{state__machine_8py_a335628f2e9085305224b4f9cc6e95ed5}} 
+\mbox{\hyperlink{state__machine_8py_a335628f2e9085305224b4f9cc6e95ed5}{var}} = Hint
+\begin{DoxyCompactList}\small\item\em this function returns the message published from hint \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{state__machine_8py_a8ad3f698becd820c9b50aedb492b62ec}\label{state__machine_8py_a8ad3f698becd820c9b50aedb492b62ec}} 
+\mbox{\hyperlink{state__machine_8py_a8ad3f698becd820c9b50aedb492b62ec}{sm}} = smach.\+State\+Machine(outcomes=\mbox{[}\textquotesingle{}stop\textquotesingle{}\mbox{]})
+\begin{DoxyCompactList}\small\item\em this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{state__machine_8py_a2594171e7c2a90ab61e43e1bc68adaf7}\label{state__machine_8py_a2594171e7c2a90ab61e43e1bc68adaf7}} 
+{\bfseries transitions}
+\item 
+\mbox{\Hypertarget{state__machine_8py_a69d1c2429167d7550d9c8105fda9a0b7}\label{state__machine_8py_a69d1c2429167d7550d9c8105fda9a0b7}} 
+{\bfseries sis} = smach\+\_\+ros.\+Introspection\+Server(\textquotesingle{}state\+\_\+machine\textquotesingle{}, sm, \textquotesingle{}/S\+M\+\_\+\+R\+O\+OT\textquotesingle{})
+\item 
+\mbox{\Hypertarget{state__machine_8py_af47997198e7e7301a1cd8602c7f02acd}\label{state__machine_8py_af47997198e7e7301a1cd8602c7f02acd}} 
+{\bfseries outcome} = sm.\+execute()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This script handles the state machine\textquotesingle{}s states calling services as he needs. This is the main program. 
+
+\begin{DoxyAuthor}{Author}
+Jacopo Ciro Soncini 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+15/11/2021
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ hint
+
+Publishes to\+: ~\newline
+ None
+
+Services\+: ~\newline
+
+
+Client Services\+: ~\newline
+ hypothesis\+\_\+make oracle
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ The state machine has three differente states\+: \mbox{\hyperlink{class_move}{Move}}, \mbox{\hyperlink{class_clues}{Clues}} and \mbox{\hyperlink{class_hyp}{Hyp}}. \mbox{\hyperlink{class_move}{Move}} handles the movement of the robot between the rooms. This movement is fake and is implemented by a simple sleep that simulates the time taken to move. \mbox{\hyperlink{class_clues}{Clues}} handles the hints by subscribing to the hint publisher node and sending the information requested by the hypothesis\+\_\+maker service. The response is saved in a global variable so that it can be passed to the last state, \mbox{\hyperlink{class_hyp}{Hyp}}, if the hypothesis is deemed consistent. \mbox{\hyperlink{class_hyp}{Hyp}} is a state that simply reads the identifier of the hypothesis and sends it to the oracle service that knows if the hypothesis is right. 

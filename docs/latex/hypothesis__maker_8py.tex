@@ -1,0 +1,98 @@
+\hypertarget{hypothesis__maker_8py}{}\doxysection{scripts/hypothesis\+\_\+maker.py File Reference}
+\label{hypothesis__maker_8py}\index{scripts/hypothesis\_maker.py@{scripts/hypothesis\_maker.py}}
+
+
+This script handles the hypothesis maker service and the onthology part.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_abfe00b0dd283834e4568248b6c04a5fb}\label{hypothesis__maker_8py_abfe00b0dd283834e4568248b6c04a5fb}} 
+def {\bfseries make\+\_\+hypothesis} (request)
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a1da91a9b684c7db2460ac547acfe732d}\label{hypothesis__maker_8py_a1da91a9b684c7db2460ac547acfe732d}} 
+def {\bfseries hypothesis\+\_\+maker\+\_\+server} ()
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_ac5411eb59ad33af7cbf88275e4f9dd22}\label{hypothesis__maker_8py_ac5411eb59ad33af7cbf88275e4f9dd22}} 
+def {\bfseries load} ()
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_afe53874353ff3745f19e520976ae17c0}\label{hypothesis__maker_8py_afe53874353ff3745f19e520976ae17c0}} 
+def {\bfseries check} (data)
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a9e612eae74452c6d29adad303b0c225c}\label{hypothesis__maker_8py_a9e612eae74452c6d29adad303b0c225c}} 
+def {\bfseries add} (name, class\+\_\+id)
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_aab2024f9fc94d0ae5677af9d3940c70f}\label{hypothesis__maker_8py_aab2024f9fc94d0ae5677af9d3940c70f}} 
+def {\bfseries ont\+\_\+class} (class\+\_\+id)
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a188bb45984b888851bfc1b9cabf30a08}\label{hypothesis__maker_8py_a188bb45984b888851bfc1b9cabf30a08}} 
+def {\bfseries reason} ()
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a47fa8af48dca80951014e27b992e4446}\label{hypothesis__maker_8py_a47fa8af48dca80951014e27b992e4446}} 
+def {\bfseries disjoint} (class\+\_\+ont)
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a4358c338a246c03c32fdf574a334d28e}\label{hypothesis__maker_8py_a4358c338a246c03c32fdf574a334d28e}} 
+def {\bfseries ont\+\_\+check} (id, name, class\+\_\+id)
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_abfea32afe55510236cf194ee534c3274}\label{hypothesis__maker_8py_abfea32afe55510236cf194ee534c3274}} 
+def {\bfseries hypo\+\_\+form} (id, name, class\+\_\+id)
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_aa967776713bbfd13a0405f1afd34c795}\label{hypothesis__maker_8py_aa967776713bbfd13a0405f1afd34c795}} 
+def {\bfseries hypo\+\_\+find} (id, class\+\_\+id)
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a1c7e38b37db231abaa241220333b731d}\label{hypothesis__maker_8py_a1c7e38b37db231abaa241220333b731d}} 
+def {\bfseries query} (query)
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a2e089c325fd372f8f3d53ed083176c1b}\label{hypothesis__maker_8py_a2e089c325fd372f8f3d53ed083176c1b}} 
+def {\bfseries complete\+\_\+consistent} (id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a77df42e6ff2be406a9a3548db97ceae9}\label{hypothesis__maker_8py_a77df42e6ff2be406a9a3548db97ceae9}} 
+{\bfseries armor} = None
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a27310e15e30d6313ebaf4f6b34d2bc33}\label{hypothesis__maker_8py_a27310e15e30d6313ebaf4f6b34d2bc33}} 
+list {\bfseries hypothesis} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a5285c5e6d56b59a232aed43667b082d2}\label{hypothesis__maker_8py_a5285c5e6d56b59a232aed43667b082d2}} 
+list {\bfseries char} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a5ff8535b1c4c49d510b4037d58a3e4c6}\label{hypothesis__maker_8py_a5ff8535b1c4c49d510b4037d58a3e4c6}} 
+list {\bfseries weapon} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{hypothesis__maker_8py_a905334d717455cce952655340984b3d0}\label{hypothesis__maker_8py_a905334d717455cce952655340984b3d0}} 
+list {\bfseries place} = \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This script handles the hypothesis maker service and the onthology part. 
+
+\begin{DoxyAuthor}{Author}
+Jacopo Ciro Soncini 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+15/11/2021
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ None
+
+Publishes to\+: ~\newline
+ hint
+
+Services\+: ~\newline
+ hypothesis\+\_\+maker
+
+Client Services\+: ~\newline
+ armor\+\_\+interface\+\_\+srv
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ This node handles the hint publisher, by publishing random hints from a list. 

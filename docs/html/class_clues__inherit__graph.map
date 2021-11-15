@@ -1,0 +1,4 @@
+<map id="Clues" name="Clues">
+<area shape="rect" id="node1" title="this class defines the state Clues, the execute subscribes to the hint publisher and handles the hypo..." alt="" coords="5,80,64,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="7,5,63,32"/>
+</map>

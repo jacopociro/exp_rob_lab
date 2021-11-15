@@ -1,0 +1,61 @@
+\hypertarget{oracle__service_8py}{}\doxysection{scripts/oracle\+\_\+service.py File Reference}
+\label{oracle__service_8py}\index{scripts/oracle\_service.py@{scripts/oracle\_service.py}}
+
+
+This script handle the oracle service.  
+
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceexpr__rob__lab}{expr\+\_\+rob\+\_\+lab}}
+\begin{DoxyCompactList}\small\item\em ! /usr/bin/env python2 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{oracle__service_8py_a502180cd0f3e5cecd6c50e04c8aeb046}\label{oracle__service_8py_a502180cd0f3e5cecd6c50e04c8aeb046}} 
+def {\bfseries oracle\+\_\+handle} (req)
+\item 
+\mbox{\Hypertarget{oracle__service_8py_a83696c581a071f713b38505f42bf8528}\label{oracle__service_8py_a83696c581a071f713b38505f42bf8528}} 
+def {\bfseries oracle\+\_\+server} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{oracle__service_8py_a2f54f8b71f0d765e2b7dbd9a8b9774ff}\label{oracle__service_8py_a2f54f8b71f0d765e2b7dbd9a8b9774ff}} 
+int \mbox{\hyperlink{oracle__service_8py_a2f54f8b71f0d765e2b7dbd9a8b9774ff}{right}} = 0
+\begin{DoxyCompactList}\small\item\em this function hadle the service, giving a different bool variable after judging the correcteness of the hypothesis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{oracle__service_8py_a3691308f2a4c2f6983f2880d32e29c84}\label{oracle__service_8py_a3691308f2a4c2f6983f2880d32e29c84}} 
+\mbox{\hyperlink{oracle__service_8py_a3691308f2a4c2f6983f2880d32e29c84}{s}} = rospy.\+Service(\textquotesingle{}oracle\textquotesingle{}, oracle, oracle\+\_\+handle)
+\begin{DoxyCompactList}\small\item\em here we initialize the node and the service \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This script handle the oracle service. 
+
+\begin{DoxyAuthor}{Author}
+Jacopo Ciro Soncini 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+15/11/2021
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ None
+
+Publishes to\+: ~\newline
+ None
+
+Services\+: ~\newline
+ oracle
+
+Client Services\+: ~\newline
+ None
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ This node handles the oracle service, here is where we define the correct hypothesis id and where we feed the request, string, and get the response, bool. 

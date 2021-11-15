@@ -1,0 +1,4 @@
+<map id="Move" name="Move">
+<area shape="rect" id="node1" title="this class defines the state Move, the execute is just a sleep to simulate movement...." alt="" coords="5,80,64,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="7,5,63,32"/>
+</map>
