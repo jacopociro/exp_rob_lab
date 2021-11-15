@@ -1,10 +1,19 @@
 #! /usr/bin/env python2
 
 from os import name
+
+
 from exp_rob_lab.srv import *
 import rospy
 from armor_msgs.msg import *
 from armor_msgs.srv import *
+import numpy as np
+import re
+
+locations = [[]]
+weapons = [[]]
+people = [[]]
+
 
 def hypothesis_maker_server():
     global armor
@@ -37,37 +46,82 @@ def load():
         print(e)
 
 def make_hypothesis(request):
+    global people, locations, weapons
     print('make_hypothesis')
     
     id = request.id
     name = request.name
     class_id = request.class_id
-    add_to_hypo(id,name,class_id)
+
+    #add_to_hypo(id,name,class_id)
     add_to_ont(name, class_id)
-    
-    disjoint(class_id)
-    apply()
-    consistent = reason()
-    
+    check(id,name,class_id)
     
     if class_id == 'who':
-            who = name
-            what = ''
-            where = ''
-    elif class_id == 'what':
-            what = name
-            who = ''
-            where = ''
-    elif class_id == 'where':
-            where = name
-            who = ''
-            what = ''
+        who = name
+    else:
+        who = ''
 
-    if consistent == 'True':
+    if class_id == 'what':
+        what = name
+    else:
+        what = ''
+    if class_id == 'where':
+        where = name
+    else:
+        where = ''
+
+    control = hypo_control(id)
+
+    if control == True:
+
+        pos_people = position_find(people, id)
+        print(pos_people)
+        pos_place = position_find(locations, id)
+        print(pos_place)
+        pos_weapon = position_find(weapons, id)
+        print(pos_weapon)
+
+        person = people[pos_people][0] 
+        print(person)
+        who = add_to_hypo(id,person,'who')
+        place = locations[pos_place][0]
+        print(place)
+        where = add_to_hypo(id,place,'where')
+        weapon = weapons[pos_weapon][0]
+        what = print(weapon)
+        add_to_hypo(id,weapon,'what')
+        consistent = True
+    else:
+        consistent = False
+        
+        
+
+    disjoint(class_id)
+    apply()
+    reason()
+    
+    '''
+    if class_id == 'who':
+        who = name
+    else:
+        who = ''
+
+    if class_id == 'what':
+        what = name
+    else:
+        what = ''
+    if class_id == 'where':
+        where = name
+    else:
+        where = ''
+    
+    if consistent == True:
         is_consistent = True
     else:
         is_consistent = False
-    res = HypothesisResponse(id, who, what, where, is_consistent)
+    '''
+    res = HypothesisResponse(id, who, what, where, consistent)
     print(res)
 
     return res
@@ -171,6 +225,7 @@ def add_to_hypo(id,name,class_id):
         request.args= [class_id, id, name]
         msg = armor(request)
         res = msg.armor_response
+        return name
         print(' ADD_TO_HYPO OK')
         #if res.is_consistent == 'True':
         #    print('OK')
@@ -274,6 +329,61 @@ def apply():
     except rospy.ServiceException as e:
         print(e)
 
+def check(id,name,class_id):
+    global locations, weapons, people
+    
+    if class_id == 'who':
+        control = matrix_find(people, name)
+        if control == False:
+            temp = [name, id]
+            people.append(temp)
+    elif class_id == 'what':
+        control = matrix_find(weapons, name)
+        if control == False:
+            temp = [name, id]
+            weapons.append(temp)
+    elif class_id == 'where':
+        control = matrix_find(locations, name)
+        if control == False:
+            temp = [name, id]
+            locations.append(temp)
+
+    print('people:\n')
+    print(people)
+
+    print('weapons:\n')
+    print(weapons)
+
+    print('locations:\n')
+    print(locations)
+
+def position_find(matrix, value):
+    i = 0
+    for row in matrix:
+        print(i)
+        for element in row:
+            if element == value:
+                    print('row count is: %d' %i)
+                    return i
+        i =+ 1
+
+def matrix_find(matrix, value):
+    for row in matrix:
+        for element in row:
+            if element == value:
+                return True
+    return False
+    
+def hypo_control(id):
+    global people, locations, weapons
+
+    a = matrix_find(people, id)
+    b = matrix_find(locations, id)
+    c = matrix_find(weapons, id)
+    if a == True and b == True and c == True:
+        return True
+    else: 
+        return False
 
 if __name__ == '__main__':
     try:
