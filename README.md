@@ -26,6 +26,7 @@ This image shows the different states initialized with the state machine.
 
 ### RQT graph
 ![ros graph](/rosgraph.png)
+
 Depending on the state of the state machine different nodes are communicating.
 
 ### Compiling and running
