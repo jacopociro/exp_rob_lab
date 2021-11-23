@@ -21,6 +21,7 @@ downloadable at https://github.com/EmaroLab/armor.
 
 ### State machine graph
 ![ros state machine](sm_sys.GIF)
+
 This image shows the different states initialized with the state machine.
 
 ### RQT graph
@@ -74,6 +75,7 @@ I also opted for 3 states instead of two as it allowed my state machine to be mo
 ### Limitations and possible imporvements
 
 The robot is really "dumb" as it does not remember if the hypothesis he formulated was already given to the oracle.
+
 The movement is poorly handled as I just stop the script for certain amount of time. This would make it seems like the robot is always travelling the same amout of distance and this is not really plausible. 
 
 
