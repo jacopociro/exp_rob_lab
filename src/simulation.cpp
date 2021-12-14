@@ -26,7 +26,7 @@ const std::string place[9] = {"conservatory", "lounge", "kitchen", "library", "h
 int uIDs[3]={-1,-1,-1};
 int winID = -1;
  
-std::vector<erl2::ErlOracle> oracle_msgs;
+std::vector<exp_rob_lab::ErlOracle> oracle_msgs;
 
 double distfromtarget (double x, double y, double z, double x1, double y1, double z1){
 	double dist = sqrt((x-x1)*(x-x1)+(y-y1)*(y-y1)+(z-z1)*(z-z1));
@@ -34,7 +34,7 @@ double distfromtarget (double x, double y, double z, double x1, double y1, doubl
 	
 }
 
-bool oracleService(erl2::Oracle::Request &req, erl2::Oracle::Response &res)
+bool oracleService(exp_rob_lab::Oracle::Request &req, exp_rob_lab::Oracle::Response &res)
 	{
 		res.ID = winID;
 		return true;
@@ -46,7 +46,7 @@ void oracleCallback(const gazebo_msgs::LinkStates::ConstPtr& msg)
 	   if (msg->name[i].find("cluedo_link")!= std::string::npos){
 		   for(int j=0; j<4;j++){
 				if ((distfromtarget(msg->pose[i].position.x, msg->pose[i].position.y, msg->pose[i].position.z, markx[j],marky[j],markz[j])<0.25) && ((lastmarkx !=markx[j]) || (lastmarky != marky[j]))){
-				erl2::ErlOracle oracle_msg;
+				exp_rob_lab::ErlOracle oracle_msg;
 				oracle_msg.ID = rand() % 6;
 				if(rand()%4==1){
 					int a = rand()%5;
@@ -105,7 +105,7 @@ int main(int argc, char **argv)
 ros::init(argc, argv, "assignment2");
 ros::NodeHandle nh;
 ros::Publisher vis_pub = nh.advertise<visualization_msgs::MarkerArray>( "/visualization_marker", 0 );
-oracle_pub = nh.advertise<erl2::ErlOracle>( "/oracle_hint", 0 );
+oracle_pub = nh.advertise<exp_rob_lab::ErlOracle>( "/oracle_hint", 0 );
 ros::ServiceServer service= nh.advertiseService("/oracle_solution", oracleService);
 ros::Subscriber sub = nh.subscribe("/gazebo/link_states", 10, oracleCallback);
 visualization_msgs::MarkerArray markers;
