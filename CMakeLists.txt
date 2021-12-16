@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.1.3)
 project(exp_rob_lab)
 
 ## Compile as C++11, supported in ROS Kinetic and newer

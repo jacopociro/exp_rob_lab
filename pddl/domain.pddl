@@ -83,12 +83,21 @@
             (at end (and (robot_home ?r ?h)))
         )
     )
+;; action to move from home
+    (:durative-action leave_home
+        :parameters (?r - robot ?h - home ?wp - waypoint)
+        :duration (= ?duration (distance_home ?wp ?h))
+        :condition (and 
+            (at start (and (robot_home ?r ?h))
+            ))
+        :effect (and 
+            (at end (and (robot_at ?r ?wp)))
+        )
+    )
 ;;action that check the oracle
     (:action check_oracle
         :parameters (?r - robot ?hy - hypothesis ?h - home ?o - oracle)
         :precondition (and (checked ?hy) (robot_home ?r ?h))
         :effect (and (oracle_called ?o))
-    )
-    
-    
+    )   
 )
