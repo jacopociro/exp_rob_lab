@@ -13,7 +13,7 @@
   <arg name="debug" default="false"/>
   <arg name="physics" default="ode"/>
   <arg name="verbose" default="false"/>
-  <arg name="world_name" value="$(find erl2)/world/$(arg world).world"/>
+  <arg name="world_name" value="$(find exp_rob_lab)/world/$(arg world).world"/>
   <arg name="respawn_gazebo" default="false"/>
   <arg name="use_clock_frequency" default="false"/>
   <arg name="pub_clock_frequency" default="100"/>
@@ -45,7 +45,8 @@
 
   <node name="simulation" pkg ="exp_rob_lab" type="simulation" output="screen" /> 
 	
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find erl2)/config/sim.rviz" /> 
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exp_rob_lab)/config/sim.rviz" /> 
 	
+  
 
 </launch>
