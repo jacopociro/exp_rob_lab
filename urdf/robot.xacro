@@ -68,7 +68,7 @@
     </joint>
   </xacro:macro>
 <!-- Dummy link and joint-->
-  <link name="dummy">
+<!-- <link name="dummy">
 
   </link>
   
@@ -76,11 +76,11 @@
     <origin rpy="0 0 0" xyz="0 0 0"/>
     <child link="body"/>
     <parent link="dummy"/>
-  </joint>
+  </joint> -->
 <!-- Body Configuration -->
   <link name="body">
     <!-- pose and inertial -->
-    <pose>0 0 0.1 0 0 0</pose>
+    
     <inertial>
       <mass value="5"/>
       <origin rpy="0 0 0" xyz="0 0 0.1"/>
