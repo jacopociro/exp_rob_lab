@@ -7,7 +7,7 @@
   <param name="use_gui" value="True"/>
   <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" ></node>
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" /> 
-	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find exp_rob_lab)/config/sim.rvz" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find exp_rob_lab)/config/sim.rviz" />
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch"> 
     <arg name="paused" value="true"/>
