@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: exp_rob_lab
+    relative_path: urdf/my_robot.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/m2wr.srdf
+  CONFIG:
+    author_name: Jacopo Ciro Soncini
+    author_email: jacopo.soncini@gmail.com
+    generated_timestamp: 1648733283
