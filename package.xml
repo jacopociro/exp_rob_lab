@@ -66,7 +66,7 @@
   <exec_depend>armor</exec_depend>
   <exec_depend>armor_py_api</exec_depend>
   <exec_depend>message_runtime</exec_depend>
-
+  <exec_depend>message_generation</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
