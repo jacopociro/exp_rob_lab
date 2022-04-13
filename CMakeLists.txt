@@ -11,13 +11,18 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  urdf
+  sensor_msgs
+  moveit_ros_planning_interface
   visualization_msgs
   gazebo_msgs
+  tf
   message_generation
   moveit_commander
   moveit_msgs
   actionlib_msgs
   geometry_msgs
+  rosplan_planning_system
 )
 
 ## System dependencies are found with CMake's conventions
@@ -64,6 +69,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
    FILES
    Oracle.srv
+   Arm.srv
 #   Service2.srv
  )
 
@@ -79,6 +85,7 @@ add_service_files(
    DEPENDENCIES
    actionlib_msgs
    std_msgs
+   geometry_msgs
  )
 
 ################################################
@@ -167,10 +174,11 @@ add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTE
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+ catkin_install_python(PROGRAMS
+  scripts/go_to_point_action.py
+  scripts/move_arm.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
