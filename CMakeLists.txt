@@ -177,6 +177,7 @@ add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTE
  catkin_install_python(PROGRAMS
   scripts/go_to_point_action.py
   scripts/move_arm.py
+  scripts/plan.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

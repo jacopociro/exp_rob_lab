@@ -1,103 +1,98 @@
 (define (domain sherlockbot)
-    (:requirements :strips :typing :fluents :disjunctive-preconditions :durative-actions  :negative-preconditions)
+    (:requirements :strips :typing :fluents :disjunctive-preconditions :durative-actions  :negative-preconditions :duration-inequalities)
 
     (:types
         waypoint
-        robot
-        hint
-        arm
-        order
-        hypothesis
-        arm_pos
-        hint_pos
         home
         oracle
+        robot
     )
 
     (:predicates
-        (robot_at ?r -robot ?wp - waypoint)
-        (reached ?a - arm ?h - hint)
-        (add_to_ont ?h - hint)
-        (checked ?hy - hypothesis)
-        (inspected ?h - hint)
-        (robot_home ?r - robot ?h - home)
+        (robot_at ?wp - waypoint)
+        (reached ?wp - waypoint)
+        (checked)
+        (robot_home ?h - home)
         (oracle_called ?o - oracle)
+        (move ?from ?to - waypoint)
+        (visited ?wp - waypoint)
     )
 ;; functions to define the distances on the map and if the hypothesis is complete
     (:functions
-        (distance_wp ?a ?b - waypoint)
-        (distance_hint ?a - arm_pos ?b - hint_pos)
-        (hypothesis_complete ?hy - hypothesis)
-        (distance_home ?a - waypoint ?b - home)
+        (hypothesis_complete)
     )
 ;;action to move to a waypoiny
     (:durative-action go_to_waypoint
-        :parameters (?r - robot ?from ?to - waypoint)
-        :duration (= ?duration (distance_wp ?from ?to))
+        :parameters (?from - waypoint ?to - waypoint)
+        :duration (= ?duration 5)
         :condition (and 
-            (at start (robot_at ?r ?from))
+            (at start (robot_at ?from))
+            (at start (move ?from ?to))
+            (at start (visited ?to))
         )
         :effect (and 
-            (at start (not (robot_at ?r ?from) ))
-            (at end ( robot_at ?r ?to))
+            (at start (not (robot_at ?from) ))
+            (at end ( robot_at ?to))
+            (at end (reached ?to))
+            (at end (not(visited ?to)))
         )
     )
 ;;action to reach the hint with the arm   
-    (:durative-action reach_hint
-        :parameters (?r - robot ?a - arm ?h - hint ?ap - arm_pos ?hp - hint_pos ?at - waypoint)
-        :duration (= ?duration (distance_hint ?ap ?hp))
-        :condition (and 
-            (at start (robot_at ?r ?at))
-            )
-        :effect (and 
-            (at end (reached ?a ?h))
-        )
-    )
-;;action to inspect if the hint is malformed
-    (:action hint_inspection
-        :parameters (?h - hint ?a - arm)
-        :precondition (and (reached ?a ?h))
-        :effect (and (inspected ?h))
-    )
+
+
 ;;action to add the hint to the onthology
-    (:action add_to_onthology
-        :parameters (?h - hint ?hy - hypothesis)
-        :precondition (and (inspected ?h))
-        :effect (and (add_to_ont ?h) (increase (hypothesis_complete ?hy) 1))
+    (:durative-action add_to_onthology
+        :parameters (?wp - waypoint)
+        :duration (= ?duration 1)
+        :condition (and 
+            (at start(reached ?wp)) 
+            (at start(robot_at ?wp))
+            )
+        :effect (and (at start (increase (hypothesis_complete) 1))
+                (at start(not(reached ?wp)))
+                )
     )
 ;;action to check if the hypothesis is complete
-    (:action hypothesis_check
-        :parameters (?hy - hypothesis)
-        :precondition (and (= (hypothesis_complete ?hy) 3) )
-        :effect (and (checked ?hy))
+    (:durative-action hypothesis_check
+        :parameters (?r - robot)
+        :duration (= ?duration 1)
+        :condition (and (at start(> (hypothesis_complete) 2) ))
+        :effect (and (at end(checked)))
     )
     
 ;;action to move home
     (:durative-action return_home
-        :parameters (?r - robot ?h - home ?wp - waypoint ?hy - hypothesis)
-        :duration (= ?duration (distance_home ?wp ?h))
+        :parameters (?h - home ?wp - waypoint)
+        :duration (= ?duration 5)
         :condition (and 
-            (at start (and (checked ?hy))
+            (at start (checked))
+            (at start (robot_at ?wp)
             ))
         :effect (and 
-            (at end (and (robot_home ?r ?h)))
+            (at end (and (robot_home ?h) (not(robot_at ?wp))))
+            
         )
     )
 ;; action to move from home
     (:durative-action leave_home
-        :parameters (?r - robot ?h - home ?wp - waypoint)
-        :duration (= ?duration (distance_home ?wp ?h))
+        :parameters (?h - home ?wp - waypoint)
+        :duration (= ?duration 5)
         :condition (and 
-            (at start (and (robot_home ?r ?h))
+            (at start (and (robot_home ?h))
             ))
         :effect (and 
-            (at end (and (robot_at ?r ?wp)))
+            (at end (robot_at ?wp))
+            (at end (reached ?wp))
+            (at end (not(robot_home ?h)))
+            (at end (not(visited ?wp)))
+            
         )
     )
 ;;action that check the oracle
-    (:action check_oracle
-        :parameters (?r - robot ?hy - hypothesis ?h - home ?o - oracle)
-        :precondition (and (checked ?hy) (robot_home ?r ?h))
-        :effect (and (oracle_called ?o))
+    (:durative-action check_oracle
+        :parameters (?h - home ?o - oracle)
+        :duration (= ?duration 1)
+        :condition (and(at start  (checked))  (at start (robot_home ?h)))
+        :effect (and (at end (oracle_called ?o)))
     )   
 )

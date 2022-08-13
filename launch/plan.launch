@@ -5,41 +5,41 @@
     <include file="$(find rosplan_planning_system)/launch/interfaced_planning_system.launch">
         <arg name="domain_path" value="$(find exp_rob_lab)/pddl/domain.pddl"/>
         <arg name="problem_path" value="$(find exp_rob_lab)/pddl/problem.pddl"/>
+        <arg name="data_path" value="$(find exp_rob_lab)/pddl/"/>
+        <arg name="autom_gen_problem_path" value="$(find exp_rob_lab)/pddl/auto_problem.pddl"/>
     </include>
 
     <!-- sim actions -->
     <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch">
         <arg name="pddl_action_name" value="go_to_waypoint"/>
-    </include>
-
-    <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch">
-        <arg name="pddl_action_name" value="reach_hint"/>
-    </include>
-
-    <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch">
-        <arg name="pddl_action_name" value="hint_inspection"/>
-        <arg name="action_probability" value="0.7"/>
+        <arg name="action_duration" value="5"/>
     </include>
 
     <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch">
         <arg name="pddl_action_name" value="add_to_onthology"/>
+        <!--<arg name="action_probability" value="0.7"/>-->
+        <arg name="action_duration" value="1"/>
     </include>
 
     <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch">
         <arg name="pddl_action_name" value="hypothesis_check"/>
-        <arg name="action_probability" value="0.7"/>
+       <!-- <arg name="action_probability" value="0.7"/>-->
+       <arg name="action_duration" value="1"/>
     </include>
 
     <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch">
         <arg name="pddl_action_name" value="return_home"/>
+        <arg name="action_duration" value="5"/>
     </include>
 
     <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch">
         <arg name="pddl_action_name" value="leave_home"/>
+        <arg name="action_duration" value="5"/>
     </include>
 
     <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch">
         <arg name="pddl_action_name" value="check_oracle"/>
-        <arg name="action_probability" value="0.7"/>
+        <arg name="action_probability" value="1"/>
+        <arg name="action_duration" value="1"/>
     </include>
 </launch>

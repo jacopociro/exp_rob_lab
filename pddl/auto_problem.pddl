@@ -1,12 +1,18 @@
-(define (problem sherlockbot_problem) (:domain sherlockbot)
-(:objects 
-    wp0, wp1, wp2, wp3 - waypoint
-    sherlock - robot
+(define (problem task)
+(:domain sherlockbot)
+(:objects
+    wp0 wp1 wp2 wp3 - waypoint
     home - home
     oracle - oracle
+    sherlock - robot
 )
-
 (:init
+
+
+
+    (robot_home home)
+
+
     (move wp0 wp1)
     (move wp0 wp2)
     (move wp0 wp3)
@@ -24,18 +30,11 @@
     (visited wp1)
     (visited wp2)
     (visited wp3)
-    (robot_home home)
-    (=(hypothesis_complete) 0)
 
-
+    (= (hypothesis_complete) 0)
 
 )
-
 (:goal (and
-    ;todo: put the goal condition here
     (oracle_called oracle)
 ))
-
-;un-comment the following line if metric is needed
-;(:metric minimize (???))
 )

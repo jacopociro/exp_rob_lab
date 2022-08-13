@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+
+<include file="$(find exp_rob_lab)/launch/assignment.launch"/>
+<include file="$(find moveit)/launch/demo_gazebo.launch"/>
+<include file="$(find exp_rob_lab)/launch/plan.launch"/>
+
+<node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
+
+<!--<node name="plan" pkg="exp_rob_lab" type="plan.py" output="screen"/>-->
+
+</launch>
