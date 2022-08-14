@@ -15,6 +15,8 @@ find_package(catkin REQUIRED COMPONENTS
   armor_msgs
   multi_ontology_reference
   actionlib_msgs
+  actionlib
+  move_base
 )
 
 ## System dependencies are found with CMake's conventions
@@ -76,6 +78,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   actionlib_msgs
   armor_msgs
+  erl2
  )
 
 ################################################

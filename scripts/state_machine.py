@@ -42,14 +42,109 @@ import time
 import smach_ros
 from exp_rob_lab.msg import Hint
 from exp_rob_lab.srv import *
+from geometry_msgs.msg import Twist, Point, Pose
+import actionlib
+from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+import moveit_commander
+import moveit_msgs.msg
+from math import pi
+from std_msgs.msg import String, Int32, Bool
+from erl2.srv import Oracle
+from exp_assignment3.srv import Marker, MarkerRequest
+import math
 
 resp_hyp = HypothesisResponse
 var = Hint
+def look_for_clues():
+    speed = Twist()
+    goal = group_cmd.get_current_joint_values()
+    goal[1] = 0
+    goal[2] = 0
+    goal[3] = 0
+    group_cmd.go(goal, wait=False)
+    time.sleep(20)
 
-def room():
+    speed.angular.z = 0.5
+    cmd_vel.publish(speed)
+    
+    time.sleep(40)
+    speed.angular.z = 0
+    cmd_vel.publish(speed)
+
+    goal[1] = math.pi/4
+    goal[2] = math.pi/4
+    goal[3] = -math.pi/2 + 0.05
+    group_cmd.go(goal, wait=False)
+    time.sleep(20)
+    
+    speed.angular.z = -0.5
+    cmd_vel.publish(speed)
+    
+    time.sleep(40)
+    speed.angular.z = 0
+    cmd_vel.publish(speed)
+
+def move(a):
 ##
 # \brief this function return a random room for the robot to move in
-    return random.choice(['Kitchen', 'Ballroom', 'Conservatory', 'Dining_Room', 'Biliard_Room', 'Library', 'Lounge', 'Hall', 'Study'])
+    goal = MoveBaseGoal()
+    if a == 1:
+        print("Going To Room")
+        room = random.choice(['Kitchen', 'Ballroom', 'Conservatory', 'Dining_Room', 'Biliard_Room', 'Library'])
+        Kitchen = Ballroom = Conservatory = Dining_Room = Biliard_Room = Library = True
+        while True:
+            if room == 'Kitchen' and Kitchen == True:
+                x = -4
+                y = -3
+                Kitchen = False
+                break
+            elif room == 'Ballroom' and Ballroom == True:
+                x = -4
+                y = 2
+                Ballroom = False
+                break
+            elif room == 'Conservatory' and Conservatory == True:
+                x = -4
+                y = 7
+                Conservatory = False
+                break
+            elif room == 'Dining_Room' and Dining_Room == True:
+                x = 5
+                y = -7
+                Dining_Room = False
+                break
+            elif room == 'Biliard_Room' and Biliard_Room == True:
+                x = 5
+                y = -3
+                Biliard_Room = False
+                break
+            elif room == 'Library' and Library == True:
+                x = 5
+                y = 1
+                Library = False
+                break
+            elif Kitchen == False and Ballroom == False and Conservatory == False and Dining_Room == False and Biliard_Room == False and Library == False:
+                Library = True
+                Biliard_Room = True
+                Dining_Room = True
+                Conservatory = True
+                Ballroom = True
+                Kitchen = True
+    else:
+        print("Going Home")
+        x = 0
+        y = -1
+
+    goal.target_pose.pose.position.x= x
+    goal.target_pose.pose.position.y= y
+    print(goal)
+    res = action.send_goal(goal)
+    print(res)
+    res = action.wait_for_result()
+    print(res)
+        #rospy.loginfo("Room Reached!")
+    
+
 
 def callback(msg):
 ##
@@ -68,7 +163,7 @@ class Move(smach.State):
         smach.State.__init__(self, outcomes=['clues'])
         
     def execute(self, userdata):
-        place = room()
+        place = move(1)
         rospy.loginfo('Moving to %s' %place)
         time.sleep(2)
 
@@ -86,7 +181,7 @@ class Clues(smach.State):
     def execute(self, userdata):
         global resp_hyp, var
         rospy.loginfo("Looking for clues...")
-        
+        look_for_clues()
         #subscribes to hint_publisher, publishes to hypothesis_maker
         sub = rospy.Subscriber('hint', Hint, callback)
         rospy.wait_for_message('hint', Hint)
@@ -128,6 +223,7 @@ class Hyp(smach.State):
         
         rospy.loginfo('Formulating an hypothesis')
         rospy.loginfo('Moving to terminal')
+        move(2)
         time.sleep(2)
 
         rospy.wait_for_service('oracle')
@@ -146,8 +242,13 @@ class Hyp(smach.State):
 def main():
 ##
 # \brief this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph
+    global action, cmd_vel, arm, group_cmd
     rospy.init_node('state_machine')
-
+    action = actionlib.SimpleActionClient('/move_base', MoveBaseAction)
+    cmd_vel = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
+    arm = moveit_commander.RobotCommander()
+    name = "arm"
+    group_cmd = moveit_commander.MoveGroupCommander(name)
     sm = smach.StateMachine(outcomes=['stop'])
 
     with sm:
