@@ -134,7 +134,7 @@ def make_hypothesis(request):
     apply()
     reason()
 
-    res = HypothesisResponse(id, who, what, where, consistent)
+    res = HypothesisResponse(id, who, where, what, consistent)
     print(res)
 
     return res
