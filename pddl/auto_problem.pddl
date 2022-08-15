@@ -7,10 +7,10 @@
     sherlock - robot
 )
 (:init
+    (robot_at wp0)
 
 
 
-    (robot_home home)
 
 
     (move wp0 wp1)
@@ -26,12 +26,12 @@
     (move wp3 wp1)
     (move wp3 wp2)
 
-    (visited wp0)
-    (visited wp1)
     (visited wp2)
     (visited wp3)
+    (visited wp1)
+    (visited wp0)
 
-    (= (hypothesis_complete) 0)
+    (= (hypothesis_complete) 2)
 
 )
 (:goal (and

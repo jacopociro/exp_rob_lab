@@ -15,17 +15,17 @@ import random
 def complete():
     print("5")
     req=KnowledgeUpdateServiceRequest()
-    req.update_type= 5
+    req.update_type= 2
     req.knowledge.is_negative=False
     req.knowledge.knowledge_type= 2
     req.knowledge.attribute_name= 'hypothesis_complete'
     result=update(req)
-
-    req.update_type= 4
+    req=KnowledgeUpdateServiceRequest()
+    req.update_type= 0
     req.knowledge.is_negative=False
     req.knowledge.knowledge_type= 2
     req.knowledge.attribute_name= 'hypothesis_complete'
-    req.knowledge.function_value = 0
+    req.knowledge.function_value = 2
     result=update(req)
 
 def checked():
@@ -46,7 +46,8 @@ def location_visited(wp):
     req.knowledge.attribute_name= 'reached'
     req.knowledge.values.append(diagnostic_msgs.msg.KeyValue('waypoint', wp))	
     result=update(req)
-
+    
+    req=KnowledgeUpdateServiceRequest()
     req.update_type=0
     req.knowledge.is_negative=False
     req.knowledge.knowledge_type=1
