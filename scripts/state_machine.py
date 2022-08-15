@@ -53,6 +53,8 @@ from erl2.srv import Oracle
 from exp_assignment3.srv import Marker, MarkerRequest
 import math
 
+Kitchen = Ballroom = Conservatory = Dining_Room = Biliard_Room = Library = True
+ID_complete = []
 resp_hyp = HypothesisResponse
 var = Hint
 def look_for_clues():
@@ -62,12 +64,12 @@ def look_for_clues():
     goal[2] = 0
     goal[3] = 0
     group_cmd.go(goal, wait=False)
-    time.sleep(20)
+    time.sleep(10)
 
-    speed.angular.z = 0.5
+    speed.angular.z = 0.8
     cmd_vel.publish(speed)
     
-    time.sleep(40)
+    time.sleep(30)
     speed.angular.z = 0
     cmd_vel.publish(speed)
 
@@ -75,24 +77,30 @@ def look_for_clues():
     goal[2] = math.pi/4
     goal[3] = -math.pi/2 + 0.05
     group_cmd.go(goal, wait=False)
-    time.sleep(20)
+    time.sleep(10)
     
-    speed.angular.z = -0.5
+    speed.angular.z = -0.8
     cmd_vel.publish(speed)
     
-    time.sleep(40)
+    time.sleep(30)
     speed.angular.z = 0
     cmd_vel.publish(speed)
 
 def move(a):
 ##
 # \brief this function return a random room for the robot to move in
-    goal = MoveBaseGoal()
+    global action, Kitchen,Ballroom,Conservatory,Dining_Room,Biliard_Room,Library
+    g = MoveBaseGoal()
+
+    g.target_pose.pose.orientation.w=0.1
+    g.target_pose.header.frame_id='map'
+
     if a == 1:
         print("Going To Room")
-        room = random.choice(['Kitchen', 'Ballroom', 'Conservatory', 'Dining_Room', 'Biliard_Room', 'Library'])
-        Kitchen = Ballroom = Conservatory = Dining_Room = Biliard_Room = Library = True
+        
+        
         while True:
+            room = random.choice(['Kitchen', 'Ballroom', 'Conservatory', 'Dining_Room', 'Biliard_Room', 'Library'])
             if room == 'Kitchen' and Kitchen == True:
                 x = -4
                 y = -3
@@ -135,14 +143,15 @@ def move(a):
         x = 0
         y = -1
 
-    goal.target_pose.pose.position.x= x
-    goal.target_pose.pose.position.y= y
-    print(goal)
-    res = action.send_goal(goal)
-    print(res)
+    g.target_pose.pose.position.x= x
+    g.target_pose.pose.position.y= y
+    print(g)
+    action.send_goal(g)
     res = action.wait_for_result()
-    print(res)
-        #rospy.loginfo("Room Reached!")
+    if res:
+        rospy.loginfo("Room Reached!")
+
+    return room
     
 
 
@@ -183,22 +192,11 @@ class Clues(smach.State):
         rospy.loginfo("Looking for clues...")
         look_for_clues()
         #subscribes to hint_publisher, publishes to hypothesis_maker
-        sub = rospy.Subscriber('hint', Hint, callback)
-        rospy.wait_for_message('hint', Hint)
 
-        rospy.wait_for_service('hypothesis_maker')
+
+        
         try:
-            hyp = rospy.ServiceProxy('hypothesis_maker', Hypothesis)
-            
-            id = var.id
-            name = var.name
-            class_id = var.class_id
-          
-            request = HypothesisRequest(id, name, class_id)
-            resp_hyp = hyp(id, name, class_id)
-            print('Hint collected:')
-            print (resp_hyp)
-            if resp_hyp.consistent == False:
+            if data == False:
                 return 'move'
             else:
                 return 'hypothesis'
@@ -224,28 +222,40 @@ class Hyp(smach.State):
         rospy.loginfo('Formulating an hypothesis')
         rospy.loginfo('Moving to terminal')
         move(2)
-        time.sleep(2)
 
-        rospy.wait_for_service('oracle')
-        try: 
-            Oracle = rospy.ServiceProxy('oracle', oracle)
-            oracle_res = Oracle(resp_hyp.id)
-            if oracle_res.right == 0:
-                print("Yay! I got the answer right!")
-                return 'stop'
-            else: 
-                print("Mmh... I need more hints...")
-                return 'move'
+        try:
+            oracle_res = solution_srv()
+            for x in ID_complete:
+                if oracle_res.ID == ID_complete[x]:
+                    print("Yay! I got the answer right!")
+                    return 'stop'
+
+            print("Mmh... I need more hints...")
+            return 'move'
         except rospy.ServiceException as e:
             print("Service call failed: %s"%e)
-        
+def cb(msg):
+    global data
+    data = msg.data
+
+def clbk(msg):
+    global ID_complete
+    ID_complete.append(msg.data) 
+
 def main():
 ##
 # \brief this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph
-    global action, cmd_vel, arm, group_cmd
+    global action, cmd_vel, arm, group_cmd, consistent, solution_srv
     rospy.init_node('state_machine')
-    action = actionlib.SimpleActionClient('/move_base', MoveBaseAction)
+    action = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+    action.wait_for_server()
+    solution_srv = rospy.ServiceProxy("/oracle_solution", Oracle)
+    rospy.wait_for_service('/oracle_solution')
+    rospy.wait_for_service('/hypothesis_maker')
+    rospy.wait_for_service('/oracle_hint')
     cmd_vel = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
+    consistent = rospy.Subscriber('/consistent', Bool, cb)
+    complete = rospy.Subscriber('/complete', String, clbk)
     arm = moveit_commander.RobotCommander()
     name = "arm"
     group_cmd = moveit_commander.MoveGroupCommander(name)

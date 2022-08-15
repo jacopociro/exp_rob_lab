@@ -2,7 +2,8 @@
     <launch>
 
         <node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
-
+        <node pkg="exp_assignment3" type="final_oracle" name="final_oracle" output="screen"/>
+        <node pkg="aruco_ros" type="marker_publisher" name="marker_publisher" args="/image:=/robot/camera1/image_raw" />
         <!--<include file="$(find exp_assignment3)/launch/simulation.launch"/>-->
         <include file="$(find moveit)/launch/demo_gazebo.launch">
             <arg name="world_name" value="$(find exp_assignment3)/worlds/assignment.world"/>
@@ -55,9 +56,9 @@
         </node>
         
         <node name="hint" pkg="exp_rob_lab" type="hint_publisher.py"/>
-        <node name="oracle" pkg="exp_rob_lab" type="oracle_service.py"/>
+        
         <node name="hypothesis_maker" pkg="exp_rob_lab" type="hypothesis_maker.py"/>
-        <!--<node name="state_machine" pkg="exp_rob_lab" type="state_machine.py" output="screen"/>-->
-        <node pkg="aruco_ros" type="marker_publisher" name="marker_publisher" args="/image:=/robot/camera1/image_raw" />
+        <node name="state_machine" pkg="exp_rob_lab" type="state_machine.py" />
+        
 
     </launch>

@@ -17,6 +17,8 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib_msgs
   actionlib
   move_base
+  erl2
+  exp_assignment3
 )
 
 ## System dependencies are found with CMake's conventions
@@ -79,6 +81,7 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib_msgs
   armor_msgs
   erl2
+  exp_assignment3
  )
 
 ################################################

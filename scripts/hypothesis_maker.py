@@ -53,7 +53,7 @@ def hypothesis_maker_server():
     load()
     comp_consist()
     hypo_detail()
-    rospy.Service('hypothesis_maker', Hypothesis, make_hypothesis)
+    rospy.Service('/hypothesis_maker', Hypothesis, make_hypothesis)
     print('Ready to formulate hypothesis')
     rospy.spin()
 
@@ -80,12 +80,27 @@ def make_hypothesis(request):
 # \brief this function is the handle of the hypothesis maker service. it returns the response to 
 # the state machine.
     global people, locations, weapons
-    
     id = request.id
     name = request.name
     class_id = request.class_id
+    print(id)
+    print(name)
+    print(class_id)
+    #controlli: tutto pieno(no campi vuoti), no campi = -1, classe sia solo who what o where
+    rotto = HypothesisResponse()
+    rotto.id = "-1"
+    rotto.who = ""
+    rotto.what = ""
+    rotto.where = ""
+    rotto.consistent = False
+    if id == "" or name == "" or class_id == "":
+        
+        return rotto
+    elif id == "-1" or name == "-1" or class_id == "-1":
+        return rotto
+    elif class_id != "what" and class_id != "who" and class_id != "where":
+        return rotto
 
-    
     add_to_ont(name, class_id)
     check(id,name,class_id)
     
@@ -103,7 +118,7 @@ def make_hypothesis(request):
         where = name
     else:
         where = ''
-
+    
     control = hypo_control(id)
 
     if control == True:
@@ -133,8 +148,7 @@ def make_hypothesis(request):
     disjoint(class_id)
     apply()
     reason()
-
-    res = HypothesisResponse(id, who, what, where, consistent)
+    res = HypothesisResponse(id, who, where, what, consistent)
     print(res)
 
     return res
