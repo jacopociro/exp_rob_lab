@@ -11,7 +11,7 @@
 exp_rob_lab::Hyp data;
 
 void clbk(exp_rob_lab::Hyp msg){
-    msg = data;
+    data = msg;
 }
 
 namespace KCL_rosplan{
@@ -20,17 +20,24 @@ namespace KCL_rosplan{
     }
 
     bool Hypothesis_checkInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg){
-        ros::NodeHandle n;
-        ros::Subscriber sub = n.subscribe("/complete", 1000, clbk);
-        
-        return data.consistent;
+
+        if (data.consistent == true){
+            return true;
+        }
+        else if(data.consistent == false){
+            return false;
+        }
     }   
 }
 
 int main(int argc, char **argv){
     ros::init(argc, argv, "hypothesis_check", ros::init_options::AnonymousName);
     ros::NodeHandle nh("~");
+    ros::NodeHandle n;
+    ros::Subscriber sub = n.subscribe("/complete", 1000, clbk);
     KCL_rosplan::Hypothesis_checkInterface act(nh);
     act.runActionInterface();
+    ros::AsyncSpinner spinner(1);
+    spinner.start();
     return 0;
 }

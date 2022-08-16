@@ -26,12 +26,12 @@
     (move wp3 wp1)
     (move wp3 wp2)
 
-    (visited wp0)
+    (visited wp3)
     (visited wp1)
     (visited wp2)
-    (visited wp3)
+    (visited wp0)
 
-    (= (hypothesis_complete) 0)
+    (= (hypothesis_complete) 2)
 
 )
 (:goal (and

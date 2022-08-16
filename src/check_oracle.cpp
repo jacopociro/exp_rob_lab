@@ -21,8 +21,7 @@ namespace KCL_rosplan{
     }
 
     bool OracleInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg){
-        ros::NodeHandle n;
-        ros::Subscriber sub = n.subscribe("/complete", 1000, clbk);
+
         ros::NodeHandle n1;
         ros::ServiceClient client = n1.serviceClient<exp_rob_lab::Oracle>("/oracle_solution");
         
@@ -52,7 +51,11 @@ void clbk(const exp_rob_lab::Hyp msg){
 int main(int argc, char **argv){
     ros::init(argc, argv, "oracle", ros::init_options::AnonymousName);
     ros::NodeHandle nh("~");
+    ros::NodeHandle n;
+    ros::Subscriber sub = n.subscribe("/complete", 1000, clbk);
     KCL_rosplan::OracleInterface act(nh);
     act.runActionInterface();
+    ros::AsyncSpinner spinner(1);
+    spinner.start();
     return 0;
 }
