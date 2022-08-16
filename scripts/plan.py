@@ -81,6 +81,7 @@ def main():
     dispatch = rospy.ServiceProxy('/rosplan_plan_dispatcher/dispatch_plan',DispatchService)	
     rospy.wait_for_service('/rosplan_knowledge_base/update')
     update= rospy.ServiceProxy('/rosplan_knowledge_base/update', KnowledgeUpdateService)
+    rospy.wait_for_service("/hypothesis_maker")
     print("1")
     while(True):
         print("2")

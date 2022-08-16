@@ -283,13 +283,13 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0" />
             <geometry>
-                <box size="0.1 0.1 0.1" />
+                <box size="0.1 0.1 0.4" />
             </geometry>
             <material name="red" />
         </visual>
     </link>
     <joint name="arm_base_to_base" type="fixed">
-        <origin rpy="0 0 0" xyz="0 0 0.085" />
+        <origin rpy="0 0 0" xyz="0 0 0.275" />
         <parent link="base_link" />
         <child link="arm_base_link" />
     </joint>
@@ -318,7 +318,7 @@
     <joint name="arm_joint_01" type="revolute">
         <axis xyz="0 0 1" />
         <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.2" />
-        <origin rpy="0 0 0" xyz="0 0 0.16" />
+        <origin rpy="0 0 0" xyz="0 0 0.36" />
         <parent link="arm_base_link" />
         <child link="arm_link_01" />
     </joint>

@@ -22,6 +22,7 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_msgs
   actionlib_msgs
   geometry_msgs
+  actionlib
   rosplan_planning_system
 )
 
@@ -62,6 +63,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    ErlOracle.msg
+   Hyp.msg
 #   Message2.msg
  )
 
@@ -69,7 +71,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
    FILES
    Oracle.srv
-   Arm.srv
+   Hypothesis.srv
 #   Service2.srv
  )
 
@@ -149,6 +151,12 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(simulation src/simulation.cpp)
+ add_executable(add_to_onthology src/add_to_onthology.cpp)
+ add_executable(check_oracle src/check_oracle.cpp)
+ add_executable(go_to_waypoint src/go_to_waypoint.cpp)
+ add_executable(hypothesis_check src/hypothesis_check.cpp)
+ add_executable(leave_home src/leave_home.cpp)
+ add_executable(return_home src/return_home.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -159,11 +167,41 @@ include_directories(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(add_to_onthology ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(check_oracle ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(go_to_waypoint ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(hypothesis_check ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(leave_home ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(return_home ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(simulation
    ${catkin_LIBRARIES}
  )
+
+ target_link_libraries(add_to_onthology
+ ${catkin_LIBRARIES}
+)
+
+target_link_libraries(check_oracle
+${catkin_LIBRARIES}
+)
+
+target_link_libraries(go_to_waypoint
+${catkin_LIBRARIES}
+)
+
+target_link_libraries(hypothesis_check
+${catkin_LIBRARIES}
+)
+
+target_link_libraries(leave_home
+${catkin_LIBRARIES}
+)
+
+target_link_libraries(return_home
+${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
@@ -176,7 +214,7 @@ add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTE
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
   scripts/go_to_point_action.py
-  scripts/move_arm.py
+  scripts/hypothesis_maker.py
   scripts/plan.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )

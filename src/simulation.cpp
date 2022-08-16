@@ -43,7 +43,7 @@ bool oracleService(exp_rob_lab::Oracle::Request &req, exp_rob_lab::Oracle::Respo
 void oracleCallback(const gazebo_msgs::LinkStates::ConstPtr& msg)
 {
    for(int i=0; i< msg->name.size(); i++){
-	   if (msg->name[i].find("cluedo_link")!= std::string::npos){
+	   if (msg->name[i].find("arm_link_04")!= std::string::npos){
 		   for(int j=0; j<4;j++){
 				if ((distfromtarget(msg->pose[i].position.x, msg->pose[i].position.y, msg->pose[i].position.z, markx[j],marky[j],markz[j])<0.25) && ((lastmarkx !=markx[j]) || (lastmarky != marky[j]))){
 				exp_rob_lab::ErlOracle oracle_msg;

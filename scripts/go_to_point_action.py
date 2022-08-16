@@ -56,6 +56,23 @@ def clbk_odom(msg):
     euler = transformations.euler_from_quaternion(quaternion)
     yaw_ = euler[2]
 
+def fix_final_yaw(des_yaw):
+    global Vel
+    # It orients the robot in the final desired orientation 
+    err_yaw = normalize_angle(des_yaw - yaw_)
+    rospy.loginfo(err_yaw)
+    twist_msg = Twist()
+    if math.fabs(err_yaw) > yaw_precision_2_:
+        twist_msg.angular.z = kp_a*err_yaw
+        if twist_msg.angular.z > ub_a:
+            twist_msg.angular.z = ub_a
+        elif twist_msg.angular.z < lb_a:
+            twist_msg.angular.z = lb_a
+    pub.publish(twist_msg)
+    # state change conditions
+    if math.fabs(err_yaw) <= yaw_precision_2_:
+        #print ('Yaw error: [%s]' % err_yaw)
+        change_state(3)
 
 def change_state(state):
     global state_
@@ -132,7 +149,7 @@ def planning(goal):
 
     desired_position_.x = goal.target_pose.pose.position.x
     desired_position_.y = goal.target_pose.pose.position.y
-
+    desired_yaw = goal.target_pose.pose.orientation.w
     state_ = 0
     rate = rospy.Rate(20)
     success = True
@@ -157,6 +174,8 @@ def planning(goal):
             act_s.publish_feedback(feedback)
             go_straight_ahead(desired_position_)
         elif state_ == 2:
+            fix_final_yaw(desired_yaw)
+        elif state_ == 3:
             feedback.stat = "Target reached!"
             feedback.actual_pose = pose_
             act_s.publish_feedback(feedback)

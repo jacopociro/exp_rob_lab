@@ -60,7 +60,7 @@ output="screen">
 <param name="action_feedback_topic" value="action_feedback" />
 </node>
 
-    <!-- sim actions -->
+    <!-- sim actions 
     <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch">
         <arg name="pddl_action_name" value="go_to_waypoint"/>
         <arg name="action_duration" value="5"/>
@@ -90,7 +90,53 @@ output="screen">
 
     <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch">
         <arg name="pddl_action_name" value="check_oracle"/>
-        <arg name="action_probability" value="1"/>
-        <arg name="action_duration" value="0.7"/>
-    </include>
+        <arg name="action_probability" value="0.7"/>
+        <arg name="action_duration" value="1"/>
+    </include>-->
+
+    <!-- Real actions -->
+    <node name = "rosplan_interface_leave_home" pkg="exp_rob_lab" type="leave_home" respawn="false" output="screen">
+    <param name="knowledge_base" value="rosplan_knowledge_base"/>
+    <param name="pddl_action_name" value="leave_home"/>
+    <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+    <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+    </node>
+
+    <node name = "rosplan_interface_return_home" pkg="exp_rob_lab" type="return_home" respawn="false" output="screen">
+    <param name="knowledge_base" value="rosplan_knowledge_base"/>
+    <param name="pddl_action_name" value="return_home"/>
+    <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+    <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+    </node>
+
+    <node name = "rosplan_interface_go_to_waypoint" pkg="exp_rob_lab" type="go_to_waypoint" respawn="false" output="screen">
+    <param name="knowledge_base" value="rosplan_knowledge_base"/>
+    <param name="pddl_action_name" value="go_to_waypoint"/>
+    <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+    <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+    </node>    
+    
+    <node name = "rosplan_interface_add_to_onthology" pkg="exp_rob_lab" type="add_to_onthology" respawn="false" output="screen">
+    <param name="knowledge_base" value="rosplan_knowledge_base"/>
+    <param name="pddl_action_name" value="add_to_onthology"/>
+    <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+    <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+    </node>
+    
+    <node name = "rosplan_interface_hypothesis_check" pkg="exp_rob_lab" type="hypothesis_check" respawn="false" output="screen">
+    <param name="knowledge_base" value="rosplan_knowledge_base"/>
+    <param name="pddl_action_name" value="hypothesis_check"/>
+    <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+    <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+    </node>
+
+    <node name = "rosplan_interface_check_oracle" pkg="exp_rob_lab" type="check_oracle" respawn="false" output="screen">
+    <param name="knowledge_base" value="rosplan_knowledge_base"/>
+    <param name="pddl_action_name" value="check_oracle"/>
+    <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+    <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+    </node>
+
+    <node name="plan" pkg="exp_rob_lab" type="plan.py"/>
+
 </launch>
