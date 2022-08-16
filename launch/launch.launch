@@ -6,7 +6,7 @@
 <include file="$(find exp_rob_lab)/launch/plan.launch"/>
 
 <node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
-<!--<node pkg="exp_rob_lab" type="hypothesis_maker.py" name="hypothesis_maker"/>-->
+<node pkg="exp_rob_lab" type="hypothesis_maker.py" name="hypothesis_maker"/>
 <node pkg="exp_rob_lab" type="go_to_point_action.py" name="go_to_point" />
 
 
