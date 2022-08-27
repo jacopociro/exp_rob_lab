@@ -20,7 +20,7 @@
 #       
 #
 #  Client Services: <BR>
-#       hypothesis_make
+#       hypothesis_maker
 #       oracle
 #
 #  Action Services: <BR>
