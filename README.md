@@ -79,6 +79,7 @@ The clues state has two possible outputs, based on if the received hypothesis is
 The hyp state has two outcomes, if the hypothesis is correct then the game ends, otherwise the machine returns to the move state, to collect more hints.
 ## Temporal sequence diagram
 ![System Architecture](images/exp_rob1_seq.jpg)
+
 This image shows a temporal sequence diagram for the simulation, in case every output is ok at the first run. Probably the state machine will be called again and again but the number of times is not fixed, so it is not represented.
 The state machine starts with the move state, making the robot move to a clue. Then, when it changes to the clues state the robot subscribes to a publisher and reads the hint. In this state, but at a different time, it also calls the hypothesis maker service, to add the hint to the onthology and then it checks for a complete hypothesis. Assuming the hypothesis is complete the robot goes to the oracle state where it moves to the terminal and check if the hypothesis is correct, which if it is will be the last action done.
 # Installation and Running Procedure
@@ -91,22 +92,28 @@ cd ..
 catkin_make
 ```
 When this is done, hopefully with no errors, just run
-`roslaunch exp_rob_lab launch.launch`
+```
+roslaunch exp_rob_lab launch.launch
+```
 
 # Running code
 The simulation is really simple, as all of the actions are simulated in this stage. The only output we have is text on the terminal.
 ### Move state
 ![System Architecture](images/move%20state.PNG)
+
 This is the move state output, where the robot moves to a random room. 
 ### Clues state
 The robot is now in the clues state where it collects hint and returns the formulated hypothesis
 This can be incomplete:
 ![System Architecture](images/incomplete%20hyp.PNG)
+
 or complete:
 ![System Architecture](images/complete%20hyp.PNG)
+
 ### Oracle state
 THis state checks if the hypothesis is incorrect, in which case returns to the move state:
 ![System Architecture](images/failed.PNG)
+
 or correct, in which case stops the program:
 ![System Architecture](images/Succesfull.PNG)
 
