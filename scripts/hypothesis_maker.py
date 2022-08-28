@@ -14,7 +14,7 @@
 #       None
 #
 #  Publishes to: <BR>
-#	    hint
+#	    None
 #
 #  Services: <BR>
 #       hypothesis_maker
@@ -26,7 +26,7 @@
 #       None
 #
 #  Description: <BR>
-#       This node handles the hint publisher, by publishing random hints from a list.
+#      This node handles the armor service, updating the knowledge. It return the hypothesis, a complete or incomplete one.
 
 from os import name
 from exp_rob_lab.srv import *
