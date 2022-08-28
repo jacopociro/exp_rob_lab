@@ -147,7 +147,7 @@ This program implements the real action to be completed when the planner dispatc
 This program implements the simulation for the assignment, the generation of hints and the server for the correct the hypothesis.
 
 ## Architecture diagram
-![System Architecture](images/exp_rob1.jpg)
+![System Architecture](images/exp_rob1.drawio.png)
 
 ![Rqt Graph](images/rosgraph.png)
 
@@ -164,7 +164,7 @@ In the domain file we can see the definition of the various predicates and actio
 In the problem file we can see the starting situation and the goal.
 The plan get updated everytime an action fails, only hypothesis check and check oracle can fail.
 ## Temporal sequence diagram
-![System Architecture](images/exp_rob1_seq.jpg)
+![System Architecture](images/exp_rob1_seq.drawio.png)
 
 This image shows a temporal sequence diagram for the simulation, in case every output is ok at the first run. Probably the plan will be updated again and again but the number of times is not fixed, so it is not represented.
 The plan gets computed and run the first action (this could be leave home or go to waypoint). From here the robot add the reiceved hint to the onthology and checks for a complete hypothesis. In case it is complete it will move home and check the oracle for the correct solution. In case it is the correct solution the robot will stop in the home position.
