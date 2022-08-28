@@ -20,7 +20,7 @@ The package is composed of:
 - Two config files:
     - motors_config.yaml
     - sim.rviz 
-- four launch files:+
+- Four launch files:+
     - assignment.launch
     - launch.launch
     - plan.launch
@@ -36,7 +36,7 @@ The package is composed of:
     - domain.pddl
     - plan.pddl
     - problem.pddl
-- ten nodes:
+- Ten nodes:
     - go_to_point_action.py
     - hypothesis_maker.py
     - plan.py
@@ -48,7 +48,18 @@ The package is composed of:
     - return_home.cpp
     - simulation.cpp
 
-## Custom messages and services
+## Custom messages, action and services
+### Move action
+The action is composed of:
+**Request**
+>geometry_msgs/PoseStamped target_pose
+
+**Response**
+>geometry_msgs/Pose actual_pose
+
+>string stat
+
+
 ### ErlOracle message
 The message is composed of one int32: id and two strings: name and class. These are needed to be readable from armor service and upload them correctly on the onthology.
 
@@ -57,6 +68,19 @@ The message is composed of one int32: id and two strings: name and class. These 
 >string name
 
 >string class_id
+
+### Hyp message
+The message is composed of 4 strings: id, who, where, what, consistent.
+
+>string id
+
+>string who
+
+>string where
+
+>string what
+
+>bool consistent
 
 ### Hypothesis service
 The request has the same format as the Hint message. The response is composed of 3 strings (id, who, what, where) and 1 boolean value (consistent). This service is called every time i upload one hint and return any complete hint, with a boolean value that checks if it is consistent.
@@ -78,54 +102,80 @@ The request has the same format as the Hint message. The response is composed of
 
 >bool consistent
 
-### oracle service 
-The request is a string with the id of the hypotesis. The response is an int32 value that checks if the hypothesis is correct.
+### Oracle service 
+The request is empty. The response is an int32 value that returns the ID.
 **Request**
->string id
+None
 
 **Response**
->int32 right
+>int32 ID
 
 ## PDDL
 ### Domain
-
+This file describes the domain for the pddl. 
 ### Problem
-
+This file describes the problem for the pddl. 
 ### Plan
+This file contains the plan the ROSPlan compiled by the ROSPlan.
+### Auto Problem
+This file contains the problem compiled by the pddl.
 
 ## Nodes
-### hint_publisher.py
-This node generates random hint from an array of hints and, using a ROS publisher, sends them to whoever subscribes. There are 18 different hint divided in 6 identifiers, each one is consistent.
 ### hypothesis_maker.py
 This node is the one tasked with communicating with the armor service and updating the onthology. It receives the hints and adds them to the onthology, then it checks if there is a complete hypothesis. In case there is it returns the complete hypothesis, otherwise is returns an empty message.
-### oracle_service.py
-This node is tasked with checking if the complete hypothesis is the correct one. It does so by simply checking if the hypotesis' id is "HP3" or whatever the user sets.
-### state_machine.py
-This node is the central node and handles the behaviour of the robot, basing it off of states. There are 3 states: move, clues and hyp. The first one handles the movement of the robot to a random room, the second one collects hints and the last one checks if the hypothesis formulated is correct.
+### go_to_point_action.py
+This node is the node tasked with making sure that the robot reaches the goal, both in orientation and position.
+The behaviour is handled with 3 states. The first one is tasked with aiming for the goal, using angular velocities. 
+The second state makes sure the robot reaches the goal, giving linear velocities. The last state handles the orientation
+given with the goal, using angular velocities. The angular and linear velocities are published on the /cmd_vel publisher.
+The goal is handled with the /reaching_goal action. On the /odom subsciber the node reads the robot position.
+### plan.py
+This node handles the ROSPlan services, updating the knowledge as needed with every new plan.
+### add_to_onthology.cpp
+This program implements the real action to be completed when the planner dispatches the action add to onthology. It also calls the needed service, publisher and subscriber.
+### check_oracle.cpp
+This program implements the real action to be completed when the planner dispatches the action check_oracle. It also calls the needed subscriber.
+### go_to_waypoint.cpp
+This program implements the real action to be completed when the planner dispatches the action go_to_waypoint.
+### hypothesis_check.cpp
+This program implements the real action to be completed when the planner dispatches the action hypothesis_check.
+### leave_home.cpp
+This program implements the real action to be completed when the planner dispatches the action leave_home.
+### return_home.cpp
+This program implements the real action to be completed when the planner dispatches the action return_home.
+### simulation.cpp
+This program implements the simulation for the assignment, the generation of hints and the server for the correct the hypothesis.
+
 ## Architecture diagram
 ![System Architecture](images/exp_rob1.jpg)
 
 ![Rqt Graph](images/rosgraph.png)
 
-As we can see the architecture is composed of 5 nodes. The central one is the state machine, which subscribes to the hint publisher and call the services in hypothesis_maker and oracle. 
-The hypothesis maker node also call the service in armor, in order to update the cluedo onthology.
-## State Machine
-![State Machine](images/sm_sys.GIF)
+The architecture is kind of complicated but can be divided in four parts: gazebo simulation, ROSplan, moveit and armor.
+ROSplan is called by plan.py and handles the behaviour of the robot, calling the ROSplan Actions.
+The simulation is handled by the simulation.cpp and is used by go_to_point_action.py. fundamental for all of the movement ROSplan actions(go to waypoint, leave home and return home).
+Armor is handled by hypothesis_maker.py which is called by the add to onothology action.
+Moveit is handled by the moveit package, is called by add to onthology to move the arm planning group.
+## Plan
+![State Machine](images/plan%20example.PNG)
 
-The state machine has 3 states: move, clues and hyp. The machine starts in the move state, from which will move to the clues state.
-The clues state has two possible outputs, based on if the received hypothesis is complete or not. If the hypothesis is complete then it will go to the hyp state, to check if it is correct. Otherwise the machine will return to the move state to collect more hints.
-The hyp state has two outcomes, if the hypothesis is correct then the game ends, otherwise the machine returns to the move state, to collect more hints.
+This is an example of a plan for the robot.
+In the domain file we can see the definition of the various predicates and actions.
+In the problem file we can see the starting situation and the goal.
+The plan get updated everytime an action fails, only hypothesis check and check oracle can fail.
 ## Temporal sequence diagram
 ![System Architecture](images/exp_rob1_seq.jpg)
 
-This image shows a temporal sequence diagram for the simulation, in case every output is ok at the first run. Probably the state machine will be called again and again but the number of times is not fixed, so it is not represented.
-The state machine starts with the move state, making the robot move to a clue. Then, when it changes to the clues state the robot subscribes to a publisher and reads the hint. In this state, but at a different time, it also calls the hypothesis maker service, to add the hint to the onthology and then it checks for a complete hypothesis. Assuming the hypothesis is complete the robot goes to the oracle state where it moves to the terminal and check if the hypothesis is correct, which if it is will be the last action done.
+This image shows a temporal sequence diagram for the simulation, in case every output is ok at the first run. Probably the plan will be updated again and again but the number of times is not fixed, so it is not represented.
+The plan gets computed and run the first action (this could be leave home or go to waypoint). From here the robot add the reiceved hint to the onthology and checks for a complete hypothesis. In case it is complete it will move home and check the oracle for the correct solution. In case it is the correct solution the robot will stop in the home position.
+
 # Installation and Running Procedure
-To install this package, assuming you have installed the armor package as indicated in the above link (don't forget to run the `./gradlew deployApp` command in the armor folder), you will need to just clone the github repository in your ros workspace, move to the correct branch and build it. 
-in <your_ros_workspace>/src run:
+To install this package, assuming you have installed the packages as indicated in the above chapter (Preliminary actions), you will need to just clone the github repository in your ros workspace, move to the correct branch and build it. 
+
+In <your_ros_workspace>/src run:
 ```
 git clone https://github.com/jacopociro/exp_rob_lab.git
-git checkout ass1
+git checkout ass2
 cd ..
 catkin_make
 ```
@@ -135,42 +185,29 @@ roslaunch exp_rob_lab launch.launch
 ```
 
 # Running code
-The simulation is really simple, as all of the actions are simulated in this stage. The only output we have is text on the terminal.
-### Move state
-![System Architecture](images/move%20state.PNG)
+![System Architecture](images/Code_running_example.mkv)
 
-This is the move state output, where the robot moves to a random room. 
-### Clues state
-The robot is now in the clues state where it collects hint and returns the formulated hypothesis
-This can be incomplete:
+THis is a brief example of how the robot moves and reaches the hint.
 
-![System Architecture](images/incomplete%20hyp.PNG)
+![System Architecture](images/hint%20position.PNG)
 
-or complete:
+This is the position of the hint on the map.
 
-![System Architecture](images/complete%20hyp.PNG)
-
-### Oracle state
-THis state checks if the hypothesis is incorrect, in which case returns to the move state:
-
-![System Architecture](images/failed.PNG)
-
-or correct, in which case stops the program:
-
-![System Architecture](images/Succesfull.PNG)
-
+Basically, during the simulation, the robot moves between the 4 points, collecting hint with the arm and adding them to an hypothesis. THen shoerlock bot, when has at least 3 hints, checks if the hypothesis is complete and consistent and in case it is returns home. If the hypothesis is not complete or not consistent the robot replans and starts following the new plan, after having updated the knowledge. When sherlock bot gets home it contatcs the oracle to know if the hypothesis is correct and if it is stop the simulation. Otherwise it will replan and start following the new plan, with an updated knowledge.
+The simulation might take a long time to complete.
 # Working Hypothesis and Environment
-The environment is as simple as it can be, in order to be easily changed and improved in the next two assignments. In this implementation the enviroment is totally simulated, the robot has a few simulated action that should be able to easily changed into real actions. All of the variable are defined by the author, such as hints and the correct hypothesis.
+The architecure is as modular as it can be, to be easily adptable. In this implementation we have a simple map, the robot has only real actions. Hints and correct solution are given to the author and I had to work with them, changing my last implementation to fit them
 ## System's Features
 The system is easily adaptable to changes, as it is pretty modular and each script handles the different parts of the algorithm. 
-The system can also handle random hints, even though the need to be properly written. If the hint is not proper the system should just ignore them.
+The system can also handle random hints, even the malformed ones.
+The system has a planning algorithm, which makes it reactive and robust. The planning algorithm, if properly adapted can handle more complex problems than the one implemented in the project. The knowledge update is also done in such a way to implement the fastest response when planning.
 
 ## System's Limitations
-The system is not designed to handle malformed hint or to discard incosistent hints. 
 To change the hitns and the solution the user needs to have some programming knowledge.
 The onthology is not readable when it gets updated.
 The output is not easy to read.
-## Possible Techinical Imporvements
-A good improvment would be the implementation of malformed hints and incosistent hypothesis, to check if the program can handle it. 
-Also it would be good to have easier way to check the output of the various scripts.
-The last obious improvment would be to have actual action instead of simulated ones
+The simulation could be faster.
+
+## Possible Techinical Imporvements 
+It would be good to have easier way to check the output of the various scripts.
+The simulation could be faster if the go to point algorithm and the moveit plans were optimized. Another way to make the simulation faster could be to have the add to onthology action to fail when it encouters a malformed hint, in order to not update the armor onthology with useless information.

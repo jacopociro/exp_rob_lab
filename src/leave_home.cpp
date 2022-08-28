@@ -24,8 +24,7 @@
 *    /reaching_goal
 *
 *  Description: <BR>
-*  This program implements the real action to be completed when the planner
-* dispatches the action leave_home.
+*  This program implements the real action to be completed when the planner dispatches the action leave_home.
 */
 
 #include "exp_rob_lab/InterfaceAction.h"

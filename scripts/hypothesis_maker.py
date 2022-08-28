@@ -28,7 +28,6 @@
 #  Description: <BR>
 #       This node handles the armor service, updating the knowledge. It return the hypothesis, a complete or incomplete one.
 
-from os import name
 from exp_rob_lab.srv import *
 import rospy
 from armor_msgs.msg import *

@@ -25,7 +25,7 @@
 *
 *  Description: <BR>
 *  This program implements the real action to be completed when the planner
-* dispatches the action add to onthology. It also calls the needed service, publisher and subscriber.
+*  dispatches the action add to onthology. It also calls the needed service, publisher and subscriber.
 */
 
 #include "exp_rob_lab/InterfaceAction.h"

@@ -24,8 +24,7 @@
 *    None
 *
 *  Description: <BR>
-*  This program implements the real action to be completed when the planner
-* dispatches the action hypothesis_check.
+*  This program implements the real action to be completed when the planner dispatches the action hypothesis_check.
 */
 
 #include "exp_rob_lab/InterfaceAction.h"
