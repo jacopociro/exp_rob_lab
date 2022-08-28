@@ -44,6 +44,7 @@ The request has the same format as the Hint message. The response is composed of
 >string name
 
 >string class_id
+
 **Response**
 >string id
 
