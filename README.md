@@ -31,7 +31,9 @@ The package is composed of:
 The message is composed of three string: id, name and class. These are needed to be readable from armor service and upload them correctly on the onthology.
 
 >string id
+
 >string name
+
 >string class_id
 
 ### Hypothesis service
@@ -44,9 +46,13 @@ The request has the same format as the Hint message. The response is composed of
 >string class_id
 **Response**
 >string id
+
 >string who
+
 >string where
+
 >string what
+
 >bool consistent
 
 ### oracle service 
