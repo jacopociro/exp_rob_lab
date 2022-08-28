@@ -38,7 +38,9 @@ The message is composed of three string: id, name and class. These are needed to
 The request has the same format as the Hint message. The response is composed of 3 strings (id, who, what, where) and 1 boolean value (consistent). This service is called every time i upload one hint and return any complete hint, with a boolean value that checks if it is consistent.
 **Request**
 >string id
+
 >string name
+
 >string class_id
 **Response**
 >string id
