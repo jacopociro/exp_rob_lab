@@ -80,17 +80,48 @@ The hyp state has two outcomes, if the hypothesis is correct then the game ends,
 ## Temporal sequence diagram
 ![System Architecture](images/exp_rob1_seq.jpg)
 This image shows a temporal sequence diagram for the simulation, in case every output is ok at the first run. Probably the state machine will be called again and again but the number of times is not fixed, so it is not represented.
-
+The state machine starts with the move state, making the robot move to a clue. Then, when it changes to the clues state the robot subscribes to a publisher and reads the hint. In this state, but at a different time, it also calls the hypothesis maker service, to add the hint to the onthology and then it checks for a complete hypothesis. Assuming the hypothesis is complete the robot goes to the oracle state where it moves to the terminal and check if the hypothesis is correct, which if it is will be the last action done.
 # Installation and Running Procedure
+To install this package, assuming you have installed the armor package as indicated in the above link (don't forget to run the `./gradlew deployApp` command in the armor folder), you will need to just clone the github repository in your ros workspace, move to the correct branch and build it. 
+in <your_ros_workspace>/src run:
+```
+git clone https://github.com/jacopociro/exp_rob_lab.git
+git checkout ass1
+cd ..
+catkin_make
+```
+When this is done, hopefully with no errors, just run
+`roslaunch exp_rob_lab launch.launch`
 
 # Running code
+The simulation is really simple, as all of the actions are simulated in this stage. The only output we have is text on the terminal.
+### Move state
+![System Architecture](images/move%20state.PNG)
+This is the move state output, where the robot moves to a random room. 
+### Clues state
+The robot is now in the clues state where it collects hint and returns the formulated hypothesis
+This can be incomplete:
+![System Architecture](images/incomplete%20hyp.PNG)
+or complete:
+![System Architecture](images/complete%20hyp.PNG)
+### Oracle state
+THis state checks if the hypothesis is incorrect, in which case returns to the move state:
+![System Architecture](images/failed.PNG)
+or correct, in which case stops the program:
+![System Architecture](images/Succesfull.PNG)
 
 # Working Hypothesis and Environment
-
+The environment is as simple as it can be, in order to be easily changed and improved in the next two assignments. In this implementation the enviroment is totally simulated, the robot has a few simulated action that should be able to easily changed into real actions. All of the variable are defined by the author, such as hints and the correct hypothesis.
 ## System's Features
+The system is easily adaptable to changes, as it is pretty modular and each script handles the different parts of the algorithm. 
+The system can also handle random hints, even though the need to be properly written. If the hint is not proper the system should just ignore them.
 
 ## System's Limitations
-
+The system is not designed to handle malformed hint or to discard incosistent hints. 
+To change the hitns and the solution the user needs to have some programming knowledge.
+The onthology is not readable when it gets updated.
+The output is not easy to read.
 ## Possible Techinical Imporvements
-
-
+A good improvment would be the implementation of malformed hints and incosistent hypothesis, to check if the program can handle it. 
+Also it would be good to have easier way to check the output of the various scripts.
+The last obious improvment would be to have actual action instead of simulated ones
