@@ -105,16 +105,20 @@ This is the move state output, where the robot moves to a random room.
 ### Clues state
 The robot is now in the clues state where it collects hint and returns the formulated hypothesis
 This can be incomplete:
+
 ![System Architecture](images/incomplete%20hyp.PNG)
 
 or complete:
+
 ![System Architecture](images/complete%20hyp.PNG)
 
 ### Oracle state
 THis state checks if the hypothesis is incorrect, in which case returns to the move state:
+
 ![System Architecture](images/failed.PNG)
 
 or correct, in which case stops the program:
+
 ![System Architecture](images/Succesfull.PNG)
 
 # Working Hypothesis and Environment
