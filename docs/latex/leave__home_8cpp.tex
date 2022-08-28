@@ -1,0 +1,80 @@
+\hypertarget{leave__home_8cpp}{}\doxysection{src/leave\+\_\+home.cpp File Reference}
+\label{leave__home_8cpp}\index{src/leave\_home.cpp@{src/leave\_home.cpp}}
+
+
+implements the leave\+\_\+home action  
+
+
+{\ttfamily \#include \char`\"{}exp\+\_\+rob\+\_\+lab/\+Interface\+Action.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$motion\+\_\+plan/\+Planning\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+Include dependency graph for leave\+\_\+home.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{leave__home_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{leave__home_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em \+: Main function \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+implements the leave\+\_\+home action 
+
+@ package exp\+\_\+rob\+\_\+lab
+
+\begin{DoxyAuthor}{Author}
+Jacopo Ciro Soncini 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28/08/2022
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ None
+
+Publishes to\+: ~\newline
+ None
+
+Services\+: ~\newline
+ None
+
+Client Services\+: ~\newline
+ None
+
+Action Services\+: ~\newline
+ /reaching\+\_\+goal
+
+Description\+: ~\newline
+ This program implements the real action to be completed when the planner dispatches the action leave\+\_\+home. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{leave__home_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{leave__home_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{leave\_home.cpp@{leave\_home.cpp}!main@{main}}
+\index{main@{main}!leave\_home.cpp@{leave\_home.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+\+: Main function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: None\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function implements the main function. 

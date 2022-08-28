@@ -1,0 +1,57 @@
+\hypertarget{class_k_c_l__rosplan_1_1_oracle_interface}{}\doxysection{K\+C\+L\+\_\+rosplan\+::Oracle\+Interface Class Reference}
+\label{class_k_c_l__rosplan_1_1_oracle_interface}\index{KCL\_rosplan::OracleInterface@{KCL\_rosplan::OracleInterface}}
+
+
+Inheritance diagram for K\+C\+L\+\_\+rosplan\+::Oracle\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{class_k_c_l__rosplan_1_1_oracle_interface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for K\+C\+L\+\_\+rosplan\+::Oracle\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{class_k_c_l__rosplan_1_1_oracle_interface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_k_c_l__rosplan_1_1_oracle_interface_a211e4f41a85f9db205937930ca7898ad}{Oracle\+Interface}} (ros\+::\+Node\+Handle \&nh)
+\begin{DoxyCompactList}\small\item\em \+: \mbox{\hyperlink{class_k_c_l__rosplan_1_1_oracle_interface}{Oracle\+Interface}} callback \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_oracle_interface_a50ab926587fcf7a4c79c1742716f4bd0}\label{class_k_c_l__rosplan_1_1_oracle_interface_a50ab926587fcf7a4c79c1742716f4bd0}} 
+bool {\bfseries concrete\+Callback} (const rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch\+::\+Const\+Ptr \&msg)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_oracle_interface_a211e4f41a85f9db205937930ca7898ad}\label{class_k_c_l__rosplan_1_1_oracle_interface_a211e4f41a85f9db205937930ca7898ad}} 
+\index{KCL\_rosplan::OracleInterface@{KCL\_rosplan::OracleInterface}!OracleInterface@{OracleInterface}}
+\index{OracleInterface@{OracleInterface}!KCL\_rosplan::OracleInterface@{KCL\_rosplan::OracleInterface}}
+\doxysubsubsection{\texorpdfstring{OracleInterface()}{OracleInterface()}}
+{\footnotesize\ttfamily K\+C\+L\+\_\+rosplan\+::\+Oracle\+Interface\+::\+Oracle\+Interface (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh }\end{DoxyParamCaption})}
+
+
+
+\+: \mbox{\hyperlink{class_k_c_l__rosplan_1_1_oracle_interface}{Oracle\+Interface}} callback 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch, variables received from the plan dispatcher\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True or False
+\end{DoxyReturn}
+This function implements the behaviour for the robot when the planner dispatches the action oracle\+\_\+check 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Interface\+Action.\+h\item 
+src/\mbox{\hyperlink{check__oracle_8cpp}{check\+\_\+oracle.\+cpp}}\end{DoxyCompactItemize}

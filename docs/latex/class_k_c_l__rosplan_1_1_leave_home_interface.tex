@@ -1,0 +1,57 @@
+\hypertarget{class_k_c_l__rosplan_1_1_leave_home_interface}{}\doxysection{K\+C\+L\+\_\+rosplan\+::Leave\+Home\+Interface Class Reference}
+\label{class_k_c_l__rosplan_1_1_leave_home_interface}\index{KCL\_rosplan::LeaveHomeInterface@{KCL\_rosplan::LeaveHomeInterface}}
+
+
+Inheritance diagram for K\+C\+L\+\_\+rosplan\+::Leave\+Home\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{class_k_c_l__rosplan_1_1_leave_home_interface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for K\+C\+L\+\_\+rosplan\+::Leave\+Home\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{class_k_c_l__rosplan_1_1_leave_home_interface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_k_c_l__rosplan_1_1_leave_home_interface_a4a26ad88c69fa30c14e747b357adbab4}{Leave\+Home\+Interface}} (ros\+::\+Node\+Handle \&nh)
+\begin{DoxyCompactList}\small\item\em \+: \mbox{\hyperlink{class_k_c_l__rosplan_1_1_leave_home_interface}{Leave\+Home\+Interface}} callback \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_leave_home_interface_a3fa4cbf53db72621824f9c6fd7cf6713}\label{class_k_c_l__rosplan_1_1_leave_home_interface_a3fa4cbf53db72621824f9c6fd7cf6713}} 
+bool {\bfseries concrete\+Callback} (const rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch\+::\+Const\+Ptr \&msg)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_leave_home_interface_a4a26ad88c69fa30c14e747b357adbab4}\label{class_k_c_l__rosplan_1_1_leave_home_interface_a4a26ad88c69fa30c14e747b357adbab4}} 
+\index{KCL\_rosplan::LeaveHomeInterface@{KCL\_rosplan::LeaveHomeInterface}!LeaveHomeInterface@{LeaveHomeInterface}}
+\index{LeaveHomeInterface@{LeaveHomeInterface}!KCL\_rosplan::LeaveHomeInterface@{KCL\_rosplan::LeaveHomeInterface}}
+\doxysubsubsection{\texorpdfstring{LeaveHomeInterface()}{LeaveHomeInterface()}}
+{\footnotesize\ttfamily K\+C\+L\+\_\+rosplan\+::\+Leave\+Home\+Interface\+::\+Leave\+Home\+Interface (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh }\end{DoxyParamCaption})}
+
+
+
+\+: \mbox{\hyperlink{class_k_c_l__rosplan_1_1_leave_home_interface}{Leave\+Home\+Interface}} callback 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch, variables received from the plan dispatcher\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True
+\end{DoxyReturn}
+This function implements the behaviour for the robot when the planner dispatches the action leave\+\_\+home action. Initializes and publishes to the /reaching\+\_\+goal action service. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Interface\+Action.\+h\item 
+src/\mbox{\hyperlink{leave__home_8cpp}{leave\+\_\+home.\+cpp}}\end{DoxyCompactItemize}

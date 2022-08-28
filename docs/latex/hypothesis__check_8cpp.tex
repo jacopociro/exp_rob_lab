@@ -1,0 +1,108 @@
+\hypertarget{hypothesis__check_8cpp}{}\doxysection{src/hypothesis\+\_\+check.cpp File Reference}
+\label{hypothesis__check_8cpp}\index{src/hypothesis\_check.cpp@{src/hypothesis\_check.cpp}}
+
+
+implements the hypothesis\+\_\+check action  
+
+
+{\ttfamily \#include \char`\"{}exp\+\_\+rob\+\_\+lab/\+Interface\+Action.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$motion\+\_\+plan/\+Planning\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$exp\+\_\+rob\+\_\+lab/\+Hypothesis.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$exp\+\_\+rob\+\_\+lab/\+Hyp.\+h$>$}\newline
+Include dependency graph for hypothesis\+\_\+check.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hypothesis__check_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{hypothesis__check_8cpp_a7cf45a902e37c468b6efb3e1f084cbf5}{clbk}} (exp\+\_\+rob\+\_\+lab\+::\+Hyp msg)
+\begin{DoxyCompactList}\small\item\em \+: /complete subscriber callback \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{hypothesis__check_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em \+: Main functions \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{hypothesis__check_8cpp_a8e807df1a5ac23b220f6098bbf5c56c2}\label{hypothesis__check_8cpp_a8e807df1a5ac23b220f6098bbf5c56c2}} 
+exp\+\_\+rob\+\_\+lab\+::\+Hyp {\bfseries data}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+implements the hypothesis\+\_\+check action 
+
+@ package exp\+\_\+rob\+\_\+lab
+
+\begin{DoxyAuthor}{Author}
+Jacopo Ciro Soncini 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28/08/2022
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ /complete
+
+Publishes to\+: ~\newline
+ None
+
+Services\+: ~\newline
+ None
+
+Client Services\+: ~\newline
+ None
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ This program implements the real action to be completed when the planner dispatches the action hypothesis\+\_\+check. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hypothesis__check_8cpp_a7cf45a902e37c468b6efb3e1f084cbf5}\label{hypothesis__check_8cpp_a7cf45a902e37c468b6efb3e1f084cbf5}} 
+\index{hypothesis\_check.cpp@{hypothesis\_check.cpp}!clbk@{clbk}}
+\index{clbk@{clbk}!hypothesis\_check.cpp@{hypothesis\_check.cpp}}
+\doxysubsubsection{\texorpdfstring{clbk()}{clbk()}}
+{\footnotesize\ttfamily void clbk (\begin{DoxyParamCaption}\item[{exp\+\_\+rob\+\_\+lab\+::\+Hyp}]{msg }\end{DoxyParamCaption})}
+
+
+
+\+: /complete subscriber callback 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: exp\+\_\+rob\+\_\+lab\+::\+Hyp msg\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+This function implements the callback for when the /complete subscriber is called and saves the message. \mbox{\Hypertarget{hypothesis__check_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{hypothesis__check_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{hypothesis\_check.cpp@{hypothesis\_check.cpp}!main@{main}}
+\index{main@{main}!hypothesis\_check.cpp@{hypothesis\_check.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+\+: Main functions 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: None\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function is the main function, initializes the subscriber. 

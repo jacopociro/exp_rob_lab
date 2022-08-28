@@ -7,14 +7,14 @@
 #
 #  \author Jacopo Ciro Soncini
 #  \version 1.0
-#  \date 15/11/2021
+#  \date 28/08/2022
 #  \details
 #  
 #  Subscribes to: <BR>
 #       None
 #
 #  Publishes to: <BR>
-#	    hint
+#	    None
 #
 #  Services: <BR>
 #       hypothesis_maker
@@ -26,7 +26,7 @@
 #       None
 #
 #  Description: <BR>
-#       This node handles the hint publisher, by publishing random hints from a list.
+#       This node handles the armor service, updating the knowledge. It return the hypothesis, a complete or incomplete one.
 
 from os import name
 from exp_rob_lab.srv import *

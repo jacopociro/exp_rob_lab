@@ -1,3 +1,33 @@
+/** @ package exp_rob_lab
+* 
+*  \file simulation.cpp
+*  \brief implements the simulation for the assignment
+*
+*  \author Jacopo Ciro Soncini
+*  \version 1.0
+*  \date 28/08/2022
+*  \details
+*   
+*  Subscribes to: <BR>
+*	/gazebo/link_states
+*
+*  Publishes to: <BR>
+*   /visualization_marker
+*	/oracle_hint
+*
+*  Services: <BR>
+*    /oracle_solution
+* 
+*  Client Services: <BR>
+*   None
+*    
+*  Action Services: <BR>
+*    None
+*
+*  Description: <BR>
+*  This program implements the simulation for the assignment, the generation of hints and the server for the correct the hypothesis.
+*/
+
 #include <ros/ros.h>
 #include <gazebo_msgs/LinkStates.h>
 #include <visualization_msgs/MarkerArray.h>

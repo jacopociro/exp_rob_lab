@@ -1,0 +1,181 @@
+\hypertarget{add__to__onthology_8cpp}{}\doxysection{src/add\+\_\+to\+\_\+onthology.cpp File Reference}
+\label{add__to__onthology_8cpp}\index{src/add\_to\_onthology.cpp@{src/add\_to\_onthology.cpp}}
+
+
+implements the add\+\_\+to\+\_\+onthology action  
+
+
+{\ttfamily \#include \char`\"{}exp\+\_\+rob\+\_\+lab/\+Interface\+Action.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$motion\+\_\+plan/\+Planning\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/move\+\_\+group\+\_\+interface/move\+\_\+group\+\_\+interface.\+h$>$}\newline
+{\ttfamily \#include $<$exp\+\_\+rob\+\_\+lab/\+Erl\+Oracle.\+h$>$}\newline
+{\ttfamily \#include $<$exp\+\_\+rob\+\_\+lab/\+Hypothesis.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$exp\+\_\+rob\+\_\+lab/\+Hyp.\+h$>$}\newline
+Include dependency graph for add\+\_\+to\+\_\+onthology.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{add__to__onthology_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{add__to__onthology_8cpp_a4eeb908fd508f8de7de286af34a37b42}{gohigh}} ()
+\begin{DoxyCompactList}\small\item\em \+: moveit plan for the arm \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{add__to__onthology_8cpp_ab50cc151dcc213dc08aa17d97c75ee16}{golow}} ()
+\begin{DoxyCompactList}\small\item\em \+: moveit plan for the arm \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{add__to__onthology_8cpp_a95ad8756ba460e13b3a0fac0f05f9f67}{hint\+\_\+clbk}} (const exp\+\_\+rob\+\_\+lab\+::\+Erl\+Oracle msg)
+\begin{DoxyCompactList}\small\item\em \+: oracle\+\_\+hint callback \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{add__to__onthology_8cpp_a99d5d00c24a01dde2bda760896ea1791}{arm\+\_\+pos}} ()
+\begin{DoxyCompactList}\small\item\em \+: This function handles the arm position on moveit and the call to hypothesis\+\_\+maker \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{add__to__onthology_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em \+: main function \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{add__to__onthology_8cpp_acd54ceffa8bce57636bd537df3ce2c79}\label{add__to__onthology_8cpp_acd54ceffa8bce57636bd537df3ce2c79}} 
+bool {\bfseries rec} = false
+\item 
+\mbox{\Hypertarget{add__to__onthology_8cpp_a1910d262855b71da353ed0d07a6c7823}\label{add__to__onthology_8cpp_a1910d262855b71da353ed0d07a6c7823}} 
+int {\bfseries pos} = 0
+\item 
+\mbox{\Hypertarget{add__to__onthology_8cpp_ab0593f5415cc4f687ad76effb453841e}\label{add__to__onthology_8cpp_ab0593f5415cc4f687ad76effb453841e}} 
+exp\+\_\+rob\+\_\+lab\+::\+Erl\+Oracle {\bfseries data}
+\item 
+\mbox{\Hypertarget{add__to__onthology_8cpp_a350594df3e8f6948c8462edfd41ce086}\label{add__to__onthology_8cpp_a350594df3e8f6948c8462edfd41ce086}} 
+ros\+::\+Publisher {\bfseries pub}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+implements the add\+\_\+to\+\_\+onthology action 
+
+@ package exp\+\_\+rob\+\_\+lab
+
+\begin{DoxyAuthor}{Author}
+Jacopo Ciro Soncini 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28/08/2022
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ /oracle\+\_\+hint
+
+Publishes to\+: ~\newline
+ /complete
+
+Services\+: ~\newline
+ None
+
+Client Services\+: ~\newline
+ /hypothesis\+\_\+maker
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ This program implements the real action to be completed when the planner dispatches the action add to onthology. It also calls the needed service, publisher and subscriber. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{add__to__onthology_8cpp_a99d5d00c24a01dde2bda760896ea1791}\label{add__to__onthology_8cpp_a99d5d00c24a01dde2bda760896ea1791}} 
+\index{add\_to\_onthology.cpp@{add\_to\_onthology.cpp}!arm\_pos@{arm\_pos}}
+\index{arm\_pos@{arm\_pos}!add\_to\_onthology.cpp@{add\_to\_onthology.cpp}}
+\doxysubsubsection{\texorpdfstring{arm\_pos()}{arm\_pos()}}
+{\footnotesize\ttfamily int arm\+\_\+pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: This function handles the arm position on moveit and the call to hypothesis\+\_\+maker 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: None\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function implements the behaviour for the arm on moveit. The arm move to find the clue and then the function send the hint to the hypthesis\+\_\+maker service to receive a full hypothesis. the hypothesis is also published on /complete. \mbox{\Hypertarget{add__to__onthology_8cpp_a4eeb908fd508f8de7de286af34a37b42}\label{add__to__onthology_8cpp_a4eeb908fd508f8de7de286af34a37b42}} 
+\index{add\_to\_onthology.cpp@{add\_to\_onthology.cpp}!gohigh@{gohigh}}
+\index{gohigh@{gohigh}!add\_to\_onthology.cpp@{add\_to\_onthology.cpp}}
+\doxysubsubsection{\texorpdfstring{gohigh()}{gohigh()}}
+{\footnotesize\ttfamily int gohigh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: moveit plan for the arm 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: None\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function implements the arm movement to go to the highest point. \mbox{\Hypertarget{add__to__onthology_8cpp_ab50cc151dcc213dc08aa17d97c75ee16}\label{add__to__onthology_8cpp_ab50cc151dcc213dc08aa17d97c75ee16}} 
+\index{add\_to\_onthology.cpp@{add\_to\_onthology.cpp}!golow@{golow}}
+\index{golow@{golow}!add\_to\_onthology.cpp@{add\_to\_onthology.cpp}}
+\doxysubsubsection{\texorpdfstring{golow()}{golow()}}
+{\footnotesize\ttfamily int golow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\+: moveit plan for the arm 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: None\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function implements the arm movement to go to the lowest point. \mbox{\Hypertarget{add__to__onthology_8cpp_a95ad8756ba460e13b3a0fac0f05f9f67}\label{add__to__onthology_8cpp_a95ad8756ba460e13b3a0fac0f05f9f67}} 
+\index{add\_to\_onthology.cpp@{add\_to\_onthology.cpp}!hint\_clbk@{hint\_clbk}}
+\index{hint\_clbk@{hint\_clbk}!add\_to\_onthology.cpp@{add\_to\_onthology.cpp}}
+\doxysubsubsection{\texorpdfstring{hint\_clbk()}{hint\_clbk()}}
+{\footnotesize\ttfamily void hint\+\_\+clbk (\begin{DoxyParamCaption}\item[{const exp\+\_\+rob\+\_\+lab\+::\+Erl\+Oracle}]{msg }\end{DoxyParamCaption})}
+
+
+
+\+: oracle\+\_\+hint callback 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: exp\+\_\+rob\+\_\+lab\+::\+Erl\+Oracle msg\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function implements the callback to read the oracle\+\_\+hint msg and save it on a global variable. \mbox{\Hypertarget{add__to__onthology_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{add__to__onthology_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{add\_to\_onthology.cpp@{add\_to\_onthology.cpp}!main@{main}}
+\index{main@{main}!add\_to\_onthology.cpp@{add\_to\_onthology.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+\+: main function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: None\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function is the main function, calling the needed publisher and subscribers 

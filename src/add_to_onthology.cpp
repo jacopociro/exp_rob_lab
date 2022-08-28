@@ -1,3 +1,33 @@
+/** @ package exp_rob_lab
+* 
+*  \file add_to_onthology.cpp
+*  \brief implements the add_to_onthology action
+*
+*  \author Jacopo Ciro Soncini
+*  \version 1.0
+*  \date 28/08/2022
+*  \details
+*   
+*  Subscribes to: <BR>
+*	/oracle_hint
+*
+*  Publishes to: <BR>
+*	/complete
+*
+*  Services: <BR>
+*    None
+* 
+*  Client Services: <BR>
+*    /hypothesis_maker
+*    
+*  Action Services: <BR>
+*    None
+*
+*  Description: <BR>
+*  This program implements the real action to be completed when the planner
+* dispatches the action add to onthology. It also calls the needed service, publisher and subscriber.
+*/
+
 #include "exp_rob_lab/InterfaceAction.h"
 #include <unistd.h>
 #include <actionlib/client/simple_action_client.h>
@@ -21,8 +51,18 @@ int pos = 0;
 exp_rob_lab::ErlOracle data;
 
 
-ros::Publisher pub;  
+ros::Publisher pub;
+
 namespace KCL_rosplan{
+/**
+ * \brief: HypothesisInterface callback
+ * \param msg : rosplan_dispatch_msgs::ActionDispatch, variables received from the plan dispatcher
+ * 
+ * \return True
+ * 
+ * This function implements the behaviour for the robot when the planner dispatches
+ * the action add_to_onthology
+ */    
     HypothesisInterface::HypothesisInterface(ros::NodeHandle &nh){
 
     }
@@ -34,6 +74,15 @@ namespace KCL_rosplan{
         return true ;
     }
 }
+
+/**
+ * \brief: main function
+ * \param msg : None
+ * 
+ * \return 0
+ * 
+ * This function is the main function, calling the needed publisher and subscribers
+ */   
 
 int main(int argc, char **argv){
     ros::init(argc, argv, "hypothesis_action", ros::init_options::AnonymousName);
@@ -49,10 +98,18 @@ int main(int argc, char **argv){
     act.runActionInterface();
     ros::AsyncSpinner spinner(1);
     spinner.start();
-    sleep(3);
+    sleep(1);
     return 0;
 }
-
+/**
+ * \brief: This function handles the arm position on moveit and the call to hypothesis_maker
+ * \param msg : None
+ * 
+ * \return 0
+ * 
+ * This function implements the behaviour for the arm on moveit. The arm move to find the clue and then the function
+ * send the hint to the hypthesis_maker service to receive a full hypothesis. the hypothesis is also published on /complete.
+ */   
 int arm_pos() {
     ros::NodeHandle h;
     ros::ServiceClient client = h.serviceClient<exp_rob_lab::Hypothesis>("hypothesis_maker");
@@ -97,14 +154,28 @@ int arm_pos() {
     rec = false;
     return 0;
 }
-
+/**
+ * \brief: oracle_hint callback
+ * \param msg : exp_rob_lab::ErlOracle msg
+ * 
+ * \return 0
+ * 
+ * This function implements the callback to read the oracle_hint msg and save it on a global variable.
+ */   
 void hint_clbk(const exp_rob_lab::ErlOracle msg){
     data.ID = msg.ID;
     data.key = msg.key;
     data.value = msg.value;
     rec = true;
 }
-
+/**
+ * \brief: moveit plan for the arm
+ * \param msg : None
+ * 
+ * \return 0
+ * 
+ * This function implements the arm movement to go to the highest point.
+ */
 int gohigh(){
     geometry_msgs::Pose pose1;
 	moveit::planning_interface::MoveGroupInterface group("arm");
@@ -125,7 +196,14 @@ int gohigh(){
 	group.execute(plan);
 	return 0;
 }
-
+/**
+ * \brief: moveit plan for the arm
+ * \param msg : None
+ * 
+ * \return 0
+ * 
+ * This function implements the arm movement to go to the lowest point.
+ */
 int golow(){
     geometry_msgs::Pose pose1;
 	moveit::planning_interface::MoveGroupInterface group("arm");

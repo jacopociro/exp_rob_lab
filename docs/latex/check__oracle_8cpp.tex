@@ -1,0 +1,114 @@
+\hypertarget{check__oracle_8cpp}{}\doxysection{src/check\+\_\+oracle.cpp File Reference}
+\label{check__oracle_8cpp}\index{src/check\_oracle.cpp@{src/check\_oracle.cpp}}
+
+
+implements the check\+\_\+oracle action  
+
+
+{\ttfamily \#include \char`\"{}exp\+\_\+rob\+\_\+lab/\+Interface\+Action.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$motion\+\_\+plan/\+Planning\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/move\+\_\+group\+\_\+interface/move\+\_\+group\+\_\+interface.\+h$>$}\newline
+{\ttfamily \#include $<$exp\+\_\+rob\+\_\+lab/\+Oracle.\+h$>$}\newline
+{\ttfamily \#include $<$exp\+\_\+rob\+\_\+lab/\+Hypothesis.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$exp\+\_\+rob\+\_\+lab/\+Hyp.\+h$>$}\newline
+Include dependency graph for check\+\_\+oracle.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{check__oracle_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{check__oracle_8cpp_a4a52d501abe64a33cc8a883b8bfbc9d0}{clbk}} (const exp\+\_\+rob\+\_\+lab\+::\+Hyp msg)
+\begin{DoxyCompactList}\small\item\em \+: /complete subscriber callback \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{check__oracle_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em \+: main function \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{check__oracle_8cpp_a8e807df1a5ac23b220f6098bbf5c56c2}\label{check__oracle_8cpp_a8e807df1a5ac23b220f6098bbf5c56c2}} 
+exp\+\_\+rob\+\_\+lab\+::\+Hyp {\bfseries data}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+implements the check\+\_\+oracle action 
+
+@ package exp\+\_\+rob\+\_\+lab
+
+\begin{DoxyAuthor}{Author}
+Jacopo Ciro Soncini 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28/08/2022
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ /complete
+
+Publishes to\+: ~\newline
+ None
+
+Services\+: ~\newline
+ None
+
+Client Services\+: ~\newline
+ None
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ This program implements the real action to be completed when the planner dispatches the action check\+\_\+oracle. It also calls the needed subscriber. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{check__oracle_8cpp_a4a52d501abe64a33cc8a883b8bfbc9d0}\label{check__oracle_8cpp_a4a52d501abe64a33cc8a883b8bfbc9d0}} 
+\index{check\_oracle.cpp@{check\_oracle.cpp}!clbk@{clbk}}
+\index{clbk@{clbk}!check\_oracle.cpp@{check\_oracle.cpp}}
+\doxysubsubsection{\texorpdfstring{clbk()}{clbk()}}
+{\footnotesize\ttfamily void clbk (\begin{DoxyParamCaption}\item[{const exp\+\_\+rob\+\_\+lab\+::\+Hyp}]{msg }\end{DoxyParamCaption})}
+
+
+
+\+: /complete subscriber callback 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: exp\+\_\+rob\+\_\+lab\+::\+Hyp msg\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+This function implements the behaviour of the callback for /complete subscriber adn saves the message received. \mbox{\Hypertarget{check__oracle_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{check__oracle_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{check\_oracle.cpp@{check\_oracle.cpp}!main@{main}}
+\index{main@{main}!check\_oracle.cpp@{check\_oracle.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+\+: main function 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & \+: None\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function implements the main function, with the subscrber initialiazer. 

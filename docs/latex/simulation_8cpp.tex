@@ -1,0 +1,114 @@
+\hypertarget{simulation_8cpp}{}\doxysection{src/simulation.cpp File Reference}
+\label{simulation_8cpp}\index{src/simulation.cpp@{src/simulation.cpp}}
+
+
+implements the simulation for the assignment  
+
+
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$gazebo\+\_\+msgs/\+Link\+States.\+h$>$}\newline
+{\ttfamily \#include $<$visualization\+\_\+msgs/\+Marker\+Array.\+h$>$}\newline
+{\ttfamily \#include $<$exp\+\_\+rob\+\_\+lab/\+Erl\+Oracle.\+h$>$}\newline
+{\ttfamily \#include $<$exp\+\_\+rob\+\_\+lab/\+Oracle.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for simulation.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{simulation_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a7e333af55a708cf53de07126dcd3006b}\label{simulation_8cpp_a7e333af55a708cf53de07126dcd3006b}} 
+double {\bfseries distfromtarget} (double x, double y, double z, double x1, double y1, double z1)
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a97662e15468969436e1d71495e60170b}\label{simulation_8cpp_a97662e15468969436e1d71495e60170b}} 
+bool {\bfseries oracle\+Service} (exp\+\_\+rob\+\_\+lab\+::\+Oracle\+::\+Request \&req, exp\+\_\+rob\+\_\+lab\+::\+Oracle\+::\+Response \&res)
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a876a1245db85a2bb87c08ae086f1eafa}\label{simulation_8cpp_a876a1245db85a2bb87c08ae086f1eafa}} 
+void {\bfseries oracle\+Callback} (const gazebo\+\_\+msgs\+::\+Link\+States\+::\+Const\+Ptr \&msg)
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{simulation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a32812fe000700d7aa8988d74e59471c7}\label{simulation_8cpp_a32812fe000700d7aa8988d74e59471c7}} 
+ros\+::\+Publisher {\bfseries oracle\+\_\+pub}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a36b0204cd96e3dc326a2adfa3d1dceda}\label{simulation_8cpp_a36b0204cd96e3dc326a2adfa3d1dceda}} 
+double {\bfseries markx} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a0bc4146f286fe42bd5e8fa1e53826447}\label{simulation_8cpp_a0bc4146f286fe42bd5e8fa1e53826447}} 
+double {\bfseries marky} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a8d90002e6a9c50028f184b22c380efc4}\label{simulation_8cpp_a8d90002e6a9c50028f184b22c380efc4}} 
+double {\bfseries markz} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a412ed4d68a81f370cdcd20e3019db982}\label{simulation_8cpp_a412ed4d68a81f370cdcd20e3019db982}} 
+double {\bfseries lastmarkx} = 0.\+0
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a174c0dfc727a92493b03f7b0573f4f3e}\label{simulation_8cpp_a174c0dfc727a92493b03f7b0573f4f3e}} 
+double {\bfseries lastmarky} = 0.\+0
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a0049a8a39c319bf1470f36c9e0f75abd}\label{simulation_8cpp_a0049a8a39c319bf1470f36c9e0f75abd}} 
+const std\+::string {\bfseries key} \mbox{[}3\mbox{]} = \{\char`\"{}who\char`\"{}, \char`\"{}what\char`\"{}, \char`\"{}where\char`\"{}\}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a68fa6a0c7a1208892294604263e23d92}\label{simulation_8cpp_a68fa6a0c7a1208892294604263e23d92}} 
+const std\+::string {\bfseries person} \mbox{[}6\mbox{]} = \{\char`\"{}miss\+Scarlett\char`\"{}, \char`\"{}colonel\+Mustard\char`\"{}, \char`\"{}mrs\+White\char`\"{}, \char`\"{}mr\+Green\char`\"{}, \char`\"{}mrs\+Peacock\char`\"{}, \char`\"{}prof\+Plum\char`\"{}\}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a4368e40a20e72e62974037baf19dba80}\label{simulation_8cpp_a4368e40a20e72e62974037baf19dba80}} 
+const std\+::string {\bfseries object} \mbox{[}6\mbox{]} = \{\char`\"{}candlestick\char`\"{}, \char`\"{}dagger\char`\"{}, \char`\"{}lead\+Pipe\char`\"{}, \char`\"{}revolver\char`\"{}, \char`\"{}rope\char`\"{}, \char`\"{}spanner\char`\"{}\}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a5e5bd50ead53d20df3f8ede527f47ce7}\label{simulation_8cpp_a5e5bd50ead53d20df3f8ede527f47ce7}} 
+const std\+::string {\bfseries place} \mbox{[}9\mbox{]} = \{\char`\"{}conservatory\char`\"{}, \char`\"{}lounge\char`\"{}, \char`\"{}kitchen\char`\"{}, \char`\"{}library\char`\"{}, \char`\"{}hall\char`\"{}, \char`\"{}study\char`\"{}, \char`\"{}bathroom\char`\"{}, \char`\"{}dining\+Room\char`\"{}, \char`\"{}billiard\+Room\char`\"{}\}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a37d4a0b625b8b9583adf9362f5aae971}\label{simulation_8cpp_a37d4a0b625b8b9583adf9362f5aae971}} 
+int {\bfseries u\+I\+Ds} \mbox{[}3\mbox{]} =\{-\/1,-\/1,-\/1\}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a90c5d03e068ddae91702223f47eff712}\label{simulation_8cpp_a90c5d03e068ddae91702223f47eff712}} 
+int {\bfseries win\+ID} = -\/1
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a6873c312fd4ae0d3f3c016f8da41fc77}\label{simulation_8cpp_a6873c312fd4ae0d3f3c016f8da41fc77}} 
+std\+::vector$<$ exp\+\_\+rob\+\_\+lab\+::\+Erl\+Oracle $>$ {\bfseries oracle\+\_\+msgs}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+implements the simulation for the assignment 
+
+@ package exp\+\_\+rob\+\_\+lab
+
+\begin{DoxyAuthor}{Author}
+Jacopo Ciro Soncini 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+28/08/2022
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ /gazebo/link\+\_\+states
+
+Publishes to\+: ~\newline
+ /visualization\+\_\+marker /oracle\+\_\+hint
+
+Services\+: ~\newline
+ /oracle\+\_\+solution
+
+Client Services\+: ~\newline
+ None
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ This program implements the simulation for the assignment, the generation of hints and the server for the correct the hypothesis. 

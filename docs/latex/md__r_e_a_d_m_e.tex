@@ -1,0 +1,135 @@
+\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{Jacopo Ciro Soncini 5050695}\label{md__r_e_a_d_m_e_autotoc_md1}
+E-\/mail\+: \href{mailto:jacopo.soncini@gmail.com}{\texttt{ jacopo.\+soncini@gmail.\+com}}\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{Brief introduction}\label{md__r_e_a_d_m_e_autotoc_md2}
+The project implements a game of cluedo. In this project the simulation is a simple room with 4 points to collect the hints, the behaviour is handled with a R\+O\+Splan and the actions have a meaning in the physical world. The robot collects hints and sends them to the armor service that returns any complete hypothesis. Then the robot return home and checks if the hypothesis is correct. In this implemenation hint can be malformed and building an incosistent hypothesis is possible.\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{Preliminary actions}\label{md__r_e_a_d_m_e_autotoc_md3}
+The package is containing the onthology used by the Sherlock\+Bot, but it will need to be paired with the Armor package Professor Luca Buoncompagni and Alessio Capitanelli developed, downloadable at \href{https://github.com/EmaroLab/armor}{\texttt{ https\+://github.\+com/\+Emaro\+Lab/armor}}. To run this package you will also need to download the R\+O\+S\+Plan package at \href{https://github.com/KCL-Planning/ROSPlan.git}{\texttt{ https\+://github.\+com/\+K\+C\+L-\/\+Planning/\+R\+O\+S\+Plan.\+git}} . Lastly you will need to download my moveit package at \href{https://github.com/jacopociro/moveit.git}{\texttt{ https\+://github.\+com/jacopociro/moveit.\+git}}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{Software Architecture}\label{md__r_e_a_d_m_e_autotoc_md4}
+Sherlock\+Bot is handled with R\+O\+S\+Plan and 10 nodes that handle hints, hypothesis, the oracle and the actions. The plan.\+py handles the various part of R\+O\+Splan, updating the knowledge as requested. More on the system architecture to be explained with the graphs, first I will explain the contents of the package. The package is composed of\+:
+\begin{DoxyItemize}
+\item One action file\+:
+\begin{DoxyItemize}
+\item Move.\+action
+\end{DoxyItemize}
+\item Two config files\+:
+\begin{DoxyItemize}
+\item motors\+\_\+config.\+yaml
+\item sim.\+rviz
+\end{DoxyItemize}
+\item four launch files\+:+
+\begin{DoxyItemize}
+\item assignment.\+launch
+\item launch.\+launch
+\item plan.\+launch
+\item spawn.\+launch
+\end{DoxyItemize}
+\item Two custom message file\+:
+\begin{DoxyItemize}
+\item Erl\+Oracle.\+msg
+\item Hyp.\+msg
+\end{DoxyItemize}
+\item Two custom service files\+:
+\begin{DoxyItemize}
+\item Hypothesis.\+srv
+\item Oracle.\+srv
+\end{DoxyItemize}
+\item P\+D\+DL plan\+:
+\begin{DoxyItemize}
+\item auto\+\_\+problem.\+pddl
+\item domain.\+pddl
+\item plan.\+pddl
+\item problem.\+pddl
+\end{DoxyItemize}
+\item ten nodes\+:
+\begin{DoxyItemize}
+\item go\+\_\+to\+\_\+point\+\_\+action.\+py
+\item \mbox{\hyperlink{hypothesis__maker_8py}{hypothesis\+\_\+maker.\+py}}
+\item plan.\+py
+\item \mbox{\hyperlink{add__to__onthology_8cpp}{add\+\_\+to\+\_\+onthology.\+cpp}}
+\item \mbox{\hyperlink{check__oracle_8cpp}{check\+\_\+oracle.\+cpp}}
+\item got\+\_\+to\+\_\+waypoint.\+cpp
+\item \mbox{\hyperlink{hypothesis__check_8cpp}{hypothesis\+\_\+check.\+cpp}}
+\item \mbox{\hyperlink{leave__home_8cpp}{leave\+\_\+home.\+cpp}}
+\item \mbox{\hyperlink{return__home_8cpp}{return\+\_\+home.\+cpp}}
+\item \mbox{\hyperlink{simulation_8cpp}{simulation.\+cpp}}
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{Custom messages and services}\label{md__r_e_a_d_m_e_autotoc_md5}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsubsection{Erl\+Oracle message}\label{md__r_e_a_d_m_e_autotoc_md6}
+The message is composed of one int32\+: id and two strings\+: name and class. These are needed to be readable from armor service and upload them correctly on the onthology.
+
+$>$int32 id
+
+$>$string name
+
+$>$string class\+\_\+id\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsubsection{Hypothesis service}\label{md__r_e_a_d_m_e_autotoc_md7}
+The request has the same format as the Hint message. The response is composed of 3 strings (id, who, what, where) and 1 boolean value (consistent). This service is called every time i upload one hint and return any complete hint, with a boolean value that checks if it is consistent. {\bfseries{Request}} $>$string id
+
+$>$string name
+
+$>$string class\+\_\+id
+
+{\bfseries{Response}} $>$string id
+
+$>$string who
+
+$>$string where
+
+$>$string what
+
+$>$bool consistent\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysubsubsection{oracle service}\label{md__r_e_a_d_m_e_autotoc_md8}
+The request is a string with the id of the hypotesis. The response is an int32 value that checks if the hypothesis is correct. {\bfseries{Request}} $>$string id
+
+{\bfseries{Response}} $>$int32 right\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{P\+D\+DL}\label{md__r_e_a_d_m_e_autotoc_md9}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsubsection{Domain}\label{md__r_e_a_d_m_e_autotoc_md10}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysubsubsection{Problem}\label{md__r_e_a_d_m_e_autotoc_md11}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysubsubsection{Plan}\label{md__r_e_a_d_m_e_autotoc_md12}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysubsection{Nodes}\label{md__r_e_a_d_m_e_autotoc_md13}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md14}{}\doxysubsubsection{hint\+\_\+publisher.\+py}\label{md__r_e_a_d_m_e_autotoc_md14}
+This node generates random hint from an array of hints and, using a R\+OS publisher, sends them to whoever subscribes. There are 18 different hint divided in 6 identifiers, each one is consistent. \hypertarget{md__r_e_a_d_m_e_autotoc_md15}{}\doxysubsubsection{hypothesis\+\_\+maker.\+py}\label{md__r_e_a_d_m_e_autotoc_md15}
+This node is the one tasked with communicating with the armor service and updating the onthology. It receives the hints and adds them to the onthology, then it checks if there is a complete hypothesis. In case there is it returns the complete hypothesis, otherwise is returns an empty message. \hypertarget{md__r_e_a_d_m_e_autotoc_md16}{}\doxysubsubsection{oracle\+\_\+service.\+py}\label{md__r_e_a_d_m_e_autotoc_md16}
+This node is tasked with checking if the complete hypothesis is the correct one. It does so by simply checking if the hypotesis\textquotesingle{} id is \char`\"{}\+H\+P3\char`\"{} or whatever the user sets. \hypertarget{md__r_e_a_d_m_e_autotoc_md17}{}\doxysubsubsection{state\+\_\+machine.\+py}\label{md__r_e_a_d_m_e_autotoc_md17}
+This node is the central node and handles the behaviour of the robot, basing it off of states. There are 3 states\+: move, clues and hyp. The first one handles the movement of the robot to a random room, the second one collects hints and the last one checks if the hypothesis formulated is correct. \hypertarget{md__r_e_a_d_m_e_autotoc_md18}{}\doxysubsection{Architecture diagram}\label{md__r_e_a_d_m_e_autotoc_md18}
+
+
+
+
+As we can see the architecture is composed of 5 nodes. The central one is the state machine, which subscribes to the hint publisher and call the services in hypothesis\+\_\+maker and oracle. The hypothesis maker node also call the service in armor, in order to update the cluedo onthology. \hypertarget{md__r_e_a_d_m_e_autotoc_md19}{}\doxysubsection{State Machine}\label{md__r_e_a_d_m_e_autotoc_md19}
+
+
+The state machine has 3 states\+: move, clues and hyp. The machine starts in the move state, from which will move to the clues state. The clues state has two possible outputs, based on if the received hypothesis is complete or not. If the hypothesis is complete then it will go to the hyp state, to check if it is correct. Otherwise the machine will return to the move state to collect more hints. The hyp state has two outcomes, if the hypothesis is correct then the game ends, otherwise the machine returns to the move state, to collect more hints. \hypertarget{md__r_e_a_d_m_e_autotoc_md20}{}\doxysubsection{Temporal sequence diagram}\label{md__r_e_a_d_m_e_autotoc_md20}
+
+
+This image shows a temporal sequence diagram for the simulation, in case every output is ok at the first run. Probably the state machine will be called again and again but the number of times is not fixed, so it is not represented. The state machine starts with the move state, making the robot move to a clue. Then, when it changes to the clues state the robot subscribes to a publisher and reads the hint. In this state, but at a different time, it also calls the hypothesis maker service, to add the hint to the onthology and then it checks for a complete hypothesis. Assuming the hypothesis is complete the robot goes to the oracle state where it moves to the terminal and check if the hypothesis is correct, which if it is will be the last action done. \hypertarget{md__r_e_a_d_m_e_autotoc_md21}{}\doxysection{Installation and Running Procedure}\label{md__r_e_a_d_m_e_autotoc_md21}
+To install this package, assuming you have installed the armor package as indicated in the above link (don\textquotesingle{}t forget to run the {\ttfamily ./gradlew deploy\+App} command in the armor folder), you will need to just clone the github repository in your ros workspace, move to the correct branch and build it. in $<$your\+\_\+ros\+\_\+workspace$>$/src run\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git clone https://github.com/jacopociro/exp\_rob\_lab.git}
+\DoxyCodeLine{git checkout ass1}
+\DoxyCodeLine{cd ..}
+\DoxyCodeLine{catkin\_make}
+\end{DoxyCode}
+
+
+When this is done, hopefully with no errors, just run 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{roslaunch exp\_rob\_lab launch.launch}
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md22}{}\doxysection{Running code}\label{md__r_e_a_d_m_e_autotoc_md22}
+The simulation is really simple, as all of the actions are simulated in this stage. The only output we have is text on the terminal. \hypertarget{md__r_e_a_d_m_e_autotoc_md23}{}\doxysubsubsection{Move state}\label{md__r_e_a_d_m_e_autotoc_md23}
+
+
+This is the move state output, where the robot moves to a random room. \hypertarget{md__r_e_a_d_m_e_autotoc_md24}{}\doxysubsubsection{Clues state}\label{md__r_e_a_d_m_e_autotoc_md24}
+The robot is now in the clues state where it collects hint and returns the formulated hypothesis This can be incomplete\+:
+
+
+
+or complete\+:
+
+\hypertarget{md__r_e_a_d_m_e_autotoc_md25}{}\doxysubsubsection{Oracle state}\label{md__r_e_a_d_m_e_autotoc_md25}
+T\+His state checks if the hypothesis is incorrect, in which case returns to the move state\+:
+
+
+
+or correct, in which case stops the program\+:
+
+\hypertarget{md__r_e_a_d_m_e_autotoc_md26}{}\doxysection{Working Hypothesis and Environment}\label{md__r_e_a_d_m_e_autotoc_md26}
+The environment is as simple as it can be, in order to be easily changed and improved in the next two assignments. In this implementation the enviroment is totally simulated, the robot has a few simulated action that should be able to easily changed into real actions. All of the variable are defined by the author, such as hints and the correct hypothesis. \hypertarget{md__r_e_a_d_m_e_autotoc_md27}{}\doxysubsection{System\textquotesingle{}s Features}\label{md__r_e_a_d_m_e_autotoc_md27}
+The system is easily adaptable to changes, as it is pretty modular and each script handles the different parts of the algorithm. The system can also handle random hints, even though the need to be properly written. If the hint is not proper the system should just ignore them.\hypertarget{md__r_e_a_d_m_e_autotoc_md28}{}\doxysubsection{System\textquotesingle{}s Limitations}\label{md__r_e_a_d_m_e_autotoc_md28}
+The system is not designed to handle malformed hint or to discard incosistent hints. To change the hitns and the solution the user needs to have some programming knowledge. The onthology is not readable when it gets updated. The output is not easy to read. \hypertarget{md__r_e_a_d_m_e_autotoc_md29}{}\doxysubsection{Possible Techinical Imporvements}\label{md__r_e_a_d_m_e_autotoc_md29}
+A good improvment would be the implementation of malformed hints and incosistent hypothesis, to check if the program can handle it. Also it would be good to have easier way to check the output of the various scripts. The last obious improvment would be to have actual action instead of simulated ones 

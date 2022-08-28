@@ -1,3 +1,33 @@
+/** @ package exp_rob_lab
+* 
+*  \file leave_home.cpp
+*  \brief implements the leave_home action
+*
+*  \author Jacopo Ciro Soncini
+*  \version 1.0
+*  \date 28/08/2022
+*  \details
+*   
+*  Subscribes to: <BR>
+*	None
+*
+*  Publishes to: <BR>
+*	None
+*
+*  Services: <BR>
+*    None
+* 
+*  Client Services: <BR>
+*    None
+*    
+*  Action Services: <BR>
+*    /reaching_goal
+*
+*  Description: <BR>
+*  This program implements the real action to be completed when the planner
+* dispatches the action leave_home.
+*/
+
 #include "exp_rob_lab/InterfaceAction.h"
 #include <unistd.h>
 #include <actionlib/client/simple_action_client.h>
@@ -6,6 +36,15 @@
 #include <math.h>
 
 namespace KCL_rosplan {
+/**
+ * \brief: LeaveHomeInterface callback
+ * \param msg : rosplan_dispatch_msgs::ActionDispatch, variables received from the plan dispatcher
+ * 
+ * \return True
+ * 
+ * This function implements the behaviour for the robot when the planner dispatches
+ * the action leave_home action. Initializes and publishes to the /reaching_goal action service.
+ */
     LeaveHomeInterface::LeaveHomeInterface(ros::NodeHandle &nh){
 
     }
@@ -51,7 +90,14 @@ namespace KCL_rosplan {
         return true;
     }
 }
-
+/**
+ * \brief: Main function
+ * \param msg : None
+ * 
+ * \return 0
+ * 
+ * This function implements the main function.
+ */
 int main(int argc, char **argv){
     ros::init(argc, argv, "leave_home", ros::init_options::AnonymousName);
     ros::NodeHandle nh("~");
