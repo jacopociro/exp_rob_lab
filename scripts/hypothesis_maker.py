@@ -14,8 +14,8 @@
 #       None
 #
 #  Publishes to: <BR>
-#	    hint
-#
+#	    None
+#  
 #  Services: <BR>
 #       hypothesis_maker
 #
