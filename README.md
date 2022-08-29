@@ -185,9 +185,9 @@ roslaunch exp_rob_lab launch.launch
 ```
 
 # Running code
-![System Architecture](images/Code_running_example.mkv)
+https://youtu.be/RRf-S3JpDGY
 
-THis is a brief example of how the robot moves and reaches the hint.
+This is a brief example of how the robot moves and reaches the hint.
 
 ![System Architecture](images/hint%20position.PNG)
 
