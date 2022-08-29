@@ -14,7 +14,7 @@
 #       None
 #
 #  Publishes to: <BR>
-#	    hint
+#	    None
 #
 #  Services: <BR>
 #       hypothesis_maker
@@ -26,7 +26,11 @@
 #       None
 #
 #  Description: <BR>
+<<<<<<< HEAD
 #      This node handles the armor service, updating the knowledge. It return the hypothesis, a complete or incomplete one
+=======
+#      This node handles the armor service, updating the knowledge. It return the hypothesis, a complete or incomplete one.
+>>>>>>> 949412ae0765622f01931a08e8e0310bf027cd76
 
 from os import name
 from exp_rob_lab.srv import *
