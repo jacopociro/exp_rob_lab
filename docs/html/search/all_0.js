@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['a_0',['a',['../hypothesis__maker_8py.html#a85b4ae5e2793b7dcc5c6deb30e83ed68',1,'hypothesis_maker']]],
-  ['armor_1',['armor',['../hypothesis__maker_8py.html#a77df42e6ff2be406a9a3548db97ceae9',1,'hypothesis_maker']]]
+  ['add_5fto_5fhypo_0',['add_to_hypo',['../hypothesis__maker_8py.html#a8adf9e1c4c0c7622f71b40607db4954a',1,'hypothesis_maker']]],
+  ['add_5fto_5font_1',['add_to_ont',['../hypothesis__maker_8py.html#afc578b2fbd2370f057e0f2e681979e57',1,'hypothesis_maker']]],
+  ['apply_2',['apply',['../hypothesis__maker_8py.html#a831bfa3d80468818812ed91ce7174d69',1,'hypothesis_maker']]]
 ];

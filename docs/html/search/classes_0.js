@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['clues_23',['Clues',['../class_clues.html',1,'']]]
+  ['clues_28',['Clues',['../class_clues.html',1,'']]]
 ];

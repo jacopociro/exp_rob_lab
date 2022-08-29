@@ -13,149 +13,49 @@ This script handles the hypothesis maker service and the onthology part.
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a1da91a9b684c7db2460ac547acfe732d}\label{hypothesis__maker_8py_a1da91a9b684c7db2460ac547acfe732d}} 
-def {\bfseries hypothesis\+\_\+maker\+\_\+server} ()
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_ac5411eb59ad33af7cbf88275e4f9dd22}\label{hypothesis__maker_8py_ac5411eb59ad33af7cbf88275e4f9dd22}} 
-def {\bfseries load} ()
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_abfe00b0dd283834e4568248b6c04a5fb}\label{hypothesis__maker_8py_abfe00b0dd283834e4568248b6c04a5fb}} 
-def {\bfseries make\+\_\+hypothesis} (request)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_afe32dab9e7ad51f09556beda1441e111}\label{hypothesis__maker_8py_afe32dab9e7ad51f09556beda1441e111}} 
-def {\bfseries comp\+\_\+consist} ()
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a8bb09bab2aba602e921a0c0768f826a0}\label{hypothesis__maker_8py_a8bb09bab2aba602e921a0c0768f826a0}} 
-def {\bfseries hypo\+\_\+detail} ()
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a8adf9e1c4c0c7622f71b40607db4954a}\label{hypothesis__maker_8py_a8adf9e1c4c0c7622f71b40607db4954a}} 
-def {\bfseries add\+\_\+to\+\_\+hypo} (id, name, class\+\_\+id)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_afc578b2fbd2370f057e0f2e681979e57}\label{hypothesis__maker_8py_afc578b2fbd2370f057e0f2e681979e57}} 
-def {\bfseries add\+\_\+to\+\_\+ont} (name, class\+\_\+id)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_af5bfe9270e43e520a55066b0092cbc81}\label{hypothesis__maker_8py_af5bfe9270e43e520a55066b0092cbc81}} 
-def {\bfseries disjoint} (class\+\_\+id)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_ad52a195e41914ef92300a23b85dfcd03}\label{hypothesis__maker_8py_ad52a195e41914ef92300a23b85dfcd03}} 
-def {\bfseries class\+\_\+ont} (class\+\_\+id)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a188bb45984b888851bfc1b9cabf30a08}\label{hypothesis__maker_8py_a188bb45984b888851bfc1b9cabf30a08}} 
-def \mbox{\hyperlink{hypothesis__maker_8py_a188bb45984b888851bfc1b9cabf30a08}{reason}} ()
+def \mbox{\hyperlink{hypothesis__maker_8py_a1da91a9b684c7db2460ac547acfe732d}{hypothesis\+\_\+maker.\+hypothesis\+\_\+maker\+\_\+server}} ()
+\begin{DoxyCompactList}\small\item\em this function initializes the node, the hypothesis\+\_\+maker service and the proxy to the armor service ~\newline
+ \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_ac5411eb59ad33af7cbf88275e4f9dd22}{hypothesis\+\_\+maker.\+load}} ()
+\begin{DoxyCompactList}\small\item\em this function defines the load command for armor ~\newline
+ \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_abfe00b0dd283834e4568248b6c04a5fb}{hypothesis\+\_\+maker.\+make\+\_\+hypothesis}} (request)
+\begin{DoxyCompactList}\small\item\em this function is the handle of the hypothesis maker service. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_afe32dab9e7ad51f09556beda1441e111}{hypothesis\+\_\+maker.\+comp\+\_\+consist}} ()
+\begin{DoxyCompactList}\small\item\em this function loads in the onthology the completed and incostistent for armor \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_a8bb09bab2aba602e921a0c0768f826a0}{hypothesis\+\_\+maker.\+hypo\+\_\+detail}} ()
+\begin{DoxyCompactList}\small\item\em this function defines the hypothesis\textquotesingle{} classes \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_a8adf9e1c4c0c7622f71b40607db4954a}{hypothesis\+\_\+maker.\+add\+\_\+to\+\_\+hypo}} (id, name, class\+\_\+id)
+\begin{DoxyCompactList}\small\item\em this function adds an hyopthesis to the reasoner \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_afc578b2fbd2370f057e0f2e681979e57}{hypothesis\+\_\+maker.\+add\+\_\+to\+\_\+ont}} (name, class\+\_\+id)
+\begin{DoxyCompactList}\small\item\em this function adds an hypothesis to the onthology \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_af5bfe9270e43e520a55066b0092cbc81}{hypothesis\+\_\+maker.\+disjoint}} (class\+\_\+id)
+\begin{DoxyCompactList}\small\item\em this function calls the disjoint command \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_ad52a195e41914ef92300a23b85dfcd03}{hypothesis\+\_\+maker.\+class\+\_\+ont}} (class\+\_\+id)
 \begin{DoxyCompactList}\small\item\em this function gets the class\+\_\+id and returns the class name for the onthology \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a831bfa3d80468818812ed91ce7174d69}\label{hypothesis__maker_8py_a831bfa3d80468818812ed91ce7174d69}} 
-def {\bfseries apply} ()
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a0d5bb7039e2dfe5178855a398b2a0c7d}\label{hypothesis__maker_8py_a0d5bb7039e2dfe5178855a398b2a0c7d}} 
-def {\bfseries check} (id, name, class\+\_\+id)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a09a49505d6142171da276ab1d6612a62}\label{hypothesis__maker_8py_a09a49505d6142171da276ab1d6612a62}} 
-def {\bfseries position\+\_\+find} (matrix, value)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a80f7955a3c47b6484eeec5226eeb8ffc}\label{hypothesis__maker_8py_a80f7955a3c47b6484eeec5226eeb8ffc}} 
-def {\bfseries matrix\+\_\+find} (matrix, value)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a2b90c345f1f24134f8e9d09bf0fb204d}\label{hypothesis__maker_8py_a2b90c345f1f24134f8e9d09bf0fb204d}} 
-def \mbox{\hyperlink{hypothesis__maker_8py_a2b90c345f1f24134f8e9d09bf0fb204d}{hypo\+\_\+control}} (id)
-\begin{DoxyCompactList}\small\item\em this function return if a value exists in a matrix \end{DoxyCompactList}\end{DoxyCompactItemize}
+def \mbox{\hyperlink{hypothesis__maker_8py_a188bb45984b888851bfc1b9cabf30a08}{hypothesis\+\_\+maker.\+reason}} ()
+\begin{DoxyCompactList}\small\item\em this function calls the reason command for armor \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_a831bfa3d80468818812ed91ce7174d69}{hypothesis\+\_\+maker.\+apply}} ()
+\begin{DoxyCompactList}\small\item\em this function calls the apply command for armor \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_a0d5bb7039e2dfe5178855a398b2a0c7d}{hypothesis\+\_\+maker.\+check}} (id, name, class\+\_\+id)
+\begin{DoxyCompactList}\small\item\em this function check if the hypothesis has already beeen added to the matrix where I store them, if not it add the hypothesis\textquotesingle{} name and id. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_a09a49505d6142171da276ab1d6612a62}{hypothesis\+\_\+maker.\+position\+\_\+find}} (matrix, value)
+\begin{DoxyCompactList}\small\item\em this function finds the idex of the row I\textquotesingle{}m looking for and return it \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_a80f7955a3c47b6484eeec5226eeb8ffc}{hypothesis\+\_\+maker.\+matrix\+\_\+find}} (matrix, value)
+\begin{DoxyCompactList}\small\item\em this function return if a value exists in a matrix \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hypothesis__maker_8py_a2b90c345f1f24134f8e9d09bf0fb204d}{hypothesis\+\_\+maker.\+hypo\+\_\+control}} (id)
+\begin{DoxyCompactList}\small\item\em this function sees if in the matrix exists a complete hypothesis \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a9c1db2e956864fd9d81e7c8b1c88e97e}\label{hypothesis__maker_8py_a9c1db2e956864fd9d81e7c8b1c88e97e}} 
-list {\bfseries locations} = \mbox{[}\mbox{[}$\,$\mbox{]}\mbox{]}
+\mbox{\Hypertarget{hypothesis__maker_8py_a43b4838b7ae4357a43f523783cd32c94}\label{hypothesis__maker_8py_a43b4838b7ae4357a43f523783cd32c94}} 
+list {\bfseries hypothesis\+\_\+maker.\+locations} = \mbox{[}\mbox{[}$\,$\mbox{]}\mbox{]}
 \item 
-\mbox{\Hypertarget{hypothesis__maker_8py_aec12c69a52ca14414852eb243649c19b}\label{hypothesis__maker_8py_aec12c69a52ca14414852eb243649c19b}} 
-list {\bfseries weapons} = \mbox{[}\mbox{[}$\,$\mbox{]}\mbox{]}
+\mbox{\Hypertarget{hypothesis__maker_8py_ad7e99fc57a7feb91094d052b819b40be}\label{hypothesis__maker_8py_ad7e99fc57a7feb91094d052b819b40be}} 
+list {\bfseries hypothesis\+\_\+maker.\+weapons} = \mbox{[}\mbox{[}$\,$\mbox{]}\mbox{]}
 \item 
-\mbox{\Hypertarget{hypothesis__maker_8py_aa99c63ad63e42004d7bd6ca954d5590b}\label{hypothesis__maker_8py_aa99c63ad63e42004d7bd6ca954d5590b}} 
-list {\bfseries people} = \mbox{[}\mbox{[}$\,$\mbox{]}\mbox{]}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a77df42e6ff2be406a9a3548db97ceae9}\label{hypothesis__maker_8py_a77df42e6ff2be406a9a3548db97ceae9}} 
-\mbox{\hyperlink{hypothesis__maker_8py_a77df42e6ff2be406a9a3548db97ceae9}{armor}} = rospy.\+Service\+Proxy(\textquotesingle{}armor\+\_\+interface\+\_\+srv\textquotesingle{}, Armor\+Directive)
-\begin{DoxyCompactList}\small\item\em this function initializes the node, the hypothesis\+\_\+maker service and the proxy to the armor service \end{DoxyCompactList}\item 
-\mbox{\hyperlink{hypothesis__maker_8py_a51e6a0d2bcb8531a5e5adcd66a77aa3b}{request}} = Armor\+Directive\+Req()
-\begin{DoxyCompactList}\small\item\em this function defines the load command for armor \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_ad41d5e86c7681b061a2ba456225455f9}\label{hypothesis__maker_8py_ad41d5e86c7681b061a2ba456225455f9}} 
-{\bfseries client\+\_\+name}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a300274138dbb93b54b0b73c33300f045}\label{hypothesis__maker_8py_a300274138dbb93b54b0b73c33300f045}} 
-{\bfseries reference\+\_\+name}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a9e0992eae3950adccaf4847fbff4231d}\label{hypothesis__maker_8py_a9e0992eae3950adccaf4847fbff4231d}} 
-{\bfseries command}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a5e60b05fade3865c267ad50a1273f604}\label{hypothesis__maker_8py_a5e60b05fade3865c267ad50a1273f604}} 
-{\bfseries primary\+\_\+command\+\_\+spec}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_ab8cb0c9a02737e16d9bf858e9a4749c0}\label{hypothesis__maker_8py_ab8cb0c9a02737e16d9bf858e9a4749c0}} 
-{\bfseries secondary\+\_\+command\+\_\+spec}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a8187411843a6284ffb964ef3fb9fcab3}\label{hypothesis__maker_8py_a8187411843a6284ffb964ef3fb9fcab3}} 
-{\bfseries args}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a10a0f35066079abd150539d0d13dbf3e}\label{hypothesis__maker_8py_a10a0f35066079abd150539d0d13dbf3e}} 
-{\bfseries msg} = armor(request)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_ab0bd7560790c13b656fd58e17e35143e}\label{hypothesis__maker_8py_ab0bd7560790c13b656fd58e17e35143e}} 
-{\bfseries res} = msg.\+armor\+\_\+response
-\item 
-\mbox{\hyperlink{hypothesis__maker_8py_acf2488b95c97e0378c9bf49de3b50f28}{id}} = request.\+id
-\begin{DoxyCompactList}\small\item\em this function is the handle of the hypothesis maker service. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_ab74e6bf80237ddc4109968cedc58c151}\label{hypothesis__maker_8py_ab74e6bf80237ddc4109968cedc58c151}} 
-{\bfseries name} = request.\+name
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_af86f019ee114dc0e0b697acbb6ced3e8}\label{hypothesis__maker_8py_af86f019ee114dc0e0b697acbb6ced3e8}} 
-{\bfseries class\+\_\+id} = request.\+class\+\_\+id
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a609886202318c9acb68398d6dab56600}\label{hypothesis__maker_8py_a609886202318c9acb68398d6dab56600}} 
-{\bfseries who} = name
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_ad6ac2b3eb4d251c00687617864501a6f}\label{hypothesis__maker_8py_ad6ac2b3eb4d251c00687617864501a6f}} 
-{\bfseries what} = name
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_aa9f4f4f5b04c261bc534982ec59eff4a}\label{hypothesis__maker_8py_aa9f4f4f5b04c261bc534982ec59eff4a}} 
-{\bfseries where} = name
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_ae1baa9f42256960b9f5b2161a808a3ac}\label{hypothesis__maker_8py_ae1baa9f42256960b9f5b2161a808a3ac}} 
-\mbox{\hyperlink{hypothesis__maker_8py_ae1baa9f42256960b9f5b2161a808a3ac}{control}} = hypo\+\_\+control(id)
-\begin{DoxyCompactList}\small\item\em this function check if the hypothesis has already beeen added to the matrix where I store them, if not it add the hypothesis\textquotesingle{} name and id. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a55c22cfbb812209ea18675898bb1fafe}\label{hypothesis__maker_8py_a55c22cfbb812209ea18675898bb1fafe}} 
-{\bfseries pos\+\_\+people} = position\+\_\+find(people, id)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a94c6836c3c55e528917d29eeee03368e}\label{hypothesis__maker_8py_a94c6836c3c55e528917d29eeee03368e}} 
-{\bfseries pos\+\_\+place} = position\+\_\+find(locations, id)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a8bf50123739b7dd1795026e538f92891}\label{hypothesis__maker_8py_a8bf50123739b7dd1795026e538f92891}} 
-{\bfseries pos\+\_\+weapon} = position\+\_\+find(weapons, id)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_ace5c7305b35a657bfae97a5bd135c372}\label{hypothesis__maker_8py_ace5c7305b35a657bfae97a5bd135c372}} 
-list {\bfseries person} = people\mbox{[}pos\+\_\+people\mbox{]}\mbox{[}0\mbox{]}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a905334d717455cce952655340984b3d0}\label{hypothesis__maker_8py_a905334d717455cce952655340984b3d0}} 
-list {\bfseries place} = locations\mbox{[}pos\+\_\+place\mbox{]}\mbox{[}0\mbox{]}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a5ff8535b1c4c49d510b4037d58a3e4c6}\label{hypothesis__maker_8py_a5ff8535b1c4c49d510b4037d58a3e4c6}} 
-list {\bfseries weapon} = weapons\mbox{[}pos\+\_\+weapon\mbox{]}\mbox{[}0\mbox{]}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a2aa7664da441186441d46f22a945496c}\label{hypothesis__maker_8py_a2aa7664da441186441d46f22a945496c}} 
-bool {\bfseries consistent} = True
-\item 
-\mbox{\hyperlink{hypothesis__maker_8py_afc486b0767ef05e2dc12f5b98be72902}{identifier}} = class\+\_\+ont(class\+\_\+id)
-\begin{DoxyCompactList}\small\item\em this function adds an hypothesis to the onthology \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_afd8bf5be766e61cd37d9132ee9578d26}\label{hypothesis__maker_8py_afd8bf5be766e61cd37d9132ee9578d26}} 
-list {\bfseries temp} = \mbox{[}name, id\mbox{]}
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_acb559820d9ca11295b4500f179ef6392}\label{hypothesis__maker_8py_acb559820d9ca11295b4500f179ef6392}} 
-int \mbox{\hyperlink{hypothesis__maker_8py_acb559820d9ca11295b4500f179ef6392}{i}} = 0
-\begin{DoxyCompactList}\small\item\em this function finds the idex of the row I\textquotesingle{}m looking for and return it \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a85b4ae5e2793b7dcc5c6deb30e83ed68}\label{hypothesis__maker_8py_a85b4ae5e2793b7dcc5c6deb30e83ed68}} 
-def \mbox{\hyperlink{hypothesis__maker_8py_a85b4ae5e2793b7dcc5c6deb30e83ed68}{a}} = matrix\+\_\+find(people, id)
-\begin{DoxyCompactList}\small\item\em this function sees if in the matrix exists a complete hypothesis \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_aaf4284a3292e242e5c9dfa5ba117b716}\label{hypothesis__maker_8py_aaf4284a3292e242e5c9dfa5ba117b716}} 
-def {\bfseries b} = matrix\+\_\+find(locations, id)
-\item 
-\mbox{\Hypertarget{hypothesis__maker_8py_a03c7cd967a8ca4d7f62fd396a92862d3}\label{hypothesis__maker_8py_a03c7cd967a8ca4d7f62fd396a92862d3}} 
-def {\bfseries c} = matrix\+\_\+find(weapons, id)
+\mbox{\Hypertarget{hypothesis__maker_8py_a2ad3d2241352b5e8e2cb2e4f85537a69}\label{hypothesis__maker_8py_a2ad3d2241352b5e8e2cb2e4f85537a69}} 
+list {\bfseries hypothesis\+\_\+maker.\+people} = \mbox{[}\mbox{[}$\,$\mbox{]}\mbox{]}
 \end{DoxyCompactItemize}
 
 
@@ -189,43 +89,280 @@ Action Services\+: ~\newline
 Description\+: ~\newline
  This node handles the hint publisher, by publishing random hints from a list. 
 
-\doxysubsection{Variable Documentation}
-\mbox{\Hypertarget{hypothesis__maker_8py_acf2488b95c97e0378c9bf49de3b50f28}\label{hypothesis__maker_8py_acf2488b95c97e0378c9bf49de3b50f28}} 
-\index{hypothesis\_maker.py@{hypothesis\_maker.py}!id@{id}}
-\index{id@{id}!hypothesis\_maker.py@{hypothesis\_maker.py}}
-\doxysubsubsection{\texorpdfstring{id}{id}}
-{\footnotesize\ttfamily id = request.\+id}
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hypothesis__maker_8py_a8adf9e1c4c0c7622f71b40607db4954a}\label{hypothesis__maker_8py_a8adf9e1c4c0c7622f71b40607db4954a}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!add\_to\_hypo@{add\_to\_hypo}}
+\index{add\_to\_hypo@{add\_to\_hypo}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{add\_to\_hypo()}{add\_to\_hypo()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+add\+\_\+to\+\_\+hypo (\begin{DoxyParamCaption}\item[{}]{id,  }\item[{}]{name,  }\item[{}]{class\+\_\+id }\end{DoxyParamCaption})}
 
 
 
-this function is the handle of the hypothesis maker service. 
+this function adds an hyopthesis to the reasoner 
 
-it returns the response to the state machine. \mbox{\Hypertarget{hypothesis__maker_8py_afc486b0767ef05e2dc12f5b98be72902}\label{hypothesis__maker_8py_afc486b0767ef05e2dc12f5b98be72902}} 
-\index{hypothesis\_maker.py@{hypothesis\_maker.py}!identifier@{identifier}}
-\index{identifier@{identifier}!hypothesis\_maker.py@{hypothesis\_maker.py}}
-\doxysubsubsection{\texorpdfstring{identifier}{identifier}}
-{\footnotesize\ttfamily identifier = class\+\_\+ont(class\+\_\+id)}
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_afc578b2fbd2370f057e0f2e681979e57}\label{hypothesis__maker_8py_afc578b2fbd2370f057e0f2e681979e57}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!add\_to\_ont@{add\_to\_ont}}
+\index{add\_to\_ont@{add\_to\_ont}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{add\_to\_ont()}{add\_to\_ont()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+add\+\_\+to\+\_\+ont (\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{class\+\_\+id }\end{DoxyParamCaption})}
 
 
 
 this function adds an hypothesis to the onthology 
 
-this function calls the disjoint command \mbox{\Hypertarget{hypothesis__maker_8py_a51e6a0d2bcb8531a5e5adcd66a77aa3b}\label{hypothesis__maker_8py_a51e6a0d2bcb8531a5e5adcd66a77aa3b}} 
-\index{hypothesis\_maker.py@{hypothesis\_maker.py}!request@{request}}
-\index{request@{request}!hypothesis\_maker.py@{hypothesis\_maker.py}}
-\doxysubsubsection{\texorpdfstring{request}{request}}
-{\footnotesize\ttfamily request = Armor\+Directive\+Req()}
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_a831bfa3d80468818812ed91ce7174d69}\label{hypothesis__maker_8py_a831bfa3d80468818812ed91ce7174d69}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!apply@{apply}}
+\index{apply@{apply}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+apply (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-this function defines the load command for armor 
+this function calls the apply command for armor 
 
-this function calls the apply command for armor
 
-this function calls the reason command for armor
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_a0d5bb7039e2dfe5178855a398b2a0c7d}\label{hypothesis__maker_8py_a0d5bb7039e2dfe5178855a398b2a0c7d}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!check@{check}}
+\index{check@{check}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+check (\begin{DoxyParamCaption}\item[{}]{id,  }\item[{}]{name,  }\item[{}]{class\+\_\+id }\end{DoxyParamCaption})}
 
-this function adds an hyopthesis to the reasoner
 
-this function defines the hypothesis\textquotesingle{} classes
+
+this function check if the hypothesis has already beeen added to the matrix where I store them, if not it add the hypothesis\textquotesingle{} name and id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & id, name, class\+\_\+id; all strings \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_ad52a195e41914ef92300a23b85dfcd03}\label{hypothesis__maker_8py_ad52a195e41914ef92300a23b85dfcd03}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!class\_ont@{class\_ont}}
+\index{class\_ont@{class\_ont}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{class\_ont()}{class\_ont()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+class\+\_\+ont (\begin{DoxyParamCaption}\item[{}]{class\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+this function gets the class\+\_\+id and returns the class name for the onthology 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_afe32dab9e7ad51f09556beda1441e111}\label{hypothesis__maker_8py_afe32dab9e7ad51f09556beda1441e111}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!comp\_consist@{comp\_consist}}
+\index{comp\_consist@{comp\_consist}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{comp\_consist()}{comp\_consist()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+comp\+\_\+consist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
 
 this function loads in the onthology the completed and incostistent for armor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_af5bfe9270e43e520a55066b0092cbc81}\label{hypothesis__maker_8py_af5bfe9270e43e520a55066b0092cbc81}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!disjoint@{disjoint}}
+\index{disjoint@{disjoint}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{disjoint()}{disjoint()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+disjoint (\begin{DoxyParamCaption}\item[{}]{class\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+this function calls the disjoint command 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_a2b90c345f1f24134f8e9d09bf0fb204d}\label{hypothesis__maker_8py_a2b90c345f1f24134f8e9d09bf0fb204d}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!hypo\_control@{hypo\_control}}
+\index{hypo\_control@{hypo\_control}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{hypo\_control()}{hypo\_control()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+hypo\+\_\+control (\begin{DoxyParamCaption}\item[{}]{id }\end{DoxyParamCaption})}
+
+
+
+this function sees if in the matrix exists a complete hypothesis 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & id, string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: Boolean Value ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_a8bb09bab2aba602e921a0c0768f826a0}\label{hypothesis__maker_8py_a8bb09bab2aba602e921a0c0768f826a0}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!hypo\_detail@{hypo\_detail}}
+\index{hypo\_detail@{hypo\_detail}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{hypo\_detail()}{hypo\_detail()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+hypo\+\_\+detail (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this function defines the hypothesis\textquotesingle{} classes 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_a1da91a9b684c7db2460ac547acfe732d}\label{hypothesis__maker_8py_a1da91a9b684c7db2460ac547acfe732d}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!hypothesis\_maker\_server@{hypothesis\_maker\_server}}
+\index{hypothesis\_maker\_server@{hypothesis\_maker\_server}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{hypothesis\_maker\_server()}{hypothesis\_maker\_server()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+hypothesis\+\_\+maker\+\_\+server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this function initializes the node, the hypothesis\+\_\+maker service and the proxy to the armor service ~\newline
+ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None This is the main function, it initializes the node and the services. it calls the various function to update the armor knowledge. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_ac5411eb59ad33af7cbf88275e4f9dd22}\label{hypothesis__maker_8py_ac5411eb59ad33af7cbf88275e4f9dd22}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!load@{load}}
+\index{load@{load}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this function defines the load command for armor ~\newline
+ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_abfe00b0dd283834e4568248b6c04a5fb}\label{hypothesis__maker_8py_abfe00b0dd283834e4568248b6c04a5fb}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!make\_hypothesis@{make\_hypothesis}}
+\index{make\_hypothesis@{make\_hypothesis}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{make\_hypothesis()}{make\_hypothesis()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+make\+\_\+hypothesis (\begin{DoxyParamCaption}\item[{}]{request }\end{DoxyParamCaption})}
+
+
+
+this function is the handle of the hypothesis maker service. 
+
+it returns the response to the state machine. 
+\begin{DoxyParams}{Parameters}
+{\em } & request, Hypothesis\+Request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: res, Hypothesis\+Response This function handles the service callback. Depending on the received hint and the updated knowledge it returns a complete or incomplete hypothesis. First it checks if the hint is not malformed and then adds it to the onthology, reading if there is any complete hypothesis in it. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_a80f7955a3c47b6484eeec5226eeb8ffc}\label{hypothesis__maker_8py_a80f7955a3c47b6484eeec5226eeb8ffc}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!matrix\_find@{matrix\_find}}
+\index{matrix\_find@{matrix\_find}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{matrix\_find()}{matrix\_find()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+matrix\+\_\+find (\begin{DoxyParamCaption}\item[{}]{matrix,  }\item[{}]{value }\end{DoxyParamCaption})}
+
+
+
+this function return if a value exists in a matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & matrix, value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: Boolean Value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_a09a49505d6142171da276ab1d6612a62}\label{hypothesis__maker_8py_a09a49505d6142171da276ab1d6612a62}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!position\_find@{position\_find}}
+\index{position\_find@{position\_find}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{position\_find()}{position\_find()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+position\+\_\+find (\begin{DoxyParamCaption}\item[{}]{matrix,  }\item[{}]{value }\end{DoxyParamCaption})}
+
+
+
+this function finds the idex of the row I\textquotesingle{}m looking for and return it 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & matrix, value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: i, int32 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hypothesis__maker_8py_a188bb45984b888851bfc1b9cabf30a08}\label{hypothesis__maker_8py_a188bb45984b888851bfc1b9cabf30a08}} 
+\index{hypothesis\_maker.py@{hypothesis\_maker.py}!reason@{reason}}
+\index{reason@{reason}!hypothesis\_maker.py@{hypothesis\_maker.py}}
+\doxysubsubsection{\texorpdfstring{reason()}{reason()}}
+{\footnotesize\ttfamily def hypothesis\+\_\+maker.\+reason (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this function calls the reason command for armor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None ~\newline
+ 
+\end{DoxyReturn}

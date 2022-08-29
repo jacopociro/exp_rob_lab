@@ -8,17 +8,20 @@
 #
 #  \author Jacopo Ciro Soncini
 #  \version 1.0
-#  \date 15/11/2021
+#  \date 29/08/2022
 #  \details
 #  
 #  Subscribes to: <BR>
 #       None
 #
 #  Publishes to: <BR>
-#	    hint
+#	    /complete
+#       /consistent
+#       /marker_publisher/detected_id 
 #
 #  Services: <BR>
-#       None
+#       /hypothesis_maker
+#       /oracle_hint
 #
 #  Client Services: <BR>
 #       None
@@ -27,7 +30,7 @@
 #       None
 #
 #  Description: <BR>
-#       This node handles the hint publisher, by publishing random hints from a list.
+#       This node handles the hint publisher, by publishing the hint from the aruco service.
 
 
 import rospy
@@ -42,6 +45,13 @@ from std_msgs.msg import String, Int32, Bool
 import time
 import random
 foundClues=[]
+
+##
+# \brief This function is the callback for the aruco subscriber   
+# \param: the message receive from the subscriber, Int32
+# \return: None
+# This function is the callback for the aruco subscriber. It reads the variable, check if the clue is already saved and if not it calls the hypothesis_maker service
+# and saves the clue in the global variable foundClues (array di clues). Also it publishes the clue on the /consistent and /complete publishers.
 
 def Id(msg):
     global foundClues
@@ -69,11 +79,14 @@ def Id(msg):
             pub.publish(resp_hyp.consistent)
             if resp_hyp.consistent:
                 pub2.publish(resp_hyp.id)
-    
+
+##
+# \brief this function initilizes the node, the services and the publishers.    
+# \param: None
+# \return: None
 
 def publisher():
-##
-# \brief this function initilizes the node and the publisher. it also defines the message we want to send.
+
     global hyp, orcl_srv, pub, pub2
     rospy.init_node('hint_publisher')
     hyp = rospy.ServiceProxy('/hypothesis_maker', Hypothesis)

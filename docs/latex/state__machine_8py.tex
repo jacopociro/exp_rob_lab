@@ -5,6 +5,13 @@
 This script handles the state machine\textquotesingle{}s states calling services as he needs. This is the main program.  
 
 
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classstate__machine_1_1_move}{state\+\_\+machine.\+Move}}
+\begin{DoxyCompactList}\small\item\em this class defines the state \mbox{\hyperlink{classstate__machine_1_1_move}{Move}}, the execute is just a sleep to simulate movement. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classstate__machine_1_1_hyp}{state\+\_\+machine.\+Hyp}}
+\begin{DoxyCompactList}\small\item\em this class defines the state \mbox{\hyperlink{classstate__machine_1_1_hyp}{Hyp}}, the execute handles the oracle service. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Namespaces}
 \begin{DoxyCompactItemize}
 \item 
@@ -13,35 +20,32 @@ This script handles the state machine\textquotesingle{}s states calling services
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{state__machine_8py_a3211dd50679a50adf96ec48989a5f67c}\label{state__machine_8py_a3211dd50679a50adf96ec48989a5f67c}} 
-def {\bfseries room} ()
-\item 
-\mbox{\Hypertarget{state__machine_8py_ad78a1b671190bff340ac59e15b975b2e}\label{state__machine_8py_ad78a1b671190bff340ac59e15b975b2e}} 
-def \mbox{\hyperlink{state__machine_8py_ad78a1b671190bff340ac59e15b975b2e}{callback}} (msg)
+def \mbox{\hyperlink{state__machine_8py_a6b1c5c125791d51cfe04013e56ffce43}{state\+\_\+machine.\+look\+\_\+for\+\_\+clues}} ()
+\begin{DoxyCompactList}\small\item\em this function looks for clues \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{state__machine_8py_a1a138a9604b3153d3b3e72c244b23c8f}{state\+\_\+machine.\+move}} (a)
 \begin{DoxyCompactList}\small\item\em this function return a random room for the robot to move in \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{state__machine_8py_a5c680ce705e6052fa07c6cece21743d0}\label{state__machine_8py_a5c680ce705e6052fa07c6cece21743d0}} 
-def {\bfseries main} ()
-\end{DoxyCompactItemize}
+\mbox{\Hypertarget{state__machine_8py_a39739b821e3bc95a07602307f227490f}\label{state__machine_8py_a39739b821e3bc95a07602307f227490f}} 
+def {\bfseries state\+\_\+machine.\+cb} (msg)
+\item 
+\mbox{\Hypertarget{state__machine_8py_a09292bf01a3a7e410e49deb38ce32042}\label{state__machine_8py_a09292bf01a3a7e410e49deb38ce32042}} 
+def {\bfseries state\+\_\+machine.\+clbk} (msg)
+\item 
+def \mbox{\hyperlink{state__machine_8py_a5c680ce705e6052fa07c6cece21743d0}{state\+\_\+machine.\+main}} ()
+\begin{DoxyCompactList}\small\item\em this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{state__machine_8py_a9212c4d24fed276f77c74fd575310ff0}\label{state__machine_8py_a9212c4d24fed276f77c74fd575310ff0}} 
-{\bfseries resp\+\_\+hyp} = Hypothesis\+Response
+\mbox{\Hypertarget{state__machine_8py_a01e9c551c8498c6c9beec64922383515}\label{state__machine_8py_a01e9c551c8498c6c9beec64922383515}} 
+bool {\bfseries state\+\_\+machine.\+Kitchen} = True
 \item 
-\mbox{\Hypertarget{state__machine_8py_a335628f2e9085305224b4f9cc6e95ed5}\label{state__machine_8py_a335628f2e9085305224b4f9cc6e95ed5}} 
-\mbox{\hyperlink{state__machine_8py_a335628f2e9085305224b4f9cc6e95ed5}{var}} = Hint
-\begin{DoxyCompactList}\small\item\em this function returns the message published from hint \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{state__machine_8py_a8ad3f698becd820c9b50aedb492b62ec}\label{state__machine_8py_a8ad3f698becd820c9b50aedb492b62ec}} 
-\mbox{\hyperlink{state__machine_8py_a8ad3f698becd820c9b50aedb492b62ec}{sm}} = smach.\+State\+Machine(outcomes=\mbox{[}\textquotesingle{}stop\textquotesingle{}\mbox{]})
-\begin{DoxyCompactList}\small\item\em this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{state__machine_8py_a2594171e7c2a90ab61e43e1bc68adaf7}\label{state__machine_8py_a2594171e7c2a90ab61e43e1bc68adaf7}} 
-{\bfseries transitions}
+\mbox{\Hypertarget{state__machine_8py_a8a96590de4741edbf18d4d572335d3a9}\label{state__machine_8py_a8a96590de4741edbf18d4d572335d3a9}} 
+list {\bfseries state\+\_\+machine.\+I\+D\+\_\+complete} = \mbox{[}$\,$\mbox{]}
 \item 
-\mbox{\Hypertarget{state__machine_8py_a69d1c2429167d7550d9c8105fda9a0b7}\label{state__machine_8py_a69d1c2429167d7550d9c8105fda9a0b7}} 
-{\bfseries sis} = smach\+\_\+ros.\+Introspection\+Server(\textquotesingle{}state\+\_\+machine\textquotesingle{}, sm, \textquotesingle{}/S\+M\+\_\+\+R\+O\+OT\textquotesingle{})
+\mbox{\Hypertarget{state__machine_8py_a1fef3d5bafe9d6f6a2bc5644ca5d004c}\label{state__machine_8py_a1fef3d5bafe9d6f6a2bc5644ca5d004c}} 
+{\bfseries state\+\_\+machine.\+resp\+\_\+hyp} = Hypothesis\+Response
 \item 
-\mbox{\Hypertarget{state__machine_8py_af47997198e7e7301a1cd8602c7f02acd}\label{state__machine_8py_af47997198e7e7301a1cd8602c7f02acd}} 
-{\bfseries outcome} = sm.\+execute()
+\mbox{\Hypertarget{state__machine_8py_a8f17421e10de3d97b2858222ce49aa30}\label{state__machine_8py_a8f17421e10de3d97b2858222ce49aa30}} 
+{\bfseries state\+\_\+machine.\+var} = Hint
 \end{DoxyCompactItemize}
 
 
@@ -55,22 +59,81 @@ Jacopo Ciro Soncini
 1.\+0 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-15/11/2021
+29/08/2022
 \end{DoxyDate}
 Subscribes to\+: ~\newline
- hint
+ /complete
 
 Publishes to\+: ~\newline
- None
+ /cmd\+\_\+vel
 
 Services\+: ~\newline
-
+ oracle\+\_\+solution
 
 Client Services\+: ~\newline
- hypothesis\+\_\+make oracle
-
-Action Services\+: ~\newline
  None
 
+Action Services\+: ~\newline
+ Move\+\_\+base
+
 Description\+: ~\newline
- The state machine has three differente states\+: \mbox{\hyperlink{class_move}{Move}}, \mbox{\hyperlink{class_clues}{Clues}} and \mbox{\hyperlink{class_hyp}{Hyp}}. \mbox{\hyperlink{class_move}{Move}} handles the movement of the robot between the rooms. This movement is fake and is implemented by a simple sleep that simulates the time taken to move. \mbox{\hyperlink{class_clues}{Clues}} handles the hints by subscribing to the hint publisher node and sending the information requested by the hypothesis\+\_\+maker service. The response is saved in a global variable so that it can be passed to the last state, \mbox{\hyperlink{class_hyp}{Hyp}}, if the hypothesis is deemed consistent. \mbox{\hyperlink{class_hyp}{Hyp}} is a state that simply reads the identifier of the hypothesis and sends it to the oracle service that knows if the hypothesis is right. 
+ The state machine has three differente states\+: Move, \mbox{\hyperlink{class_clues}{Clues}} and Hyp. Move handles the movement of the robot between the rooms. \mbox{\hyperlink{class_clues}{Clues}} looks for the hints Hyp is a state that simply check the /oracle\+\_\+solution service using the identifier of the hypothesis. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{state__machine_8py_a6b1c5c125791d51cfe04013e56ffce43}\label{state__machine_8py_a6b1c5c125791d51cfe04013e56ffce43}} 
+\index{state\_machine.py@{state\_machine.py}!look\_for\_clues@{look\_for\_clues}}
+\index{look\_for\_clues@{look\_for\_clues}!state\_machine.py@{state\_machine.py}}
+\doxysubsubsection{\texorpdfstring{look\_for\_clues()}{look\_for\_clues()}}
+{\footnotesize\ttfamily def state\+\_\+machine.\+look\+\_\+for\+\_\+clues (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this function looks for clues 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None ~\newline
+ This function moves the arm up and down while the robots move around, to make sure that the aruco camera on the top of the arm can find the clue in the room. The arm movement is handled with moveit, the angular velocity is sent on /cmd\+\_\+vel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state__machine_8py_a5c680ce705e6052fa07c6cece21743d0}\label{state__machine_8py_a5c680ce705e6052fa07c6cece21743d0}} 
+\index{state\_machine.py@{state\_machine.py}!main@{main}}
+\index{main@{main}!state\_machine.py@{state\_machine.py}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def state\+\_\+machine.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph. 
+
+Also calls the publishers and the services. 
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{state__machine_8py_a1a138a9604b3153d3b3e72c244b23c8f}\label{state__machine_8py_a1a138a9604b3153d3b3e72c244b23c8f}} 
+\index{state\_machine.py@{state\_machine.py}!move@{move}}
+\index{move@{move}!state\_machine.py@{state\_machine.py}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily def state\+\_\+machine.\+move (\begin{DoxyParamCaption}\item[{}]{a }\end{DoxyParamCaption})}
+
+
+
+this function return a random room for the robot to move in 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & a, int32 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: room, string ~\newline
+ This function checks the value of a; if a == 1 it chooses a random room to move in, sending the values of the goal to the move\+\_\+base action service. If a is not 1, it sends the home goal. 
+\end{DoxyReturn}

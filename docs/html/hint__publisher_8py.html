@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Experimental Robotics Laboratory assignment 1: scripts/hint_publisher.py File Reference</title>
+<title>Experimental Robotics Laboratory Third Assignment: scripts/hint_publisher.py File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,10 +21,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Experimental Robotics Laboratory assignment 1
-   &#160;<span id="projectnumber">1.0</span>
+   <div id="projectname">Experimental Robotics Laboratory Third Assignment
    </div>
-   <div id="projectbrief">This package is made for the first assignment of experimental robotics laboratory. Using armor it manages to find out the killer in a quick cluedo like game.</div>
+   <div id="projectbrief">Third assignment for the Experiamental Robotics Laboratory course in the Robotics Engineering Master degree at UNIGE</div>
   </td>
  </tr>
  </tbody>
@@ -87,88 +86,90 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac3a610c97549660f208358625db3d525"><td class="memItemLeft" align="right" valign="top"><a id="ac3a610c97549660f208358625db3d525"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>publisher</b> ()</td></tr>
+<tr class="memitem:a96890f3a918467b1e9a61aa5513215f3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hint__publisher_8py.html#a96890f3a918467b1e9a61aa5513215f3">hint_publisher.Id</a> (msg)</td></tr>
+<tr class="memdesc:a96890f3a918467b1e9a61aa5513215f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is the callback for the aruco subscriber <br  />
+  <a href="hint__publisher_8py.html#a96890f3a918467b1e9a61aa5513215f3">More...</a><br /></td></tr>
+<tr class="separator:a96890f3a918467b1e9a61aa5513215f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3a610c97549660f208358625db3d525"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hint__publisher_8py.html#ac3a610c97549660f208358625db3d525">hint_publisher.publisher</a> ()</td></tr>
+<tr class="memdesc:ac3a610c97549660f208358625db3d525"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function initilizes the node, the services and the publishers.  <a href="hint__publisher_8py.html#ac3a610c97549660f208358625db3d525">More...</a><br /></td></tr>
 <tr class="separator:ac3a610c97549660f208358625db3d525"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a732a5f9332ab57ac4809a5affaef3bfd"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><b>hint</b></td></tr>
-<tr class="separator:a732a5f9332ab57ac4809a5affaef3bfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4474258363d2d40129f9b7699c5ac7f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="hint__publisher_8py.html#aa4474258363d2d40129f9b7699c5ac7f">pub</a> = rospy.Publisher('hint', Hint)</td></tr>
-<tr class="memdesc:aa4474258363d2d40129f9b7699c5ac7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function initilizes the node and the publisher.  <a href="hint__publisher_8py.html#aa4474258363d2d40129f9b7699c5ac7f">More...</a><br /></td></tr>
-<tr class="separator:aa4474258363d2d40129f9b7699c5ac7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a514f1b439f404f86f77090fa9edc96ce"><td class="memItemLeft" align="right" valign="top"><a id="a514f1b439f404f86f77090fa9edc96ce"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>r</b> = rospy.Rate(1)</td></tr>
-<tr class="separator:a514f1b439f404f86f77090fa9edc96ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac23fb295847684aaafd24830017a8180"><td class="memItemLeft" align="right" valign="top"><a id="ac23fb295847684aaafd24830017a8180"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>num</b> = random.randint(0,17)</td></tr>
-<tr class="separator:ac23fb295847684aaafd24830017a8180"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10a0f35066079abd150539d0d13dbf3e"><td class="memItemLeft" align="right" valign="top"><a id="a10a0f35066079abd150539d0d13dbf3e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>msg</b> = Hint()</td></tr>
-<tr class="separator:a10a0f35066079abd150539d0d13dbf3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf2488b95c97e0378c9bf49de3b50f28"><td class="memItemLeft" align="right" valign="top"><a id="acf2488b95c97e0378c9bf49de3b50f28"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
-<tr class="separator:acf2488b95c97e0378c9bf49de3b50f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab74e6bf80237ddc4109968cedc58c151"><td class="memItemLeft" align="right" valign="top"><a id="ab74e6bf80237ddc4109968cedc58c151"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
-<tr class="separator:ab74e6bf80237ddc4109968cedc58c151"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af86f019ee114dc0e0b697acbb6ced3e8"><td class="memItemLeft" align="right" valign="top"><a id="af86f019ee114dc0e0b697acbb6ced3e8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>class_id</b></td></tr>
-<tr class="separator:af86f019ee114dc0e0b697acbb6ced3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d3f1dc49c5bd11ad986f157e18d1790"><td class="memItemLeft" align="right" valign="top"><a id="a4d3f1dc49c5bd11ad986f157e18d1790"></a>
+list&#160;</td><td class="memItemRight" valign="bottom"><b>hint_publisher.foundClues</b> = []</td></tr>
+<tr class="separator:a4d3f1dc49c5bd11ad986f157e18d1790"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>script for the hint publisher. </p>
 <dl class="section author"><dt>Author</dt><dd>Jacopo Ciro Soncini </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>15/11/2021</dd></dl>
+<dl class="section date"><dt>Date</dt><dd>29/08/2022</dd></dl>
 <p>Subscribes to: <br  />
  None</p>
 <p>Publishes to: <br  />
- hint</p>
+ /complete /consistent /marker_publisher/detected_id</p>
 <p>Services: <br  />
- None</p>
+ /hypothesis_maker /oracle_hint</p>
 <p>Client Services: <br  />
  None</p>
 <p>Action Services: <br  />
  None</p>
 <p>Description: <br  />
- This node handles the hint publisher, by publishing random hints from a list. </p>
-</div><h2 class="groupheader">Variable Documentation</h2>
-<a id="a732a5f9332ab57ac4809a5affaef3bfd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a732a5f9332ab57ac4809a5affaef3bfd">&#9670;&nbsp;</a></span>hint</h2>
+ This node handles the hint publisher, by publishing the hint from the aruco service. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a96890f3a918467b1e9a61aa5513215f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96890f3a918467b1e9a61aa5513215f3">&#9670;&nbsp;</a></span>Id()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">list hint</td>
+          <td class="memname">def hint_publisher.Id </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  [[<span class="stringliteral">&#39;HP1&#39;</span>,<span class="stringliteral">&#39;Miss_Scarlett&#39;</span>, <span class="stringliteral">&#39;who&#39;</span>],[<span class="stringliteral">&#39;HP1&#39;</span>,<span class="stringliteral">&#39;Candlestick&#39;</span>, <span class="stringliteral">&#39;what&#39;</span>],[<span class="stringliteral">&#39;HP1&#39;</span>,<span class="stringliteral">&#39;Kitchen&#39;</span>, <span class="stringliteral">&#39;where&#39;</span>],</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;        [<span class="stringliteral">&#39;HP2&#39;</span>,<span class="stringliteral">&#39;Rev_Green&#39;</span>, <span class="stringliteral">&#39;who&#39;</span>],[<span class="stringliteral">&#39;HP2&#39;</span>,<span class="stringliteral">&#39;Dagger&#39;</span>, <span class="stringliteral">&#39;what&#39;</span>],[<span class="stringliteral">&#39;HP2&#39;</span>,<span class="stringliteral">&#39;Ballroom&#39;</span>, <span class="stringliteral">&#39;where&#39;</span>],</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;        [<span class="stringliteral">&#39;HP3&#39;</span>,<span class="stringliteral">&#39;Col_Mustard&#39;</span>, <span class="stringliteral">&#39;who&#39;</span>],[<span class="stringliteral">&#39;HP3&#39;</span>,<span class="stringliteral">&#39;Lead_Pipe&#39;</span>, <span class="stringliteral">&#39;what&#39;</span>],[<span class="stringliteral">&#39;HP3&#39;</span>,<span class="stringliteral">&#39;Conservatory&#39;</span>, <span class="stringliteral">&#39;where&#39;</span>],</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;        [<span class="stringliteral">&#39;HP4&#39;</span>,<span class="stringliteral">&#39;Prof_Plum&#39;</span>, <span class="stringliteral">&#39;who&#39;</span>],[<span class="stringliteral">&#39;HP4&#39;</span>,<span class="stringliteral">&#39;Revolver&#39;</span>, <span class="stringliteral">&#39;what&#39;</span>],[<span class="stringliteral">&#39;HP4&#39;</span>,<span class="stringliteral">&#39;Biliard_Room&#39;</span>, <span class="stringliteral">&#39;where&#39;</span>],</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;        [<span class="stringliteral">&#39;HP5&#39;</span>,<span class="stringliteral">&#39;Mrs_Peacock&#39;</span>, <span class="stringliteral">&#39;who&#39;</span>],[<span class="stringliteral">&#39;HP5&#39;</span>,<span class="stringliteral">&#39;Rope&#39;</span>, <span class="stringliteral">&#39;what&#39;</span>],[<span class="stringliteral">&#39;HP5&#39;</span>,<span class="stringliteral">&#39;Library&#39;</span>, <span class="stringliteral">&#39;where&#39;</span>],</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        [<span class="stringliteral">&#39;HP6&#39;</span>,<span class="stringliteral">&#39;Mrs_White&#39;</span>, <span class="stringliteral">&#39;who&#39;</span>],[<span class="stringliteral">&#39;HP6&#39;</span>,<span class="stringliteral">&#39;Wrench&#39;</span>, <span class="stringliteral">&#39;what&#39;</span>],[<span class="stringliteral">&#39;HP6&#39;</span>,<span class="stringliteral">&#39;Lounge&#39;</span>, <span class="stringliteral">&#39;where&#39;</span>]]</div>
-</div><!-- fragment -->
+
+<p>This function is the callback for the aruco subscriber <br  />
+ </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"></td><td>the message receive from the subscriber, Int32 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>: None This function is the callback for the aruco subscriber. It reads the variable, check if the clue is already saved and if not it calls the hypothesis_maker service and saves the clue in the global variable foundClues (array di clues). Also it publishes the clue on the /consistent and /complete publishers. </dd></dl>
+
 </div>
 </div>
-<a id="aa4474258363d2d40129f9b7699c5ac7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4474258363d2d40129f9b7699c5ac7f">&#9670;&nbsp;</a></span>pub</h2>
+<a id="ac3a610c97549660f208358625db3d525"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3a610c97549660f208358625db3d525">&#9670;&nbsp;</a></span>publisher()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pub = rospy.Publisher('hint', Hint)</td>
+          <td class="memname">def hint_publisher.publisher </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>this function initilizes the node and the publisher. </p>
-<p>it also defines the message we want to send. </p>
+<p>this function initilizes the node, the services and the publishers. </p>
+<p><br  />
+ </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"></td><td>None </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>: None </dd></dl>
 
 </div>
 </div>

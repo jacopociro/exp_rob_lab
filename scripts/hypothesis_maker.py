@@ -39,11 +39,13 @@ locations = [[]]
 weapons = [[]]
 people = [[]]
 
+##
+# \brief this function initializes the node, the hypothesis_maker service and the proxy to the armor service   
+# \param: None
+# \return: None
+# This is the main function, it initializes the node and the services. it calls the various function to update the armor knowledge.
 
 def hypothesis_maker_server():
-##
-# \brief this function initializes the node, the hypothesis_maker service and the proxy to the 
-# armor service
     global armor
     rospy.init_node('hypothesis_maker2')
     rospy.wait_for_service('armor_interface_srv')
@@ -56,10 +58,13 @@ def hypothesis_maker_server():
     rospy.Service('/hypothesis_maker', Hypothesis, make_hypothesis)
     print('Ready to formulate hypothesis')
     rospy.spin()
-
-def load():
 ##
-# \brief this function defines the load command for armor
+# \brief this function defines the load command for armor  
+# \param: None
+# \return: None
+# 
+def load():
+
     try:
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
@@ -74,11 +79,14 @@ def load():
         
     except rospy.ServiceException as e:
         print(e)
-
-def make_hypothesis(request):
 ##
-# \brief this function is the handle of the hypothesis maker service. it returns the response to 
-# the state machine.
+# \brief this function is the handle of the hypothesis maker service. it returns the response to the state machine.
+# \param: request, HypothesisRequest
+# \return: res, HypothesisResponse
+# This function handles the service callback. Depending on the received hint and the updated knowledge it returns a complete or incomplete hypothesis. First it checks if the hint
+# is not malformed and then adds it to the onthology, reading if there is any complete hypothesis in it.
+def make_hypothesis(request):
+
     global people, locations, weapons
     id = request.id
     name = request.name
@@ -86,7 +94,7 @@ def make_hypothesis(request):
     print(id)
     print(name)
     print(class_id)
-    #controlli: tutto pieno(no campi vuoti), no campi = -1, classe sia solo who what o where
+    
     rotto = HypothesisResponse()
     rotto.id = "-1"
     rotto.who = ""
@@ -153,10 +161,12 @@ def make_hypothesis(request):
 
     return res
 
-
-def comp_consist():
 ##
 # \brief this function loads in the onthology the completed and incostistent for armor
+# \param: None
+# \return: None
+
+def comp_consist():
     try:
         
         request=ArmorDirectiveReq()
@@ -186,9 +196,12 @@ def comp_consist():
     except rospy.ServiceException as e:
         print(e)
 
-def hypo_detail():
 ##
 # \brief this function defines the hypothesis' classes
+# \param: None
+# \return: None
+
+def hypo_detail():
     try:
         request=ArmorDirectiveReq()
         request.client_name = 'hypothesis_maker'
@@ -229,9 +242,12 @@ def hypo_detail():
     except rospy.ServiceException as e:
         print(e)
 
-def add_to_hypo(id,name,class_id):
 ##
 # \brief this function adds an hyopthesis to the reasoner
+# \param: None
+# \return: None
+def add_to_hypo(id,name,class_id):
+
     try:
         request=ArmorDirectiveReq()
         request.client_name = 'hypothesis_maker'
@@ -249,9 +265,11 @@ def add_to_hypo(id,name,class_id):
     except rospy.ServiceException as e:
         print(e)
 
-def add_to_ont(name,class_id):
 ##
 # \brief this function adds an hypothesis to the onthology
+# \param: None
+# \return: None
+def add_to_ont(name,class_id):
     try:
         identifier = class_ont(class_id)
 
@@ -269,10 +287,12 @@ def add_to_ont(name,class_id):
 
     except rospy.ServiceException as e:
         print(e)
-
-def disjoint(class_id):
 ##
 # \brief this function calls the disjoint command
+# \param: None
+# \return: None
+def disjoint(class_id):
+
     try:
         identifier = class_ont(class_id)
 
@@ -290,20 +310,24 @@ def disjoint(class_id):
 
     except rospy.ServiceException as e:
         print(e)
-     
-def class_ont(class_id):
 ##
 # \brief this function gets the class_id and returns the class name for the onthology
+# \param: None
+# \return: None    
+def class_ont(class_id):
+
         if class_id == 'who':
             return  'PERSON'
         elif class_id == 'what':
             return 'WEAPON'
         elif class_id == 'where':
             return  'PLACE'
-            
-def reason():
+
 ##
 # \brief this function calls the reason command for armor
+# \param: None
+# \return: None             
+def reason():
     try:
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
@@ -321,9 +345,12 @@ def reason():
     except rospy.ServiceException as e:
         print(e)
 
-def apply():
 ##
 # \brief this function calls the apply command for armor
+# \param: None
+# \return: None  
+def apply():
+
     try:
         request=ArmorDirectiveReq()
         request.client_name= 'hypothesis_maker'
@@ -341,10 +368,11 @@ def apply():
     except rospy.ServiceException as e:
         print(e)
 
-def check(id,name,class_id):
 ##
-# \brief this function check if the hypothesis has already beeen added to the matrix where I 
-# store them, if not it add the hypothesis' name and id.
+# \brief this function check if the hypothesis has already beeen added to the matrix where I store them, if not it add the hypothesis' name and id.
+# \param: id, name, class_id; all strings
+# \return: None 
+def check(id,name,class_id):
     global locations, weapons, people
     
     if class_id == 'who':
@@ -372,9 +400,12 @@ def check(id,name,class_id):
     print('locations:\n')
     print(locations)
 
-def position_find(matrix, value):
-## 
+##
 # \brief this function finds the idex of the row I'm looking for and return it
+# \param: matrix, value
+# \return: i, int32 
+def position_find(matrix, value):
+
     i = 0
     for row in matrix:
         for element in row:
@@ -383,18 +414,24 @@ def position_find(matrix, value):
                     return i
         i =+ 1
 
-def matrix_find(matrix, value):
 ##
 # \brief this function return if a value exists in a matrix
+# \param: matrix, value
+# \return: Boolean Value
+def matrix_find(matrix, value):
+##
+# \brief 
     for row in matrix:
         for element in row:
             if element == value:
                 return True
     return False
-    
-def hypo_control(id):
 ##
 # \brief this function sees if in the matrix exists a complete hypothesis
+# \param: id, string
+# \return: Boolean Value    
+def hypo_control(id):
+ 
     global people, locations, weapons
 
     a = matrix_find(people, id)
@@ -404,6 +441,7 @@ def hypo_control(id):
         return True
     else: 
         return False
+
 
 if __name__ == '__main__':
     try:

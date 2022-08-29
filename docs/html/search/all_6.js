@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['oracle_5fservice_2epy_14',['oracle_service.py',['../oracle__service_8py.html',1,'']]]
+  ['load_17',['load',['../hypothesis__maker_8py.html#ac5411eb59ad33af7cbf88275e4f9dd22',1,'hypothesis_maker']]],
+  ['look_5ffor_5fclues_18',['look_for_clues',['../state__machine_8py.html#a6b1c5c125791d51cfe04013e56ffce43',1,'state_machine']]]
 ];

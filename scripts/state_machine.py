@@ -7,32 +7,27 @@
 #
 #  \author Jacopo Ciro Soncini
 #  \version 1.0
-#  \date 15/11/2021
+#  \date 29/08/2022
 #  \details
 #  
 #  Subscribes to: <BR>
-#       hint
+#       /complete
 #
 #  Publishes to: <BR>
-#	    None
+#	    /cmd_vel
 #
 #  Services: <BR>
-#       
+#       oracle_solution
 #
 #  Client Services: <BR>
-#       hypothesis_make
-#       oracle
+#      None
 #
 #  Action Services: <BR>
-#       None
+#       Move_base
 #
 #  Description: <BR>
-#    The state machine has three differente states: Move, Clues and Hyp. Move handles the movement of the robot between the rooms.
-#    This movement is fake and is implemented by a simple sleep that simulates the time taken to move. Clues handles the hints 
-#    by subscribing to the hint publisher node and sending the information requested by the hypothesis_maker service. The response
-#    is saved in a global variable so that it can be passed to the last state, Hyp, if the hypothesis is deemed consistent. 
-#    Hyp is a state that simply reads the identifier of the hypothesis and sends it to the oracle service that knows if the hypothesis
-#    is right.
+#    The state machine has three differente states: Move, Clues and Hyp. Move handles the movement of the robot between the rooms. Clues looks for the hints 
+#    Hyp is a state that simply check the /oracle_solution service using the identifier of the hypothesis.
 
 
 import rospy
@@ -57,6 +52,14 @@ Kitchen = Ballroom = Conservatory = Dining_Room = Biliard_Room = Library = True
 ID_complete = []
 resp_hyp = HypothesisResponse
 var = Hint
+
+##
+# \brief this function looks for clues
+# \param: None
+# \return: None   
+# This function moves the arm up and down while the robots move around, to make sure that the aruco camera on the top of the arm can find the clue in the room.
+# The arm movement is handled with moveit, the angular velocity is sent on /cmd_vel
+
 def look_for_clues():
     speed = Twist()
     goal = group_cmd.get_current_joint_values()
@@ -86,9 +89,13 @@ def look_for_clues():
     speed.angular.z = 0
     cmd_vel.publish(speed)
 
-def move(a):
 ##
 # \brief this function return a random room for the robot to move in
+# \param: a, int32
+# \return: room, string   
+# This function checks the value of a; if a == 1 it chooses a random room to move in, sending the values of the goal to the move_base action service. If a is not 1, it sends
+# the home goal. 
+def move(a):
     global action, Kitchen,Ballroom,Conservatory,Dining_Room,Biliard_Room,Library
     g = MoveBaseGoal()
 
@@ -153,21 +160,19 @@ def move(a):
 
     return room
     
+# def callback(msg):
 
-
-def callback(msg):
-##
-# \brief this function returns the message published from hint
     global var
     #rospy.loginfo(msg)
     var = msg
     return var
 
-class Move(smach.State):
 ##
-# \class Move
-# \brief this class defines the state Move, the execute is just a sleep to simulate movement.
-# It returns only clues.
+# \brief this class defines the state Move, the execute is just a sleep to simulate movement. It returns only clues.
+# \param: None
+# \return: None  
+# This state handles the movement, calling the move function
+class Move(smach.State):
     def __init__(self):
         smach.State.__init__(self, outcomes=['clues'])
         
@@ -178,11 +183,16 @@ class Move(smach.State):
 
         return 'clues'
 
+##
+# \brief this class defines the state Clues, the execute subscribes to the hint publisher and handles the hypothesis_maker service.
+#  It returns move or hypothesis to change states.
+# \param: None
+# \return: None  
+# This state handles the looking for clues behaviour, calling the look_for_clues function. Based on the global variable data it move to different states.
 class Clues(smach.State):
 ##
 # \class Clues
-# \brief this class defines the state Clues, the execute subscribes to the hint publisher and handles
-# the hypothesis_maker service. It returns move or hypothesis to change states.
+# \brief 
     def __init__(self):
         smach.State.__init__(self, outcomes=['move', 'hypothesis'])
         
@@ -204,15 +214,13 @@ class Clues(smach.State):
         except rospy.ServiceException as e:
             print("Service call failed: %s"%e)
 
-
-        
-
-        
-
+##
+# \brief this class defines the state Hyp, the execute handles the oracle service. It returns move if the hypothesis is mistaken or stop if the hypothesis is correct.
+# \param: None
+# \return: None  
+# This state handles the checking the hypothesis behaviour, calling themove function, to go back to home, and the solution service.
+# If the solution matches with the one from the service the state machines stops.
 class Hyp(smach.State):
-##\class Hyp
-# \brief this class defines the state Hyp, the execute handles the oracle service. It returns
-# move if the hypothesis is mistaken or stop if the hypothesis is correct.
     def __init__(self):
         smach.State.__init__(self, outcomes=['move', 'stop'])
 
@@ -234,6 +242,8 @@ class Hyp(smach.State):
             return 'move'
         except rospy.ServiceException as e:
             print("Service call failed: %s"%e)
+
+
 def cb(msg):
     global data
     data = msg.data
@@ -241,10 +251,14 @@ def cb(msg):
 def clbk(msg):
     global ID_complete
     ID_complete.append(msg.data) 
+##
+# \brief this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph. Also calls the publishers and the 
+# services.
+# \param: None
+# \return: None  
 
 def main():
-##
-# \brief this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph
+
     global action, cmd_vel, arm, group_cmd, consistent, solution_srv
     rospy.init_node('state_machine')
     action = actionlib.SimpleActionClient('move_base', MoveBaseAction)

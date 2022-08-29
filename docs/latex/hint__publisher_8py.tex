@@ -13,33 +13,16 @@ script for the hint publisher.
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{hint__publisher_8py_ac3a610c97549660f208358625db3d525}\label{hint__publisher_8py_ac3a610c97549660f208358625db3d525}} 
-def {\bfseries publisher} ()
-\end{DoxyCompactItemize}
+def \mbox{\hyperlink{hint__publisher_8py_a96890f3a918467b1e9a61aa5513215f3}{hint\+\_\+publisher.\+Id}} (msg)
+\begin{DoxyCompactList}\small\item\em This function is the callback for the aruco subscriber ~\newline
+ \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hint__publisher_8py_ac3a610c97549660f208358625db3d525}{hint\+\_\+publisher.\+publisher}} ()
+\begin{DoxyCompactList}\small\item\em this function initilizes the node, the services and the publishers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-list {\bfseries hint}
-\item 
-\mbox{\hyperlink{hint__publisher_8py_aa4474258363d2d40129f9b7699c5ac7f}{pub}} = rospy.\+Publisher(\textquotesingle{}hint\textquotesingle{}, Hint)
-\begin{DoxyCompactList}\small\item\em this function initilizes the node and the publisher. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{hint__publisher_8py_a514f1b439f404f86f77090fa9edc96ce}\label{hint__publisher_8py_a514f1b439f404f86f77090fa9edc96ce}} 
-{\bfseries r} = rospy.\+Rate(1)
-\item 
-\mbox{\Hypertarget{hint__publisher_8py_ac23fb295847684aaafd24830017a8180}\label{hint__publisher_8py_ac23fb295847684aaafd24830017a8180}} 
-{\bfseries num} = random.\+randint(0,17)
-\item 
-\mbox{\Hypertarget{hint__publisher_8py_a10a0f35066079abd150539d0d13dbf3e}\label{hint__publisher_8py_a10a0f35066079abd150539d0d13dbf3e}} 
-{\bfseries msg} = Hint()
-\item 
-\mbox{\Hypertarget{hint__publisher_8py_acf2488b95c97e0378c9bf49de3b50f28}\label{hint__publisher_8py_acf2488b95c97e0378c9bf49de3b50f28}} 
-{\bfseries id}
-\item 
-\mbox{\Hypertarget{hint__publisher_8py_ab74e6bf80237ddc4109968cedc58c151}\label{hint__publisher_8py_ab74e6bf80237ddc4109968cedc58c151}} 
-{\bfseries name}
-\item 
-\mbox{\Hypertarget{hint__publisher_8py_af86f019ee114dc0e0b697acbb6ced3e8}\label{hint__publisher_8py_af86f019ee114dc0e0b697acbb6ced3e8}} 
-{\bfseries class\+\_\+id}
+\mbox{\Hypertarget{hint__publisher_8py_a4d3f1dc49c5bd11ad986f157e18d1790}\label{hint__publisher_8py_a4d3f1dc49c5bd11ad986f157e18d1790}} 
+list {\bfseries hint\+\_\+publisher.\+found\+Clues} = \mbox{[}$\,$\mbox{]}
 \end{DoxyCompactItemize}
 
 
@@ -53,16 +36,16 @@ Jacopo Ciro Soncini
 1.\+0 
 \end{DoxyVersion}
 \begin{DoxyDate}{Date}
-15/11/2021
+29/08/2022
 \end{DoxyDate}
 Subscribes to\+: ~\newline
  None
 
 Publishes to\+: ~\newline
- hint
+ /complete /consistent /marker\+\_\+publisher/detected\+\_\+id
 
 Services\+: ~\newline
- None
+ /hypothesis\+\_\+maker /oracle\+\_\+hint
 
 Client Services\+: ~\newline
  None
@@ -71,33 +54,44 @@ Action Services\+: ~\newline
  None
 
 Description\+: ~\newline
- This node handles the hint publisher, by publishing random hints from a list. 
+ This node handles the hint publisher, by publishing the hint from the aruco service. 
 
-\doxysubsection{Variable Documentation}
-\mbox{\Hypertarget{hint__publisher_8py_a732a5f9332ab57ac4809a5affaef3bfd}\label{hint__publisher_8py_a732a5f9332ab57ac4809a5affaef3bfd}} 
-\index{hint\_publisher.py@{hint\_publisher.py}!hint@{hint}}
-\index{hint@{hint}!hint\_publisher.py@{hint\_publisher.py}}
-\doxysubsubsection{\texorpdfstring{hint}{hint}}
-{\footnotesize\ttfamily list hint}
-
-{\bfseries Initial value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{1 =  [[\textcolor{stringliteral}{'HP1'},\textcolor{stringliteral}{'Miss\_Scarlett'}, \textcolor{stringliteral}{'who'}],[\textcolor{stringliteral}{'HP1'},\textcolor{stringliteral}{'Candlestick'}, \textcolor{stringliteral}{'what'}],[\textcolor{stringliteral}{'HP1'},\textcolor{stringliteral}{'Kitchen'}, \textcolor{stringliteral}{'where'}],}
-\DoxyCodeLine{2         [\textcolor{stringliteral}{'HP2'},\textcolor{stringliteral}{'Rev\_Green'}, \textcolor{stringliteral}{'who'}],[\textcolor{stringliteral}{'HP2'},\textcolor{stringliteral}{'Dagger'}, \textcolor{stringliteral}{'what'}],[\textcolor{stringliteral}{'HP2'},\textcolor{stringliteral}{'Ballroom'}, \textcolor{stringliteral}{'where'}],}
-\DoxyCodeLine{3         [\textcolor{stringliteral}{'HP3'},\textcolor{stringliteral}{'Col\_Mustard'}, \textcolor{stringliteral}{'who'}],[\textcolor{stringliteral}{'HP3'},\textcolor{stringliteral}{'Lead\_Pipe'}, \textcolor{stringliteral}{'what'}],[\textcolor{stringliteral}{'HP3'},\textcolor{stringliteral}{'Conservatory'}, \textcolor{stringliteral}{'where'}],}
-\DoxyCodeLine{4         [\textcolor{stringliteral}{'HP4'},\textcolor{stringliteral}{'Prof\_Plum'}, \textcolor{stringliteral}{'who'}],[\textcolor{stringliteral}{'HP4'},\textcolor{stringliteral}{'Revolver'}, \textcolor{stringliteral}{'what'}],[\textcolor{stringliteral}{'HP4'},\textcolor{stringliteral}{'Biliard\_Room'}, \textcolor{stringliteral}{'where'}],}
-\DoxyCodeLine{5         [\textcolor{stringliteral}{'HP5'},\textcolor{stringliteral}{'Mrs\_Peacock'}, \textcolor{stringliteral}{'who'}],[\textcolor{stringliteral}{'HP5'},\textcolor{stringliteral}{'Rope'}, \textcolor{stringliteral}{'what'}],[\textcolor{stringliteral}{'HP5'},\textcolor{stringliteral}{'Library'}, \textcolor{stringliteral}{'where'}],}
-\DoxyCodeLine{6         [\textcolor{stringliteral}{'HP6'},\textcolor{stringliteral}{'Mrs\_White'}, \textcolor{stringliteral}{'who'}],[\textcolor{stringliteral}{'HP6'},\textcolor{stringliteral}{'Wrench'}, \textcolor{stringliteral}{'what'}],[\textcolor{stringliteral}{'HP6'},\textcolor{stringliteral}{'Lounge'}, \textcolor{stringliteral}{'where'}]]}
-
-\end{DoxyCode}
-\mbox{\Hypertarget{hint__publisher_8py_aa4474258363d2d40129f9b7699c5ac7f}\label{hint__publisher_8py_aa4474258363d2d40129f9b7699c5ac7f}} 
-\index{hint\_publisher.py@{hint\_publisher.py}!pub@{pub}}
-\index{pub@{pub}!hint\_publisher.py@{hint\_publisher.py}}
-\doxysubsubsection{\texorpdfstring{pub}{pub}}
-{\footnotesize\ttfamily pub = rospy.\+Publisher(\textquotesingle{}hint\textquotesingle{}, Hint)}
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hint__publisher_8py_a96890f3a918467b1e9a61aa5513215f3}\label{hint__publisher_8py_a96890f3a918467b1e9a61aa5513215f3}} 
+\index{hint\_publisher.py@{hint\_publisher.py}!Id@{Id}}
+\index{Id@{Id}!hint\_publisher.py@{hint\_publisher.py}}
+\doxysubsubsection{\texorpdfstring{Id()}{Id()}}
+{\footnotesize\ttfamily def hint\+\_\+publisher.\+Id (\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
 
 
 
-this function initilizes the node and the publisher. 
+This function is the callback for the aruco subscriber ~\newline
+ 
 
-it also defines the message we want to send. 
+
+\begin{DoxyParams}{Parameters}
+{\em } & the message receive from the subscriber, Int32 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None This function is the callback for the aruco subscriber. It reads the variable, check if the clue is already saved and if not it calls the hypothesis\+\_\+maker service and saves the clue in the global variable found\+Clues (array di clues). Also it publishes the clue on the /consistent and /complete publishers. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{hint__publisher_8py_ac3a610c97549660f208358625db3d525}\label{hint__publisher_8py_ac3a610c97549660f208358625db3d525}} 
+\index{hint\_publisher.py@{hint\_publisher.py}!publisher@{publisher}}
+\index{publisher@{publisher}!hint\_publisher.py@{hint\_publisher.py}}
+\doxysubsubsection{\texorpdfstring{publisher()}{publisher()}}
+{\footnotesize\ttfamily def hint\+\_\+publisher.\+publisher (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this function initilizes the node, the services and the publishers. 
+
+~\newline
+ 
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None 
+\end{DoxyReturn}

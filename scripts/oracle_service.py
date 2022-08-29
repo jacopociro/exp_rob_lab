@@ -7,7 +7,7 @@
 #
 #  \author Jacopo Ciro Soncini
 #  \version 1.0
-#  \date 15/11/2021
+#  \date 29/08/2022
 #  \details
 #  
 #  Subscribes to: <BR>
@@ -28,7 +28,7 @@
 #  Description: <BR>
 #       This node handles the oracle service, here is where we define the correct hypothesis id and where we feed
 #       the request, string, and get the response, bool.
-
+'''
 from exp_rob_lab.srv import oracle, oracleResponse
 import rospy
 
@@ -57,3 +57,4 @@ if __name__ == '__main__':
     try:
         oracle_server()
     except rospy.ROSInterruptException: pass
+'''
