@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" title=" " alt="" coords="5,56,61,83"/>
-<area shape="rect" id="node2" href="$class_clues.html" title="this class defines the state Clues, the execute subscribes to the hint publisher and handles the hypo..." alt="" coords="109,5,168,32"/>
-<area shape="rect" id="node3" href="$class_hyp.html" title="this class defines the state Hyp, the execute handles the oracle service. It returns move if the hypo..." alt="" coords="115,56,163,83"/>
-<area shape="rect" id="node4" href="$class_move.html" title="this class defines the state Move, the execute is just a sleep to simulate movement...." alt="" coords="109,107,168,133"/>
+<area shape="rect" id="node2" href="$classstate__machine_1_1_clues.html" title="this class defines the state Clues, the execute subscribes to the hint publisher and handles the hypo..." alt="" coords="109,5,268,32"/>
+<area shape="rect" id="node3" href="$classstate__machine_1_1_hyp.html" title="this class defines the state Hyp, the execute handles the oracle service." alt="" coords="115,56,263,83"/>
+<area shape="rect" id="node4" href="$classstate__machine_1_1_move.html" title=" " alt="" coords="109,107,268,133"/>
 </map>

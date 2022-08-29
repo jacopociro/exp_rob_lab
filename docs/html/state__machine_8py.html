@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Experimental Robotics Laboratory assignment 1: scripts/state_machine.py File Reference</title>
+<title>Experimental Robotics Laboratory first assignment: scripts/state_machine.py File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,10 +21,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Experimental Robotics Laboratory assignment 1
-   &#160;<span id="projectnumber">1.0</span>
+   <div id="projectname">Experimental Robotics Laboratory first assignment
    </div>
-   <div id="projectbrief">This package is made for the first assignment of experimental robotics laboratory. Using armor it manages to find out the killer in a quick cluedo like game.</div>
+   <div id="projectbrief">First assignment for the Experimentatl Robotics Laboratory course in Robotics Engineering master degree at UNIGE</div>
   </td>
  </tr>
  </tbody>
@@ -68,6 +67,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
@@ -79,6 +79,17 @@ $(function() {
 <p>This script handles the state machine's states calling services as he needs. This is the main program.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstate__machine_1_1_move.html">state_machine.Move</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstate__machine_1_1_clues.html">state_machine.Clues</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">this class defines the state <a class="el" href="classstate__machine_1_1_clues.html" title="this class defines the state Clues, the execute subscribes to the hint publisher and handles the hypo...">Clues</a>, the execute subscribes to the hint publisher and handles the hypothesis_maker service.  <a href="classstate__machine_1_1_clues.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classstate__machine_1_1_hyp.html">state_machine.Hyp</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">this class defines the state <a class="el" href="classstate__machine_1_1_hyp.html" title="this class defines the state Hyp, the execute handles the oracle service.">Hyp</a>, the execute handles the oracle service.  <a href="classstate__machine_1_1_hyp.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceexpr__rob__lab"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceexpr__rob__lab.html">expr_rob_lab</a></td></tr>
@@ -87,39 +98,24 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3211dd50679a50adf96ec48989a5f67c"><td class="memItemLeft" align="right" valign="top"><a id="a3211dd50679a50adf96ec48989a5f67c"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>room</b> ()</td></tr>
+<tr class="memitem:a3211dd50679a50adf96ec48989a5f67c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8py.html#a3211dd50679a50adf96ec48989a5f67c">state_machine.room</a> ()</td></tr>
+<tr class="memdesc:a3211dd50679a50adf96ec48989a5f67c"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function return a random room for the robot to move in  <a href="state__machine_8py.html#a3211dd50679a50adf96ec48989a5f67c">More...</a><br /></td></tr>
 <tr class="separator:a3211dd50679a50adf96ec48989a5f67c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad78a1b671190bff340ac59e15b975b2e"><td class="memItemLeft" align="right" valign="top"><a id="ad78a1b671190bff340ac59e15b975b2e"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8py.html#ad78a1b671190bff340ac59e15b975b2e">callback</a> (msg)</td></tr>
-<tr class="memdesc:ad78a1b671190bff340ac59e15b975b2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function return a random room for the robot to move in <br /></td></tr>
+<tr class="memitem:ad78a1b671190bff340ac59e15b975b2e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8py.html#ad78a1b671190bff340ac59e15b975b2e">state_machine.callback</a> (msg)</td></tr>
+<tr class="memdesc:ad78a1b671190bff340ac59e15b975b2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function returns the message published from hint  <a href="state__machine_8py.html#ad78a1b671190bff340ac59e15b975b2e">More...</a><br /></td></tr>
 <tr class="separator:ad78a1b671190bff340ac59e15b975b2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c680ce705e6052fa07c6cece21743d0"><td class="memItemLeft" align="right" valign="top"><a id="a5c680ce705e6052fa07c6cece21743d0"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>main</b> ()</td></tr>
+<tr class="memitem:a5c680ce705e6052fa07c6cece21743d0"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8py.html#a5c680ce705e6052fa07c6cece21743d0">state_machine.main</a> ()</td></tr>
+<tr class="memdesc:a5c680ce705e6052fa07c6cece21743d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph.  <a href="state__machine_8py.html#a5c680ce705e6052fa07c6cece21743d0">More...</a><br /></td></tr>
 <tr class="separator:a5c680ce705e6052fa07c6cece21743d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a9212c4d24fed276f77c74fd575310ff0"><td class="memItemLeft" align="right" valign="top"><a id="a9212c4d24fed276f77c74fd575310ff0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>resp_hyp</b> = HypothesisResponse</td></tr>
-<tr class="separator:a9212c4d24fed276f77c74fd575310ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a335628f2e9085305224b4f9cc6e95ed5"><td class="memItemLeft" align="right" valign="top"><a id="a335628f2e9085305224b4f9cc6e95ed5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8py.html#a335628f2e9085305224b4f9cc6e95ed5">var</a> = Hint</td></tr>
-<tr class="memdesc:a335628f2e9085305224b4f9cc6e95ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">this function returns the message published from hint <br /></td></tr>
-<tr class="separator:a335628f2e9085305224b4f9cc6e95ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ad3f698becd820c9b50aedb492b62ec"><td class="memItemLeft" align="right" valign="top"><a id="a8ad3f698becd820c9b50aedb492b62ec"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8py.html#a8ad3f698becd820c9b50aedb492b62ec">sm</a> = smach.StateMachine(outcomes=['stop'])</td></tr>
-<tr class="memdesc:a8ad3f698becd820c9b50aedb492b62ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph <br /></td></tr>
-<tr class="separator:a8ad3f698becd820c9b50aedb492b62ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2594171e7c2a90ab61e43e1bc68adaf7"><td class="memItemLeft" align="right" valign="top"><a id="a2594171e7c2a90ab61e43e1bc68adaf7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>transitions</b></td></tr>
-<tr class="separator:a2594171e7c2a90ab61e43e1bc68adaf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69d1c2429167d7550d9c8105fda9a0b7"><td class="memItemLeft" align="right" valign="top"><a id="a69d1c2429167d7550d9c8105fda9a0b7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>sis</b> = smach_ros.IntrospectionServer('state_machine', sm, '/SM_ROOT')</td></tr>
-<tr class="separator:a69d1c2429167d7550d9c8105fda9a0b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af47997198e7e7301a1cd8602c7f02acd"><td class="memItemLeft" align="right" valign="top"><a id="af47997198e7e7301a1cd8602c7f02acd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>outcome</b> = sm.execute()</td></tr>
-<tr class="separator:af47997198e7e7301a1cd8602c7f02acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fef3d5bafe9d6f6a2bc5644ca5d004c"><td class="memItemLeft" align="right" valign="top"><a id="a1fef3d5bafe9d6f6a2bc5644ca5d004c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>state_machine.resp_hyp</b> = HypothesisResponse</td></tr>
+<tr class="separator:a1fef3d5bafe9d6f6a2bc5644ca5d004c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f17421e10de3d97b2858222ce49aa30"><td class="memItemLeft" align="right" valign="top"><a id="a8f17421e10de3d97b2858222ce49aa30"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>state_machine.var</b> = Hint</td></tr>
+<tr class="separator:a8f17421e10de3d97b2858222ce49aa30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This script handles the state machine's states calling services as he needs. This is the main program. </p>
@@ -133,12 +129,94 @@ Variables</h2></td></tr>
 <p>Services: <br  />
 </p>
 <p>Client Services: <br  />
- hypothesis_make oracle</p>
+ hypothesis_maker oracle</p>
 <p>Action Services: <br  />
  None</p>
 <p>Description: <br  />
- The state machine has three differente states: <a class="el" href="class_move.html" title="this class defines the state Move, the execute is just a sleep to simulate movement....">Move</a>, <a class="el" href="class_clues.html" title="this class defines the state Clues, the execute subscribes to the hint publisher and handles the hypo...">Clues</a> and <a class="el" href="class_hyp.html" title="this class defines the state Hyp, the execute handles the oracle service. It returns move if the hypo...">Hyp</a>. <a class="el" href="class_move.html" title="this class defines the state Move, the execute is just a sleep to simulate movement....">Move</a> handles the movement of the robot between the rooms. This movement is fake and is implemented by a simple sleep that simulates the time taken to move. <a class="el" href="class_clues.html" title="this class defines the state Clues, the execute subscribes to the hint publisher and handles the hypo...">Clues</a> handles the hints by subscribing to the hint publisher node and sending the information requested by the hypothesis_maker service. The response is saved in a global variable so that it can be passed to the last state, <a class="el" href="class_hyp.html" title="this class defines the state Hyp, the execute handles the oracle service. It returns move if the hypo...">Hyp</a>, if the hypothesis is deemed consistent. <a class="el" href="class_hyp.html" title="this class defines the state Hyp, the execute handles the oracle service. It returns move if the hypo...">Hyp</a> is a state that simply reads the identifier of the hypothesis and sends it to the oracle service that knows if the hypothesis is right. </p>
-</div></div><!-- contents -->
+ The state machine has three differente states: Move, Clues and Hyp. Move handles the movement of the robot between the rooms. This movement is fake and is implemented by a simple sleep that simulates the time taken to move. Clues handles the hints by subscribing to the hint publisher node and sending the information requested by the hypothesis_maker service. The response is saved in a global variable so that it can be passed to the last state, Hyp, if the hypothesis is deemed consistent. Hyp is a state that simply reads the identifier of the hypothesis and sends it to the oracle service that knows if the hypothesis is right. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="ad78a1b671190bff340ac59e15b975b2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad78a1b671190bff340ac59e15b975b2e">&#9670;&nbsp;</a></span>callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def state_machine.callback </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>this function returns the message published from hint </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"></td><td>msg, Hint </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>: var, Hint </dd></dl>
+
+</div>
+</div>
+<a id="a5c680ce705e6052fa07c6cece21743d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c680ce705e6052fa07c6cece21743d0">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def state_machine.main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"></td><td>None </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>: None <br  />
+ </dd></dl>
+
+</div>
+</div>
+<a id="a3211dd50679a50adf96ec48989a5f67c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3211dd50679a50adf96ec48989a5f67c">&#9670;&nbsp;</a></span>room()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def state_machine.room </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>this function return a random room for the robot to move in </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"></td><td>None </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>: room, string <br  />
+ This function simulates the move action </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

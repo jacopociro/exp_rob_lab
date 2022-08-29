@@ -32,10 +32,12 @@
 from exp_rob_lab.srv import oracle, oracleResponse
 import rospy
 
-def oracle_handle(req):
 ##
-# \brief this function hadle the service, giving a different bool variable after judging the correcteness of the 
-# hypothesis
+# \brief this function hadle the service, giving a different bool variable after judging the correcteness of the hypothesis
+# \param req, oracleRequest
+# \returns oracleResponse 
+def oracle_handle(req):
+
     print('Hypothesis number %s is...'%req.id)
     if req.id == 'HP3':
         print("correct!")
@@ -45,9 +47,12 @@ def oracle_handle(req):
         right = 1
     return oracleResponse(right)
 
-def oracle_server():
 ##
-#\brief here we initialize the node and the service
+# \brief here we initialize the node and the service
+# \param None
+# \returns None
+def oracle_server():
+
     rospy.init_node('oracle')
     s = rospy.Service('oracle', oracle, oracle_handle)
     print("Oracle is ready to tell you the truth!")

@@ -13,20 +13,9 @@ This script handle the oracle service.
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{oracle__service_8py_a502180cd0f3e5cecd6c50e04c8aeb046}\label{oracle__service_8py_a502180cd0f3e5cecd6c50e04c8aeb046}} 
-def {\bfseries oracle\+\_\+handle} (req)
-\item 
-\mbox{\Hypertarget{oracle__service_8py_a83696c581a071f713b38505f42bf8528}\label{oracle__service_8py_a83696c581a071f713b38505f42bf8528}} 
-def {\bfseries oracle\+\_\+server} ()
-\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{oracle__service_8py_a2f54f8b71f0d765e2b7dbd9a8b9774ff}\label{oracle__service_8py_a2f54f8b71f0d765e2b7dbd9a8b9774ff}} 
-int \mbox{\hyperlink{oracle__service_8py_a2f54f8b71f0d765e2b7dbd9a8b9774ff}{right}} = 0
+def \mbox{\hyperlink{oracle__service_8py_a502180cd0f3e5cecd6c50e04c8aeb046}{oracle\+\_\+service.\+oracle\+\_\+handle}} (req)
 \begin{DoxyCompactList}\small\item\em this function hadle the service, giving a different bool variable after judging the correcteness of the hypothesis \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{oracle__service_8py_a3691308f2a4c2f6983f2880d32e29c84}\label{oracle__service_8py_a3691308f2a4c2f6983f2880d32e29c84}} 
-\mbox{\hyperlink{oracle__service_8py_a3691308f2a4c2f6983f2880d32e29c84}{s}} = rospy.\+Service(\textquotesingle{}oracle\textquotesingle{}, oracle, oracle\+\_\+handle)
+def \mbox{\hyperlink{oracle__service_8py_a83696c581a071f713b38505f42bf8528}{oracle\+\_\+service.\+oracle\+\_\+server}} ()
 \begin{DoxyCompactList}\small\item\em here we initialize the node and the service \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -59,3 +48,41 @@ Action Services\+: ~\newline
 
 Description\+: ~\newline
  This node handles the oracle service, here is where we define the correct hypothesis id and where we feed the request, string, and get the response, bool. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{oracle__service_8py_a502180cd0f3e5cecd6c50e04c8aeb046}\label{oracle__service_8py_a502180cd0f3e5cecd6c50e04c8aeb046}} 
+\index{oracle\_service.py@{oracle\_service.py}!oracle\_handle@{oracle\_handle}}
+\index{oracle\_handle@{oracle\_handle}!oracle\_service.py@{oracle\_service.py}}
+\doxysubsubsection{\texorpdfstring{oracle\_handle()}{oracle\_handle()}}
+{\footnotesize\ttfamily def oracle\+\_\+service.\+oracle\+\_\+handle (\begin{DoxyParamCaption}\item[{}]{req }\end{DoxyParamCaption})}
+
+
+
+this function hadle the service, giving a different bool variable after judging the correcteness of the hypothesis 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req,oracle\+Request} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+oracle\+Response 
+\end{DoxyReturn}
+\mbox{\Hypertarget{oracle__service_8py_a83696c581a071f713b38505f42bf8528}\label{oracle__service_8py_a83696c581a071f713b38505f42bf8528}} 
+\index{oracle\_service.py@{oracle\_service.py}!oracle\_server@{oracle\_server}}
+\index{oracle\_server@{oracle\_server}!oracle\_service.py@{oracle\_service.py}}
+\doxysubsubsection{\texorpdfstring{oracle\_server()}{oracle\_server()}}
+{\footnotesize\ttfamily def oracle\+\_\+service.\+oracle\+\_\+server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+here we initialize the node and the service 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}

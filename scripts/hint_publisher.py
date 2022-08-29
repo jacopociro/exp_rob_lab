@@ -41,9 +41,12 @@ hint = [['HP1','Miss_Scarlett', 'who'],['HP1','Candlestick', 'what'],['HP1','Kit
         ['HP5','Mrs_Peacock', 'who'],['HP5','Rope', 'what'],['HP5','Library', 'where'],
         ['HP6','Mrs_White', 'who'],['HP6','Wrench', 'what'],['HP6','Lounge', 'where']]
 
-def publisher():
 ##
-# \brief this function initilizes the node and the publisher. it also defines the message we want to send.
+# \brief this function initializes the node and the publisher. it also defines the message we want to send. 
+# \param: None
+# \return: None
+# This function initialized the node and the publisher, get a random hint and publishes it.
+def publisher():
     pub = rospy.Publisher('hint', Hint)
     rospy.init_node('hint_publisher')
     r = rospy.Rate(1)

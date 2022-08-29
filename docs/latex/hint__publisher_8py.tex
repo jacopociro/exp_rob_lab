@@ -13,33 +13,12 @@ script for the hint publisher.
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{hint__publisher_8py_ac3a610c97549660f208358625db3d525}\label{hint__publisher_8py_ac3a610c97549660f208358625db3d525}} 
-def {\bfseries publisher} ()
-\end{DoxyCompactItemize}
+def \mbox{\hyperlink{hint__publisher_8py_ac3a610c97549660f208358625db3d525}{hint\+\_\+publisher.\+publisher}} ()
+\begin{DoxyCompactList}\small\item\em this function initializes the node and the publisher. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-list {\bfseries hint}
-\item 
-\mbox{\hyperlink{hint__publisher_8py_aa4474258363d2d40129f9b7699c5ac7f}{pub}} = rospy.\+Publisher(\textquotesingle{}hint\textquotesingle{}, Hint)
-\begin{DoxyCompactList}\small\item\em this function initilizes the node and the publisher. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{hint__publisher_8py_a514f1b439f404f86f77090fa9edc96ce}\label{hint__publisher_8py_a514f1b439f404f86f77090fa9edc96ce}} 
-{\bfseries r} = rospy.\+Rate(1)
-\item 
-\mbox{\Hypertarget{hint__publisher_8py_ac23fb295847684aaafd24830017a8180}\label{hint__publisher_8py_ac23fb295847684aaafd24830017a8180}} 
-{\bfseries num} = random.\+randint(0,17)
-\item 
-\mbox{\Hypertarget{hint__publisher_8py_a10a0f35066079abd150539d0d13dbf3e}\label{hint__publisher_8py_a10a0f35066079abd150539d0d13dbf3e}} 
-{\bfseries msg} = Hint()
-\item 
-\mbox{\Hypertarget{hint__publisher_8py_acf2488b95c97e0378c9bf49de3b50f28}\label{hint__publisher_8py_acf2488b95c97e0378c9bf49de3b50f28}} 
-{\bfseries id}
-\item 
-\mbox{\Hypertarget{hint__publisher_8py_ab74e6bf80237ddc4109968cedc58c151}\label{hint__publisher_8py_ab74e6bf80237ddc4109968cedc58c151}} 
-{\bfseries name}
-\item 
-\mbox{\Hypertarget{hint__publisher_8py_af86f019ee114dc0e0b697acbb6ced3e8}\label{hint__publisher_8py_af86f019ee114dc0e0b697acbb6ced3e8}} 
-{\bfseries class\+\_\+id}
+list {\bfseries hint\+\_\+publisher.\+hint}
 \end{DoxyCompactItemize}
 
 
@@ -73,12 +52,33 @@ Action Services\+: ~\newline
 Description\+: ~\newline
  This node handles the hint publisher, by publishing random hints from a list. 
 
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hint__publisher_8py_ac3a610c97549660f208358625db3d525}\label{hint__publisher_8py_ac3a610c97549660f208358625db3d525}} 
+\index{hint\_publisher.py@{hint\_publisher.py}!publisher@{publisher}}
+\index{publisher@{publisher}!hint\_publisher.py@{hint\_publisher.py}}
+\doxysubsubsection{\texorpdfstring{publisher()}{publisher()}}
+{\footnotesize\ttfamily def hint\+\_\+publisher.\+publisher (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this function initializes the node and the publisher. 
+
+it also defines the message we want to send. 
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None This function initialized the node and the publisher, get a random hint and publishes it. 
+\end{DoxyReturn}
+
+
 \doxysubsection{Variable Documentation}
-\mbox{\Hypertarget{hint__publisher_8py_a732a5f9332ab57ac4809a5affaef3bfd}\label{hint__publisher_8py_a732a5f9332ab57ac4809a5affaef3bfd}} 
+\mbox{\Hypertarget{hint__publisher_8py_a0f3bfc8589cbd8b3c0339abee23d2baf}\label{hint__publisher_8py_a0f3bfc8589cbd8b3c0339abee23d2baf}} 
 \index{hint\_publisher.py@{hint\_publisher.py}!hint@{hint}}
 \index{hint@{hint}!hint\_publisher.py@{hint\_publisher.py}}
 \doxysubsubsection{\texorpdfstring{hint}{hint}}
-{\footnotesize\ttfamily list hint}
+{\footnotesize\ttfamily list hint\+\_\+publisher.\+hint}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
@@ -90,14 +90,3 @@ Description\+: ~\newline
 \DoxyCodeLine{6         [\textcolor{stringliteral}{'HP6'},\textcolor{stringliteral}{'Mrs\_White'}, \textcolor{stringliteral}{'who'}],[\textcolor{stringliteral}{'HP6'},\textcolor{stringliteral}{'Wrench'}, \textcolor{stringliteral}{'what'}],[\textcolor{stringliteral}{'HP6'},\textcolor{stringliteral}{'Lounge'}, \textcolor{stringliteral}{'where'}]]}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{hint__publisher_8py_aa4474258363d2d40129f9b7699c5ac7f}\label{hint__publisher_8py_aa4474258363d2d40129f9b7699c5ac7f}} 
-\index{hint\_publisher.py@{hint\_publisher.py}!pub@{pub}}
-\index{pub@{pub}!hint\_publisher.py@{hint\_publisher.py}}
-\doxysubsubsection{\texorpdfstring{pub}{pub}}
-{\footnotesize\ttfamily pub = rospy.\+Publisher(\textquotesingle{}hint\textquotesingle{}, Hint)}
-
-
-
-this function initilizes the node and the publisher. 
-
-it also defines the message we want to send. 

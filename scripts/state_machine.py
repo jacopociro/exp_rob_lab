@@ -46,24 +46,33 @@ from exp_rob_lab.srv import *
 resp_hyp = HypothesisResponse
 var = Hint
 
-def room():
 ##
 # \brief this function return a random room for the robot to move in
+# \param: None
+# \return: room, string   
+# This function simulates the move action
+def room():
+
     return random.choice(['Kitchen', 'Ballroom', 'Conservatory', 'Dining_Room', 'Biliard_Room', 'Library', 'Lounge', 'Hall', 'Study'])
 
-def callback(msg):
 ##
 # \brief this function returns the message published from hint
+# \param: msg, Hint
+# \return: var, Hint
+def callback(msg):
+
     global var
     #rospy.loginfo(msg)
     var = msg
     return var
 
+#
+# \brief this class defines the state Move, the execute is just a sleep to simulate movement. It returns only clues.
+# \param: None
+# \return: None  
+# This state handles the movement, calling the move function
 class Move(smach.State):
-##
-# \class Move
-# \brief this class defines the state Move, the execute is just a sleep to simulate movement.
-# It returns only clues.
+
     def __init__(self):
         smach.State.__init__(self, outcomes=['clues'])
         
@@ -74,11 +83,13 @@ class Move(smach.State):
 
         return 'clues'
 
-class Clues(smach.State):
 ##
-# \class Clues
-# \brief this class defines the state Clues, the execute subscribes to the hint publisher and handles
-# the hypothesis_maker service. It returns move or hypothesis to change states.
+# \brief this class defines the state Clues, the execute subscribes to the hint publisher and handles the hypothesis_maker service.
+#  It returns move or hypothesis to change states.
+# \param: None
+# \return: None  
+# This state handles the looking for clues behaviour, calling the publisher and the service. Based on the response it move to different states.
+class Clues(smach.State):
     def __init__(self):
         smach.State.__init__(self, outcomes=['move', 'hypothesis'])
         
@@ -111,15 +122,13 @@ class Clues(smach.State):
         except rospy.ServiceException as e:
             print("Service call failed: %s"%e)
 
-
-        
-
-        
-
+##
+# \brief this class defines the state Hyp, the execute handles the oracle service. It returns move if the hypothesis is mistaken or stop if the hypothesis is correct.
+# \param: None
+# \return: None  
+# This state handles the checking the hypothesis behaviour, calling the oracle service.
+# If the solution matches with the one from the service the state machines stops.
 class Hyp(smach.State):
-##\class Hyp
-# \brief this class defines the state Hyp, the execute handles the oracle service. It returns
-# move if the hypothesis is mistaken or stop if the hypothesis is correct.
     def __init__(self):
         smach.State.__init__(self, outcomes=['move', 'stop'])
 
@@ -142,10 +151,12 @@ class Hyp(smach.State):
                 return 'move'
         except rospy.ServiceException as e:
             print("Service call failed: %s"%e)
-        
-def main():
+
 ##
-# \brief this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph
+# \brief this is the main function, it calls the smach state machine, all of the states and a sis to see the state machine graph.
+# \param: None
+# \return: None   
+def main():
     rospy.init_node('state_machine')
 
     sm = smach.StateMachine(outcomes=['stop'])
