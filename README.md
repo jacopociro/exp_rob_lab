@@ -74,7 +74,7 @@ This node is the one tasked with communicating with the armor service and updati
 ### state_machine.py
 This node is the central node and handles the behaviour of the robot, basing it off of states. There are 3 states: move, clues and hyp. The first one handles the movement of the robot to a random room, the second one look for hints and the last one checks if the hypothesis formulated is correct.
 ## Architecture diagram
-![System Architecture](images/exp_rob1.jpg)
+![System Architecture](images/exp_rob1.drawio.png)
 
 ![Rqt Graph](images/rosgraph.png)
 
@@ -87,7 +87,7 @@ The state machine has 3 states: move, clues and hyp. The machine starts in the m
 The clues state has two possible outputs, based on if the received hypothesis is complete or not. If the hypothesis is complete then it will go to the hyp state, to check if it is correct. Otherwise the machine will return to the move state to collect more hints.
 The hyp state has two outcomes, if the hypothesis is correct then the game ends, otherwise the machine returns to the move state, to collect more hints.
 ## Temporal sequence diagram
-![System Architecture](images/exp_rob1_seq.jpg)
+![System Architecture](images/exp_rob1_seq.drawio.png)
 
 This image shows a temporal sequence diagram for the simulation, in case every output is ok at the first run. Probably the state machine will be called again and again but the number of times is not fixed, so it is not represented.
 The state machine starts with the move state, making the robot move to a clue. Then, when it changes to the clues state the robot looks around to find and read the hint. During this function, but at a different time, it also calls the hypothesis maker service, to add the hint to the onthology and then it checks for a complete hypothesis. Assuming the hypothesis is complete the robot goes to the oracle state where it moves to the terminal and check if the hypothesis is correct, which if it is will be the last action done.
