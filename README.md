@@ -117,6 +117,8 @@ https://youtu.be/GTX7jYbu5oQ
 
 At this link you can checkout the most interesting action, where the robot looks around during the look for clues function.
 
+The robot moves between each of the rooms, collecting hint via the aruco camera. Sherlockbot, to make sure that doesn't miss any hint, will move inside a room and move around, looking carefully anywhere. Then it will add the hint to the onthoilogy and move to the next. When it has at least one consistent and complete hypothesis, it will move to the terminal (position: 0,0 on the map) and check the hypothesis with the oracle. Here is where it either ends the simulation if the hypothesis is correct or move to a room if it isn't.
+
 # Working Hypothesis and Environment
 The environment is as modualar as possibile, to make the system as adaptable as possible. In this implementation the enviroment is totally simulated on gazebo and rviz, where all of the action are represented. All of the variable are given to the author.
 ## System's Features
