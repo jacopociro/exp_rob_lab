@@ -20,7 +20,7 @@ The package is composed of:
 - Two config files:
     - motors_config.yaml
     - sim.rviz 
-- Four launch files:+
+- Four launch files:
     - assignment.launch
     - launch.launch
     - plan.launch
